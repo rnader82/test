@@ -1,0 +1,141 @@
+/* 
+ * Design Tokens & Theme Variables
+ * Modern TechSolutions / Novalyo Design System
+ */
+
+:root {
+    /* Brand Palette from Design Spec */
+    --bg: #f7f8fb;
+    --panel: #ffffff;
+    --border: #e7eaf0;
+    --border-input: #dbe0e8;
+    --text: #111827;
+    --text-secondary: #334155;
+    --muted: #6b7280;
+    --primary: #5b4df6;
+    --primary-hover: #4a3df0;
+    --primary-50: #f3f1ff;
+    
+    /* Semantic Colors */
+    --green: #16a34a;
+    --green-bg: #eefbf2;
+    --green-text: #14813b;
+    --green-border: #d9f3e2;
+    
+    --red: #ef4444;
+    --red-alt: #ef233c;
+    --red-bg: #fff0f1;
+    --red-text: #ef233c;
+    
+    --orange: #f59e0b;
+    --orange-alt: #ee7d12;
+    --orange-bg: #fff5e9;
+    --orange-text: #ee7d12;
+    
+    --blue: #1687ff;
+    --blue-alt: #087ce7;
+    --blue-bg: #edf7ff;
+    --blue-text: #087ce7;
+    --blue-border: #9cc7ff;
+    --blue-assignee: #0f61ca;
+    
+    --purple: #7c3aed;
+    --purple-alt: #6d28d9;
+    --purple-bg: #f5efff;
+    --purple-text: #6d28d9;
+    
+    --brown: #a35d13;
+    --brown-alt: #9a5a16;
+    --brown-bg: #fff5ea;
+    --brown-text: #9a5a16;
+    
+    --yellow-bg: #fff7df;
+    --yellow-text: #d58a00;
+    
+    --gray-bg: #f4f5f7;
+    --gray-text: #667085;
+    --gray-border: #e7eaf0;
+    
+    --radius: 12px;
+    --radius-sm: 8px;
+    --radius-md: 9px;
+    --radius-lg: 12px;
+
+    /* Theme Bridge Tokens */
+    --md-sys-color-primary: #5b4df6;
+    --md-sys-color-on-primary: #ffffff;
+    --md-sys-color-primary-container: #f3f1ff;
+    --md-sys-color-on-primary-container: #5b4df6;
+
+    --md-sys-color-secondary-rgb: 91, 77, 246;
+    --md-sys-color-secondary: #5b4df6;
+    --md-sys-color-on-secondary: #ffffff;
+    --md-sys-color-secondary-container: #f3f1ff;
+    --md-sys-color-on-secondary-container: #5b4df6;
+
+    --md-sys-color-tertiary: #1687ff;
+    --md-sys-color-on-tertiary: #ffffff;
+    --md-sys-color-tertiary-container: #edf7ff;
+    --md-sys-color-on-tertiary-container: #087ce7;
+
+    /* Surface & Background */
+    --md-sys-color-background: #f7f8fb;
+    --md-sys-color-on-background: #111827;
+    --md-sys-color-surface: #ffffff;
+    --md-sys-color-on-surface: #111827;
+    --md-sys-color-surface-variant: #f7f8fb;
+    --md-sys-color-on-surface-variant: #6b7280;
+
+    /* Outline & Borders */
+    --md-sys-color-outline: #dbe0e8;
+    --md-sys-color-outline-variant: #e7eaf0;
+
+    /* Bootstrap Overrides */
+    --bs-primary: #5b4df6;
+    --bs-primary-rgb: 91, 77, 246;
+    --bs-body-bg: #f7f8fb;
+    --bs-body-color: #111827;
+    --bs-success: #16a34a;
+    --bs-success-rgb: 22, 163, 74;
+    --bs-danger: #ef4444;
+    --bs-danger-rgb: 239, 68, 68;
+    --bs-warning: #f59e0b;
+    --bs-warning-rgb: 245, 158, 11;
+    --bs-info: #1687ff;
+    --bs-info-rgb: 22, 135, 255;
+    
+    /* Shapes & Borders */
+    --md-sys-shape-corner-extra-small: 6px;
+    --md-sys-shape-corner-small: 8px;
+    --md-sys-shape-corner-medium: 12px;
+    --md-sys-shape-corner-large: 16px;
+    --md-sys-shape-corner-extra-large: 24px;
+    --md-sys-shape-corner-full: 9999px;
+
+    /* Elevation & Shadows */
+    --md-sys-elevation-1: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+    --md-sys-elevation-2: 0 4px 12px rgba(15, 23, 42, 0.06);
+    --md-sys-elevation-3: 0 12px 28px rgba(15, 23, 42, 0.12);
+
+    --premium-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+    --premium-shadow-md: 0 4px 16px -2px rgba(15, 23, 42, 0.06);
+    --premium-shadow-lg: 0 12px 28px rgba(15, 23, 42, 0.14);
+    --premium-shadow-inset: inset 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+
+    /* Transitions & Gradients */
+    --premium-transition: all 0.2s ease;
+    --premium-transition-fast: all 0.15s ease;
+    --brand-gradient: linear-gradient(135deg, #5b4df6, #2494ff);
+}
+
+/* Typography Scale */
+body {
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif !important;
+    background-color: var(--bg) !important;
+    color: var(--text) !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: var(--text);
+}
