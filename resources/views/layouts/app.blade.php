@@ -1,0 +1,2323 @@
+<!DOCTYPE html>
+<html lang="en" class="light-style layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-bordered"
+    data-assets-path="{{ url('/') }}/" data-template="vertical-menu-template-bordered" data-style="light">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    @hasSection('title')
+        <title>@yield('title') | Novalyo</title>
+    @else
+        @php
+            $navbarTitle = View::yieldContent('navbar-title');
+            $extractedTitle = '';
+            if ($navbarTitle) {
+                if (preg_match('/<h1>(.*?)<\/h1>/s', $navbarTitle, $matches)) {
+                    $extractedTitle = trim(strip_tags($matches[1]));
+                } else {
+                    $extractedTitle = trim(strip_tags($navbarTitle));
+                }
+                $extractedTitle = preg_replace('/\s+/', ' ', $extractedTitle);
+            }
+        @endphp
+        <title>{{ $extractedTitle ?: 'Novalyo 360' }} | Novalyo</title>
+    @endif
+    <meta name="description"
+        content="Materialize is the most developer friendly &amp; highly customizable Admin Dashboard Template." />
+    <meta name="keywords"
+        content="dashboard, material, material design, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
+    <!-- Canonical SEO -->
+    <link rel="canonical" href="https://1.envato.market/materialize_admin">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('images/logo_small.png') }}" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha384-nRgPTkuX86pH8yjPJUAFuASXQSSl2/bBUiNV47vSYpKFxHJhbcrGnmlYpYJMeD7a" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Bootstrap Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+        integrity="sha384-He3RckdFB2wffiHOcESa3sf4Ida+ni/fw9SSzAcfY2EPnU1zkK/sLUzw2C5Tyuhj" crossorigin="anonymous">
+    <!-- Remixicon CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.min.css" rel="stylesheet"
+        integrity="sha384-tfEwtPQRbzmgeuqdzD9yIr//J+ygmYLnPoxn19mX03AfLoXoN7feKElIT5xO3qs5" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('fonts/flag-icons.css') }}" />
+    <!-- Menu waves for no-customizer fix -->
+    <link rel="stylesheet" href="{{ asset('libs/node-waves/node-waves.css') }}" />
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="{{ asset('css/core.css') }}" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{{ asset('css/theme-bordered.css') }}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{{ asset('css/demo.css') }}" />
+    <!-- jQuery (necessary for Select2) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
+    <!-- Select2 for searchable dropdowns -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"
+        integrity="sha384-OXVF05DQEe311p6ohU11NwlnX08FzMCsyoXzGOaL+83dKAb3qS17yZJxESl8YrJQ" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css"
+        integrity="sha384-IrMr0LFnIMa9H6HhC5VVqVuWNEIwspnRLKQc0SUyPj4Cy4s02DiWDZEoJOo5WNK6" crossorigin="anonymous" />
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"
+        integrity="sha384-d3UHjPdzJkZuk5H3qKYMLRyWLAQBJbby2yr2Q58hXXtAGF8RSNO9jpLDlKKPv5v3" crossorigin="anonymous"></script>
+    <!-- CKEditor for WYSIWYG editor
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"
+        integrity="sha384-O17uTisZJc13V+J3ifrBCnoCTgCYymiDZ21mywiTld1Cf4+OVoLvPv70n3yy1eAL" crossorigin="anonymous"></script> -->
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="{{ asset('libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
+    <link rel="stylesheet" href="{{ asset('libs/typeahead-js/typeahead.css') }}" />
+    <link rel="stylesheet" href="{{ asset('libs/datatables-bs5/datatables.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('libs/apex-charts/apex-charts.css') }}" />
+    <link rel="stylesheet" href="{{ asset('libs/swiper/swiper.css') }}" />
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="{{ asset('css/cards-statistics.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/cards-analytics.css') }}" />
+    <!-- Quill texteditor -->
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet"
+        integrity="sha384-ecIckRi4QlKYya/FQUbBUjS4qp65jF/J87Guw5uzTbO1C1Jfa/6kYmd6dXUF6D7i" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.min.js"
+        integrity="sha384-reiVBUvj2HgLgCZalqLFSMBVD9LdtiwGyybRGCq2AfP8Rgebz5DxEnwKp4FpagKV" crossorigin="anonymous"></script>
+    <!-- GLightbox CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css"
+        integrity="sha384-GPAzSuZc0kFvdIev6wm9zg8gnafE8tLso7rsAYQfc9hAdWCpOcpcNI5W9lWkYcsd" crossorigin="anonymous">
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="{{ asset('libs/flatpickr/flatpickr.css') }}" />
+    <!-- Helpers -->
+    <script src="{{ asset('js/helpers.js') }}"></script>
+    <script src="{{ asset('js/config.js') }}"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @stack('styles')
+    
+    <style>
+        :root {
+            --premium-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            --premium-border-color: #e7eaf0;
+        }
+
+        .card-premium {
+            background: #ffffff !important;
+            border: 1px solid var(--border) !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02) !important;
+            border-radius: 12px !important;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.98) !important;
+            border: 1px solid var(--border) !important;
+        }
+
+        /* Hide horizontal scrollbar on tabs while allowing smooth scrolling */
+        .nav-tabs,
+        .odoo-nav-tabs,
+        .nav-tabs-bordered,
+        .card-header-tabs {
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+        .nav-tabs::-webkit-scrollbar,
+        .odoo-nav-tabs::-webkit-scrollbar,
+        .nav-tabs-bordered::-webkit-scrollbar,
+        .card-header-tabs::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        .create-toggle::after,
+        .create-toggle.dropdown-toggle::after {
+            display: none !important;
+        }
+
+        /* Sidebar truncation fix & styling polish */
+        .menu-vertical .menu-item .menu-link div {
+            white-space: normal !important;
+            overflow: visible !important;
+            text-overflow: clip !important;
+            line-height: 1.3 !important;
+            font-size: 13.5px !important;
+        }
+
+        .menu-vertical .menu-item .menu-link {
+            display: flex !important;
+            align-items: center !important;
+            white-space: normal !important;
+        }
+
+        /* Indent submenu items to show clear visual hierarchy */
+        .menu-vertical .menu-inner > .menu-item > .menu-sub > .menu-item > .menu-link {
+            padding-left: 2rem !important;
+        }
+
+        .menu-vertical .menu-sub .menu-sub .menu-link {
+            padding-left: 3rem !important;
+        }
+
+        .layout-page {
+            display: flex !important;
+            flex-direction: column !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            background: var(--bg) !important;
+        }
+
+        .content-wrapper {
+            flex-grow: 1;
+            width: 100%;
+            padding: 0 !important;
+        }
+
+        .container-xxl {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            max-width: none !important;
+        }
+
+        .select2-container--open {
+            z-index: 99999 !important;
+        }
+
+        .select2-dropdown {
+            z-index: 99999 !important;
+        }
+
+        /* Logo swap with smooth transition */
+        #logo-full,
+        #logo-small {
+            transition: opacity 0.2s ease, max-width 0.2s ease;
+            object-fit: contain;
+        }
+
+        /* Default (expanded): show full, hide small */
+        #logo-full {
+            display: block !important;
+            opacity: 1;
+            max-height: 42px;
+            max-width: 175px;
+            width: auto;
+        }
+        #logo-small {
+            display: none !important;
+            opacity: 0;
+            max-height: 38px;
+            max-width: 38px;
+            width: auto;
+        }
+
+        /* Collapsed: show small, hide full */
+        .layout-menu-collapsed:not(.layout-menu-hover) #logo-full {
+            display: none !important;
+            opacity: 0 !important;
+            max-width: 0 !important;
+        }
+        .layout-menu-collapsed:not(.layout-menu-hover) #logo-small {
+            display: block !important;
+            opacity: 1 !important;
+            max-height: 38px;
+            max-width: 38px;
+            margin: 0 auto;
+        }
+
+        /* Collapsed + hover: show full logo again */
+        .layout-menu-collapsed.layout-menu-hover #logo-full {
+            display: block !important;
+            opacity: 1 !important;
+            max-height: 42px;
+            max-width: 175px;
+        }
+        .layout-menu-collapsed.layout-menu-hover #logo-small {
+            display: none !important;
+            opacity: 0 !important;
+            max-width: 0 !important;
+        }
+
+        /* App-brand layout adjustments */
+        html.layout-menu-collapsed:not(.layout-menu-hover) #layout-menu .app-brand,
+        html.layout-menu-collapsed:not(.layout-menu-hover) .layout-menu .app-brand,
+        html.layout-menu-collapsed:not(.layout-menu-hover) .sidebar .brand,
+        .layout-menu-collapsed:not(.layout-menu-hover) #layout-menu .app-brand,
+        .layout-menu-collapsed:not(.layout-menu-hover) .layout-menu .app-brand,
+        .layout-menu-collapsed:not(.layout-menu-hover) .sidebar .brand {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            padding: 0 !important;
+            margin: 0 auto !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            box-sizing: border-box !important;
+        }
+
+        html.layout-menu-collapsed:not(.layout-menu-hover) #layout-menu .app-brand-link,
+        html.layout-menu-collapsed:not(.layout-menu-hover) .layout-menu .app-brand-link,
+        .layout-menu-collapsed:not(.layout-menu-hover) #layout-menu .app-brand-link,
+        .layout-menu-collapsed:not(.layout-menu-hover) .layout-menu .app-brand-link {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            margin: 0 auto !important;
+            padding: 0 !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+        }
+
+        html.layout-menu-collapsed:not(.layout-menu-hover) #layout-menu .app-brand .layout-menu-toggle,
+        html.layout-menu-collapsed:not(.layout-menu-hover) .layout-menu .app-brand .layout-menu-toggle,
+        .layout-menu-collapsed:not(.layout-menu-hover) #layout-menu .app-brand .layout-menu-toggle,
+        .layout-menu-collapsed:not(.layout-menu-hover) .layout-menu .app-brand .layout-menu-toggle {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        html.layout-menu-collapsed:not(.layout-menu-hover) #logo-small,
+        .layout-menu-collapsed:not(.layout-menu-hover) #logo-small {
+            display: block !important;
+            opacity: 1 !important;
+            max-height: 36px !important;
+            max-width: 36px !important;
+            width: auto !important;
+            height: auto !important;
+            margin: 0 auto !important;
+            object-fit: contain !important;
+        }
+
+        .layout-menu-collapsed.layout-menu-hover .app-brand .layout-menu-toggle {
+            display: flex !important;
+        }
+
+        .menu-vertical .menu-inner > .menu-item > .menu-link,
+        .menu-vertical.menu-inner > .menu-item > .menu-link {
+            min-height: 40px !important;
+            padding-top: 8px !important;
+            padding-bottom: 8px !important;
+            align-items: center !important;
+        }
+
+        /* Mobile Hamburger Button */
+        .mobile-menu-toggle {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 42px !important;
+            height: 42px !important;
+            min-width: 42px !important;
+            padding: 0 !important;
+            border-radius: 8px !important;
+            border: 1px solid var(--border) !important;
+            background: #ffffff !important;
+            color: var(--text) !important;
+            font-size: 1.55rem !important;
+            cursor: pointer !important;
+            text-decoration: none !important;
+            transition: all 0.15s ease !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+            flex-shrink: 0 !important;
+        }
+
+        .mobile-menu-toggle:hover,
+        .mobile-menu-toggle:active {
+            background-color: #f1f5f9 !important;
+            border-color: var(--primary) !important;
+            color: var(--primary) !important;
+        }
+
+        .mobile-menu-toggle i {
+            line-height: 1 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        @media (min-width: 1200px) {
+            .mobile-menu-toggle {
+                display: none !important;
+            }
+        }
+
+        /* Mobile & Tablet Drawer Popup (Full Screen Drawer) */
+        @media (max-width: 1199.98px) {
+            #layout-menu.layout-menu,
+            .sidebar {
+                position: fixed !important;
+                top: 0 !important;
+                bottom: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                height: 100vh !important;
+                height: 100dvh !important;
+                max-height: 100vh !important;
+                max-height: 100dvh !important;
+                width: 100vw !important;
+                min-width: 100vw !important;
+                max-width: 100vw !important;
+                flex: none !important;
+                z-index: 9999 !important;
+                background: #ffffff !important;
+                transform: translate3d(-100%, 0, 0) !important;
+                transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                box-shadow: none !important;
+                visibility: hidden !important;
+                display: flex !important;
+                flex-direction: column !important;
+                overflow: hidden !important;
+                border-radius: 0 !important;
+            }
+
+            html.layout-menu-expanded #layout-menu.layout-menu,
+            html.layout-menu-expanded .sidebar,
+            body.layout-menu-expanded #layout-menu.layout-menu,
+            body.layout-menu-expanded .sidebar {
+                transform: translate3d(0, 0, 0) !important;
+                visibility: visible !important;
+                box-shadow: 0 0 50px rgba(15, 23, 42, 0.35) !important;
+            }
+
+            /* Scrollable menu items area within full screen drawer */
+            #layout-menu .menu-inner {
+                flex: 1 1 auto !important;
+                height: 100% !important;
+                overflow-y: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+                padding: 12px 16px 36px 16px !important;
+            }
+
+            /* Drawer Header / Brand */
+            #layout-menu .app-brand {
+                height: 72px !important;
+                min-height: 72px !important;
+                padding: 0 20px !important;
+                border-bottom: 1px solid var(--border) !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                flex-shrink: 0 !important;
+                background: #ffffff !important;
+            }
+
+            /* Drawer Close Button */
+            #layout-menu .app-brand #mobile-menu-close {
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                width: 42px !important;
+                height: 42px !important;
+                min-width: 42px !important;
+                border-radius: 10px !important;
+                background: #f1f5f9 !important;
+                color: #334155 !important;
+                border: 1px solid #e2e8f0 !important;
+                cursor: pointer !important;
+                transition: all 0.15s ease !important;
+            }
+
+            #layout-menu .app-brand #mobile-menu-close:hover,
+            #layout-menu .app-brand #mobile-menu-close:active {
+                background: #e2e8f0 !important;
+                color: var(--primary) !important;
+            }
+
+            /* Keep all menu labels, brand, profile info visible in drawer popup */
+            #layout-menu .menu-link div,
+            #layout-menu .brand-title,
+            #layout-menu .sidebar-profile-info,
+            #layout-menu .collapse-text {
+                display: block !important;
+                white-space: normal !important;
+            }
+
+            #layout-menu .menu-link {
+                justify-content: flex-start !important;
+                padding: 11px 16px !important;
+                border-radius: 8px !important;
+            }
+
+            #layout-menu .sidebar-profile {
+                justify-content: flex-start !important;
+            }
+
+            #layout-menu #logo-full {
+                display: block !important;
+                opacity: 1 !important;
+                max-width: 175px !important;
+                max-height: 42px !important;
+            }
+
+            #layout-menu #logo-small {
+                display: none !important;
+                opacity: 0 !important;
+            }
+
+            /* Mobile Backdrop Overlay */
+            .layout-overlay {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                background: rgba(15, 23, 42, 0.45) !important;
+                backdrop-filter: blur(3px) !important;
+                -webkit-backdrop-filter: blur(3px) !important;
+                z-index: 9998 !important;
+                display: none !important;
+                cursor: pointer !important;
+            }
+
+            html.layout-menu-expanded .layout-overlay,
+            body.layout-menu-expanded .layout-overlay {
+                display: block !important;
+            }
+
+            html.layout-menu-expanded,
+            html.layout-menu-expanded body,
+            body.layout-menu-expanded {
+                overflow: hidden !important;
+            }
+
+            .layout-page, .main {
+                width: 100% !important;
+                max-width: 100vw !important;
+                flex: 1 1 100% !important;
+                min-width: 0 !important;
+            }
+
+            /* Submenu Display on Mobile Drawer */
+            #layout-menu .menu-item.open > .menu-sub,
+            .sidebar .menu-item.open > .menu-sub,
+            html.layout-menu-expanded #layout-menu .menu-item.open > .menu-sub {
+                display: flex !important;
+                flex-direction: column !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                height: auto !important;
+                max-height: none !important;
+                overflow: visible !important;
+            }
+
+            #layout-menu .menu-item:not(.open) > .menu-sub,
+            .sidebar .menu-item:not(.open) > .menu-sub {
+                display: none !important;
+            }
+
+            #layout-menu .menu-sub,
+            .sidebar .menu-sub {
+                list-style: none !important;
+                padding: 6px 8px 6px 12px !important;
+                margin: 4px 6px 8px 12px !important;
+                background: #f8fafc !important;
+                border-radius: 8px !important;
+                border-left: 3px solid var(--primary) !important;
+            }
+
+            #layout-menu .menu-sub .menu-item,
+            .sidebar .menu-sub .menu-item {
+                margin: 2px 0 !important;
+            }
+
+            #layout-menu .menu-sub .menu-item .menu-link,
+            .sidebar .menu-sub .menu-item .menu-link {
+                padding: 9px 14px !important;
+                font-size: 14px !important;
+                color: #475569 !important;
+                border-radius: 6px !important;
+                display: flex !important;
+                align-items: center !important;
+                min-height: 40px !important;
+            }
+
+            #layout-menu .menu-sub .menu-item .menu-link:hover,
+            #layout-menu .menu-sub .menu-item .menu-link:active,
+            .sidebar .menu-sub .menu-item .menu-link:hover {
+                background: #e2e8f0 !important;
+                color: var(--primary) !important;
+            }
+
+            #layout-menu .menu-sub .menu-item.active > .menu-link,
+            .sidebar .menu-sub .menu-item.active > .menu-link {
+                color: var(--primary) !important;
+                background-color: var(--primary-50) !important;
+                font-weight: 600 !important;
+            }
+
+            /* Submenu Toggle Chevron Arrow */
+            #layout-menu .menu-link.menu-toggle {
+                position: relative !important;
+                padding-right: 42px !important;
+            }
+
+            #layout-menu .menu-link.menu-toggle::after {
+                content: '' !important;
+                position: absolute !important;
+                right: 18px !important;
+                top: 50% !important;
+                width: 9px !important;
+                height: 9px !important;
+                border-right: 2px solid #64748b !important;
+                border-bottom: 2px solid #64748b !important;
+                transform: translateY(-70%) rotate(-45deg) !important;
+                transition: transform 0.22s ease, border-color 0.22s ease !important;
+            }
+
+            #layout-menu .menu-item.open > .menu-link.menu-toggle::after {
+                transform: translateY(-30%) rotate(45deg) !important;
+                border-color: var(--primary) !important;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .layout-navbar, .topbar {
+                height: auto !important;
+                min-height: auto !important;
+                flex-wrap: wrap !important;
+                padding: 12px 16px !important;
+                gap: 10px !important;
+            }
+            .topbar-left-wrapper {
+                min-width: 0 !important;
+                flex: 1 1 auto !important;
+            }
+            .title-block {
+                min-width: 0 !important;
+            }
+            .title-block h1,
+            .navbar-title-container h1 {
+                font-size: 18px !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token() }}">
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper">
+        <div class="layout-container">
+            <!-- Menu -->
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme sidebar">
+                <div class="app-brand demo brand">
+                    <a href="{{ route('dashboard') }}" class="app-brand-link d-flex align-items-center text-decoration-none">
+                        <img id="logo-full" src="{{ asset('images/logo.png') }}" alt="Novalyo 360" class="app-brand-logo-full" />
+                        <img id="logo-small" src="{{ asset('images/logo_small.png') }}" alt="Novalyo 360" class="app-brand-logo-small" />
+                    </a>
+                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto" id="mobile-menu-close" style="padding: 0; min-height: unset; height: auto;" aria-label="Toggle menu">
+                        <i class="bi bi-chevron-left d-none d-xl-block" style="font-size: 16px;"></i>
+                        <i class="bi bi-x-lg d-xl-none" style="font-size: 18px;"></i>
+                    </a>
+                </div>
+                <div class="menu-inner-shadow"></div>
+                <ul class="menu-inner py-1"> @auth 
+                            @if (Auth::user()->hasPermission('dashboard-access') || Auth::user()->is_admin == 1)
+                                <li class="menu-item {{ Route::is('dashboard') ? 'active open' : '' }}">
+                                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                        <i class="bi bi-house-door" style="margin-right: 10px;"></i>
+                                        <div>{{ __('locale.menu_welcome') }}</div>
+                                    </a>
+                                    <ul class="menu-sub">
+                                        <li class="menu-item {{ Route::is('dashboard') ? 'active' : '' }}">
+                                            <a href="{{ route('dashboard') }}" class="menu-link">
+                                                <i class="bi bi-speedometer2" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_dashboard') }}</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
+                            <li class="menu-item {{ Route::is('reports.*') ? 'active' : '' }}">
+                                @if (Auth::user()->hasPermission('reports-access') || Auth::user()->is_admin == 1)
+                                    <a href="{{ route('reports.index') }}" class="menu-link">
+                                        <i class="bi bi-bar-chart" style="margin-right: 10px;"></i>
+                                        <div>{{ __('locale.menu_reports') }}</div>
+                                    </a>
+                                @endif
+                            </li>
+                            <li class="menu-item {{ Route::is('todos.*') ? 'active open' : '' }}">
+                                @if (Auth::user()->hasPermission('todo-access') || Auth::user()->is_admin == 1)
+                                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                        <i class="bi bi-list-task" style="margin-right: 10px;"></i>
+                                        <div>{{ __('locale.menu_todo') }}</div>
+                                    </a>
+                                    <ul class="menu-sub">
+                                        @if (Auth::user()->hasPermission('remaining-tasks-access') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item">
+                                            <a href="{{ route('todos.index') }}" class="menu-link">
+                                                <i class="bi bi-list-check" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_remaining_tasks') }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                        @if (Auth::user()->hasPermission('assigned-to-me-access') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item">
+                                            <a href="{{ route('todos.index', ['filters' => 'assigned_to_me']) }}"
+                                                class="menu-link">
+                                                <i class="bi bi-person-check" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_assigned_to_me') }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                        @if (Auth::user()->hasPermission('done-tasks-access') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item">
+                                            <a href="{{ route('todos.index', ['filters' => 'done']) }}"
+                                                class="menu-link">
+                                                <i class="bi bi-check-square" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_done') }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                    </ul>
+                                @endif
+                            </li>
+                                <li class="menu-item {{ Route::is('clients.*') || Route::is('prospects.*') || Route::is('contracts.*') || Route::is('contacts.*') ? 'active open' : '' }}">
+                                @if (Auth::user()->hasPermission('clients-access') || Auth::user()->is_admin == 1)
+                                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                        <i class="bi bi-building" style="margin-right: 10px;"></i>
+                                        <div>{{ __('locale.menu_clients') }}</div>
+                                    </a>
+                                    <ul class="menu-sub">
+                                        @if (Auth::user()->hasPermission('view-contacts') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ Route::is('contacts.*') ? 'active' : '' }}">
+                                            <a href="{{ route('contacts.index') }}" class="menu-link">
+                                                <i class="bi bi-person-lines-fill" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_contacts') }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                        @if (Auth::user()->hasPermission('clients-list-access') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ Route::is('clients.*') ? 'active' : '' }}">
+                                            <a href="{{ route('clients.index') }}" class="menu-link">
+                                                <i class="bi bi-tags" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_companies') }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                        @if (Auth::user()->hasPermission('view-contracts') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ Route::is('contracts.*') ? 'active' : '' }}">
+                                            <a href="{{ route('contracts.index') }}" class="menu-link">
+                                                <i class="bi bi-journal-text" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_contracts') }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                    </ul>
+                                @endif
+                                </li>
+                                <li class="menu-item {{ Route::is('equipments.*') || Route::is('warehouses.*') || Route::is('equipment_categories.*') || Route::is('combos.*') ? 'active open' : '' }}">
+                                @if (Auth::user()->hasPermission('equipments-access') || Auth::user()->is_admin == 1)
+                                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                        <i class="bi bi-tags" style="margin-right: 10px;"></i>
+                                        <div>{{ __('locale.menu_equipments') }}</div>
+                                    </a>
+                                    <ul class="menu-sub">
+                                        @if (Auth::user()->hasPermission('view-equipments') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ Route::is('equipments.*') && !Route::is('equipments.inventory.*') ? 'active' : '' }}">
+                                            <a href="{{ route('equipments.index') }}" class="menu-link">
+                                                <i class="bi bi-tag" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_equipments') }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+
+                                        @if (Auth::user()->hasPermission('view-combos') || Auth::user()->hasPermission('combos-access') || Auth::user()->is_admin == 1 || Auth::user()->isNovalyoAdmin())
+                                        <li class="menu-item {{ Route::is('combos.*') ? 'active' : '' }}">
+                                            <a href="{{ route('combos.index') }}" class="menu-link">
+                                                <i class="bi bi-layers" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_combos') ?? 'Choix de Combos' }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+
+                                        @if (Auth::user()->hasPermission('inventory-access') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ Route::is('equipments.inventory.*') || Route::is('warehouses.*') ? 'active open' : '' }}">
+                                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                <i class="bi bi-box-seam" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_inventory') }}</div>
+                                            </a>
+                                            <ul class="menu-sub">
+                                                @if (Auth::user()->hasPermission('inventory-dashboard-access') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('equipments.inventory.index') ? 'active' : '' }}">
+                                                    <a href="{{ route('equipments.inventory.index') }}" class="menu-link">
+                                                        <i class="bi bi-speedometer2" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_inventory_dashboard') }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('view-warehouses') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('warehouses.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('warehouses.index') }}" class="menu-link">
+                                                        <i class="bi bi-shop" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_warehouses') }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('inventory-history-access') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('equipments.inventory.history') ? 'active' : '' }}">
+                                                    <a href="{{ route('equipments.inventory.history') }}" class="menu-link">
+                                                        <i class="bi bi-clock-history" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.inventory_history') }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                            </ul>
+                                        </li>
+                                        @endif
+
+                                        @if (Auth::user()->hasPermission('view-equipment-categories') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ Route::is('equipment_categories.*') ? 'active' : '' }}">
+                                            <a href="{{ route('equipment_categories.index') }}" class="menu-link">
+                                                <i class="bi bi-folder2" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.equipment_categories') ?? 'Catégories d\'équipements' }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                    </ul>
+                                @endif
+                                </li>
+
+                                <li class="menu-item {{ Route::is('employees.*') || Route::is('employee_equipments.*') ? 'active open' : '' }}">
+                                @if (Auth::user()->hasPermission('collaborateurs-access') || Auth::user()->hasPermission('employees-access') || Auth::user()->hasPermission('view-employees') || Auth::user()->hasPermission('employee-equipments-access') || Auth::user()->hasPermission('view-employee-equipments') || Auth::user()->is_admin == 1)
+                                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                        <i class="bi bi-people" style="margin-right: 10px;"></i>
+                                        <div>{{ __('locale.menu_collaborateurs_parent') ?? 'Collaborateurs' }}</div>
+                                    </a>
+                                    <ul class="menu-sub">
+                                        @if (Auth::user()->hasPermission('view-employees') || Auth::user()->hasPermission('employees-access') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ Route::is('employees.*') ? 'active' : '' }}">
+                                            <a href="{{ route('employees.index') }}" class="menu-link">
+                                                <i class="bi bi-person-lines-fill" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_employees') ?? 'Collaborateurs' }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                        @if (Auth::user()->hasPermission('view-employee-equipments') || Auth::user()->hasPermission('employee-equipments-access') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ Route::is('employee_equipments.*') ? 'active' : '' }}">
+                                            <a href="{{ route('employee_equipments.index') }}" class="menu-link">
+                                                <i class="bi bi-laptop" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_employee_equipments') ?? 'Matériel Collaborateurs' }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                    </ul>
+                                @endif
+                                </li>
+
+                                @if (Auth::user()->hasPermission('purchasing-access') || Auth::user()->is_admin == 1)
+                                <li class="menu-item {{ Route::is('suppliers.*') || Route::is('purchases.*') || Route::is('supplier-orders.*') || Route::is('supplier-contacts.*') ? 'active open' : '' }}">
+                                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                        <i class="bi bi-cart-check" style="margin-right: 10px;"></i>
+                                        <div>{{ __('locale.menu_purchasing') }}</div>
+                                    </a>
+                                    <ul class="menu-sub">
+                                        @if (Auth::user()->hasPermission('view-suppliers') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ Route::is('suppliers.*') ? 'active' : '' }}">
+                                            <a href="{{ route('suppliers.index') }}" class="menu-link">
+                                                <i class="bi bi-truck" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_suppliers') }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                        @if (Auth::user()->hasPermission('view-supplier-contacts') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ Route::is('supplier-contacts.*') ? 'active' : '' }}">
+                                            <a href="{{ route('supplier-contacts.index') }}" class="menu-link">
+                                                <i class="bi bi-person-lines-fill" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_supplier_contacts') }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                        @if (Auth::user()->hasPermission('view-purchases') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ Route::is('purchases.*') ? 'active' : '' }}">
+                                            <a href="{{ route('purchases.index') }}" class="menu-link">
+                                                <i class="bi bi-receipt" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_purchases') }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                        @if (Auth::user()->hasPermission('view-supplier-orders') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ Route::is('supplier-orders.*') ? 'active' : '' }}">
+                                            <a href="{{ route('supplier-orders.index') }}" class="menu-link">
+                                                <i class="bi bi-cart-check" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_supplier_orders') }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                    </ul>
+                                </li>
+                                @endif
+                                <li class="menu-item {{ Route::is('issues.devis') || Route::is('pricelists.*') ? 'active open' : '' }}">
+                                    @if (Auth::user()->hasPermission('commerce-access') || Auth::user()->is_admin == 1)
+                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                            <i class="bi bi-bag" style="margin-right: 10px;"></i>
+                                            <div>{{ __('locale.menu_commerce') }}</div>
+                                        </a>
+                                        <ul class="menu-sub">
+                                            @if (Auth::user()->hasPermission('commerce-business-access') || Auth::user()->is_admin == 1)
+                                            <li class="menu-item">
+                                                <a href="{{-- route('commerce.business') --}}" class="menu-link">
+                                                    <i class="bi bi-briefcase" style="margin-right: 10px;"></i>
+                                                    <div>{{ __('locale.menu_business') }}</div>
+                                                </a>
+                                            </li>
+                                            @endif
+                                            @if (Auth::user()->hasPermission('commerce-estimate-ticket-access') || Auth::user()->is_admin == 1)
+                                            <li class="menu-item {{ Route::is('issues.devis') ? 'active' : '' }}">
+                                                <a href="{{ route('issues.devis') }}" class="menu-link">
+                                                    <i class="bi bi-calculator" style="margin-right: 10px;"></i>
+                                                    <div>{{ __('locale.menu_estimate_ticket') }}</div>
+                                                </a>
+                                            </li>
+                                            @endif
+                                            @if (Auth::user()->hasPermission('view-pricelists') || Auth::user()->is_admin == 1)
+                                            <li class="menu-item {{ Route::is('pricelists.*') ? 'active' : '' }}">
+                                                <a href="{{ route('pricelists.index') }}" class="menu-link">
+                                                    <i class="bi bi-percent" style="margin-right: 10px;"></i>
+                                                    <div>{{ __('locale.menu_pricelists') }}</div>
+                                                </a>
+                                            </li>
+                                            @endif
+                                            @if (Auth::user()->hasPermission('commerce-report-access') || Auth::user()->is_admin == 1)
+                                            <li class="menu-item">
+                                                <a href="{{-- route('commerce.report') --}}" class="menu-link">
+                                                    <i class="bi bi-file-earmark-bar-graph" style="margin-right: 10px;"></i>
+                                                    <div>{{ __('locale.menu_report') }}</div>
+                                                </a>
+                                            </li>
+                                            @endif
+                                        </ul>
+                                    @endif
+                                </li>
+                                @if (Auth::user()->hasPermission('view-orders') || Auth::user()->hasPermission('order-access') || Auth::user()->is_admin == 1)
+                                <li class="menu-item {{ Route::is('orders.*') || Route::is('quote-templates.*') || Route::is('quote-reserves.*') ? 'active open' : '' }}">
+                                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                        <i class="bi bi-box" style="margin-right: 10px;"></i>
+                                        <div>{{ __('locale.menu_order') }}</div>
+                                    </a>
+                                    <ul class="menu-sub">
+                                        <li class="menu-item {{ Route::is('orders.*') ? 'active' : '' }}">
+                                            <a href="{{ route('orders.index') }}" class="menu-link">
+                                                <i class="bi bi-cart3" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_orders') ?? 'Commandes' }}</div>
+                                            </a>
+                                        </li>
+                                        @if (Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ Route::is('quote-templates.*') ? 'active' : '' }}">
+                                            <a href="{{ route('quote-templates.index') }}" class="menu-link">
+                                                <i class="bi bi-file-earmark-spreadsheet" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_quote_templates') ?? 'Modèles de devis' }}</div>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item {{ Route::is('quote-reserves.*') ? 'active' : '' }}">
+                                            <a href="{{ route('quote-reserves.index') }}" class="menu-link">
+                                                <i class="bi bi-shield-check" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_quote_reserves') ?? 'Réserves de devis' }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                    </ul>
+                                </li>
+                                @endif
+                                @if (Auth::user()->hasPermission('view-deliveries') || Auth::user()->hasPermission('deliveries-access') || Auth::user()->is_admin == 1 || Auth::user()->isNovalyoAdmin())
+                                <li class="menu-item {{ Route::is('deliveries.*') ? 'active' : '' }}">
+                                    <a href="{{ route('deliveries.index') }}" class="menu-link">
+                                        <i class="bi bi-truck" style="margin-right: 10px;"></i>
+                                        <div>{{ __('locale.menu_deliveries') ?? 'Livraisons' }}</div>
+                                    </a>
+                                </li>
+                                @endif
+                                @if (Auth::user()->hasPermission('project-management-access') || Auth::user()->is_admin == 1)
+                                <li class="menu-item {{ Route::is('projects.*') ? 'active' : '' }}">
+                                    <a href="{{ route('projects.index') }}" class="menu-link">
+                                        <i class="bi bi-diagram-3" style="margin-right: 10px;"></i>
+                                        <div>{{ __('locale.menu_project_management') }}</div>
+                                    </a>
+                                </li>
+                                @endif
+                                @if (Auth::user()->hasPermission('view-construction-reports') || Auth::user()->is_admin == 1)
+                                <li class="menu-item {{ Route::is('construction-reports.*') ? 'active' : '' }}">
+                                    <a href="{{ route('construction-reports.index') }}" class="menu-link">
+                                        <i class="bi bi-file-earmark-medical" style="margin-right: 10px;"></i>
+                                        <div>{{ __('locale.cr_title') }}</div>
+                                    </a>
+                                </li>
+                                @endif
+                                @if (Auth::user()->hasPermission('technical-access') || Auth::user()->is_admin == 1)
+                                <li class="menu-item {{ Route::is('visite-prev.*') || Route::is('issues.index') || Route::is('tech_intervs.*') || Route::is('repairs.*') || Route::is('planning.*') || Route::is('knowledge-base.*') ? 'active open' : '' }}">
+                                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                        <i class="bi bi-tools" style="margin-right: 10px;"></i>
+                                        <div>{{ __('locale.menu_technical') }}</div>
+                                    </a>
+                                    <ul class="menu-sub">
+                                        @if (Auth::user()->hasPermission('technical-visite-prev-access') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ Route::is('visite-prev.*') ? 'active' : '' }}">
+                                            <a href="{{ route('visite-prev.index') }}" class="menu-link">
+                                                <i class="bi bi-shield-check" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_visite_prev') }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                        @if (Auth::user()->hasPermission('menu-tickets') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ Route::is('issues.index') ? 'active' : '' }}">
+                                            <a href="{{ route('issues.index') }}" class="menu-link">
+                                                <i class="bi bi-ticket-perforated" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_tickets') }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                        @if (Auth::user()->hasPermission('menu-interventions') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ Route::is('tech_intervs.*') ? 'active' : '' }}">
+                                            <a href="{{ route('tech_intervs.index') }}" class="menu-link">
+                                                <i class="bi bi-cone-striped" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_interventions') }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                        @if (Auth::user()->hasPermission('menu-repair') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ Route::is('repairs.*') ? 'active' : '' }}">
+                                            <a href="{{ route('repairs.index') }}" class="menu-link">
+                                                <i class="bi bi-wrench" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_repairs') }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                        @if (Auth::user()->hasPermission('menu-planning') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ Route::is('planning.*') ? 'active' : '' }}">
+                                            <a href="{{ route('planning.week') }}" class="menu-link">
+                                                <i class="bi bi-calendar3" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_planification') }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                        @if (Auth::user()->hasPermission('technical-knowledge-base-access') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ Route::is('knowledge-base.*') ? 'active' : '' }}">
+                                            <a href="{{ route('knowledge-base.index') }}" class="menu-link">
+                                                <i class="bi bi-book" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_knowledge_base') }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                    </ul>
+                                </li>
+                                @endif
+                            @if (Auth::user()->hasPermission('facturation-access') || Auth::user()->is_admin == 1)
+                            <li class="menu-item {{ Route::is('facturation.index') ? 'active' : '' }}">
+                                <a href="{{-- route('facturation.index') --}}" class="menu-link">
+                                    <i class="bi bi-file-earmark-spreadsheet"
+                                        style="margin-right: 10px;"></i>
+                                    <div>{{ __('locale.menu_facturation') }}</div>
+                                </a>
+                            </li>
+                            @endif
+                            @if (Auth::user()->hasPermission('recouvrement-access') || Auth::user()->is_admin == 1)
+                            <li class="menu-item {{ Route::is('recouvrement.index') ? 'active' : '' }}">
+                                <a href="{{-- route('recouvrement.index') --}}" class="menu-link">
+                                    <i class="bi bi-cash-stack" style="margin-right: 10px;"></i>
+                                    <div>{{ __('locale.menu_recouvrement') }}</div>
+                                </a>
+                            </li>
+                            @endif
+                            
+                            <li class="menu-item {{ 
+                                Route::is('users.*') || 
+                                Route::is('roles.*') || 
+                                Route::is('permissions.*') || 
+                                Route::is('user_assignments.*') || 
+                                Route::is('commercials.*') || 
+                                Route::is('companies.*') || 
+                                Route::is('tenants.*') || 
+                                Route::is('countries.*') || 
+                                Route::is('languages.*') || 
+                                Route::is('client-document-types.*') || 
+                                Route::is('contract_templates.*') || 
+                                Route::is('contract_clause_templates.*') || 
+                                Route::is('equipment_types.*') || 
+                                Route::is('brands.*') || 
+                                Route::is('issues_groups.*') || 
+                                Route::is('categories.*') || 
+                                Route::is('issue_types.*') || 
+                                Route::is('statuses.*') || 
+                                Route::is('states.*') || 
+                                Route::is('issue_criticities.*') || 
+                                Route::is('issue_severities.*') || 
+                                Route::is('origines.*') || 
+                                Route::is('tech_intervention_types.*') || 
+                                Route::is('tech_intervention_statuses.*') || 
+                                Route::is('tech_intervention_states.*') || 
+                                Route::is('tech_intervention_severities.*') || 
+                                Route::is('process_stages.*') || 
+                                Route::is('installers.*') || 
+                                Route::is('vp-checklist-templates.*') || 
+                                Route::is('odoo.settings') || 
+                                Route::is('odoo_categories.*') || 
+                                Route::is('odoo_fiscal_positions.*') || 
+                                Route::is('accounting_families.*') || 
+                                Route::is('remises_ascom.*') || 
+                                Route::is('message_templates.*') || 
+                                Route::is('logs.*') ? 'active open' : '' 
+                            }}">
+                                @if (Auth::user()->hasPermission('settings-access') || Auth::user()->is_admin == 1)
+                                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                        <i class="bi bi-gear" style="margin-right: 10px;"></i>
+                                        <div>{{ __('locale.menu_settings') }}</div>
+                                    </a>
+                                    <ul class="menu-sub">
+                                        {{-- 1. Utilisateurs & Droits (Users & Access) --}}
+                                        @if (
+                                            Auth::user()->hasPermission('manage-users') || 
+                                            Auth::user()->hasPermission('manage-roles') || 
+                                            Auth::user()->hasPermission('manage-permissions') || 
+                                            Auth::user()->hasPermission('view-user-assignments') || 
+                                            Auth::user()->hasPermission('view-commercials') || 
+                                            Auth::user()->is_admin == 1
+                                        )
+                                        <li class="menu-item {{ 
+                                            Route::is('users.*') || 
+                                            Route::is('roles.*') || 
+                                            Route::is('permissions.*') || 
+                                            Route::is('user_assignments.*') || 
+                                            Route::is('commercials.*') ? 'active open' : '' 
+                                        }}">
+                                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                <i class="bi bi-people" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_users_access') ?? 'Utilisateurs & Droits' }}</div>
+                                            </a>
+                                            <ul class="menu-sub">
+                                                @if (Auth::user()->hasPermission('manage-users') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('users.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('users.index') }}" class="menu-link">
+                                                        <i class="bi bi-person" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_users') }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('manage-roles') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('roles.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('roles.index') }}" class="menu-link">
+                                                        <i class="bi bi-shield-lock" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_roles') }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('manage-permissions') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('permissions.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('permissions.index') }}" class="menu-link">
+                                                        <i class="bi bi-check2-circle" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_permissions') }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('view-user-assignments') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('user_assignments.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('user_assignments.index') }}" class="menu-link">
+                                                        <i class="bi bi-person-check" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_user_assignments') }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('view-commercials') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('commercials.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('commercials.index') }}" class="menu-link">
+                                                        <i class="bi bi-briefcase" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_commercials') }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                            </ul>
+                                        </li>
+                                        @endif
+
+                                        {{-- 2. Organisation & Structure (Company & Structure) --}}
+                                        @if (
+                                            Auth::user()->hasPermission('view-companies') || 
+                                            Auth::user()->hasPermission('view-tenants') || 
+                                            Auth::user()->hasPermission('settings-access') || 
+                                            Auth::user()->is_admin == 1
+                                        )
+                                        <li class="menu-item {{ 
+                                            Route::is('companies.*') || 
+                                            Route::is('tenants.*') || 
+                                            Route::is('countries.*') || 
+                                            Route::is('languages.*') ? 'active open' : '' 
+                                        }}">
+                                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                <i class="bi bi-building" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_organization') ?? 'Organisation' }}</div>
+                                            </a>
+                                            <ul class="menu-sub">
+                                                @if (Auth::user()->hasPermission('view-companies') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('companies.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('companies.index') }}" class="menu-link">
+                                                        <i class="bi bi-building" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_companies') }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('view-tenants') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('tenants.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('tenants.index') }}" class="menu-link">
+                                                        <i class="bi bi-stack" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_tenants') }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('settings-access') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('countries.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('countries.index') }}" class="menu-link">
+                                                        <i class="bi bi-globe" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_countries') ?? 'Pays' }}</div>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item {{ Route::is('languages.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('languages.index') }}" class="menu-link">
+                                                        <i class="bi bi-translate" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.lbl_langue') ?? 'Langues' }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                            </ul>
+                                        </li>
+                                        @endif
+
+                                        {{-- 3. Documents & Contrats (Documents & Contracts) --}}
+                                        @if (
+                                            Auth::user()->hasPermission('view-client-document-types') || 
+                                            Auth::user()->hasPermission('admin-manage-contract-templates') || 
+                                            Auth::user()->hasPermission('settings-access') || 
+                                            Auth::user()->is_admin == 1
+                                        )
+                                        <li class="menu-item {{ 
+                                            Route::is('client-document-types.*') || 
+                                            Route::is('contract_templates.*') || 
+                                            Route::is('contract_clause_templates.*') ? 'active open' : '' 
+                                        }}">
+                                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                <i class="bi bi-file-earmark-text" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_documents_contracts') ?? 'Documents & Contrats' }}</div>
+                                            </a>
+                                            <ul class="menu-sub">
+                                                @if (Auth::user()->hasPermission('view-client-document-types') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('client-document-types.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('client-document-types.index') }}" class="menu-link">
+                                                        <i class="bi bi-file-earmark-medical" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_client_document_types') ?? 'Types de documents' }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('admin-manage-contract-templates') || Auth::user()->hasPermission('settings-access') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('contract_templates.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('contract_templates.index') }}" class="menu-link">
+                                                        <i class="bi bi-journal-text" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_contract_templates') ?? 'Modèles de contrat' }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('admin-manage-contract-templates') || Auth::user()->hasPermission('settings-access') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('contract_clause_templates.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('contract_clause_templates.index') }}" class="menu-link">
+                                                        <i class="bi bi-card-checklist" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_contract_clause_templates') ?? 'Modèles de clauses' }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                            </ul>
+                                        </li>
+                                        @endif
+
+                                        {{-- 4. Articles & Catalogue (Equipment & Catalog Settings) --}}
+                                        @if (
+                                            Auth::user()->hasPermission('admin-manage-equipment-types') || 
+                                            Auth::user()->hasPermission('settings-access') || 
+                                            Auth::user()->is_admin == 1
+                                        )
+                                        <li class="menu-item {{ 
+                                            Route::is('equipment_types.*') || 
+                                            Route::is('brands.*') ? 'active open' : '' 
+                                        }}">
+                                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                <i class="bi bi-tag" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_catalog_settings') ?? 'Articles & Catalogue' }}</div>
+                                            </a>
+                                            <ul class="menu-sub">
+                                                <li class="menu-item {{ Route::is('equipment_types.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('equipment_types.index') }}" class="menu-link">
+                                                        <i class="bi bi-collection" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.equipment_types') ?? 'Types d\'article' }}</div>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item {{ Route::is('brands.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('brands.index') }}" class="menu-link">
+                                                        <i class="bi bi-award" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.brands') ?? 'Marques' }}</div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        @endif
+
+                                        {{-- 5. Tickets / SAV (Issue Settings) --}}
+                                        @if (Auth::user()->hasPermission('manage-ticket-settings') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ 
+                                            Route::is('issues_groups.*') || 
+                                            Route::is('categories.*') || 
+                                            Route::is('issue_types.*') || 
+                                            Route::is('statuses.*') || 
+                                            Route::is('states.*') || 
+                                            Route::is('issue_criticities.*') || 
+                                            Route::is('issue_severities.*') || 
+                                            Route::is('warranty_types.*') || 
+                                            Route::is('repair_diagnoses.*') || 
+                                            Route::is('origines.*') ? 'active open' : '' 
+                                        }}">
+                                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                <i class="bi bi-ticket-detailed" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_issue_settings') }}</div>
+                                            </a>
+                                            <ul class="menu-sub">
+                                                @if (Auth::user()->hasPermission('view-ticket-groups') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('issues_groups.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('issues_groups.index') }}" class="menu-link">
+                                                        <i class="bi bi-collection" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_ticket_groups') }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('manage-categories') || Auth::user()->is_admin == 1)
+                                                    <li class="menu-item {{ Route::is('categories.*') ? 'active' : '' }}">
+                                                        <a href="{{ route('categories.index') }}" class="menu-link">
+                                                            <i class="bi bi-bookmark" style="margin-right: 10px;"></i>
+                                                            <div>{{ __('locale.menu_categories') }}</div>
+                                                        </a>
+                                                    </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('view-ticket-types') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('issue_types.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('issue_types.index') }}" class="menu-link">
+                                                        <i class="bi bi-tags" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_issue_types') }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('view-ticket-statuses') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('statuses.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('statuses.index') }}" class="menu-link">
+                                                        <i class="bi bi-info-square" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_statuses') }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('view-ticket-states') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('states.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('states.index') }}" class="menu-link">
+                                                        <i class="bi bi-activity" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_states') }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('view-ticket-criticities') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('issue_criticities.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('issue_criticities.index') }}" class="menu-link">
+                                                        <i class="bi bi-lightning" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_issue_criticities') }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('view-ticket-severities') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('issue_severities.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('issue_severities.index') }}" class="menu-link">
+                                                        <i class="bi bi-exclamation-octagon" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_issue_severities') }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('manage-origines') || Auth::user()->is_admin == 1)
+                                                    <li class="menu-item {{ Route::is('origines.*') ? 'active' : '' }}">
+                                                        <a href="{{ route('origines.index') }}" class="menu-link">
+                                                            <i class="bi bi-compass" style="margin-right: 10px;"></i>
+                                                            <div>{{ __('locale.menu_origines') }}</div>
+                                                        </a>
+                                                    </li>
+                                                @endif
+                                                <li class="menu-item {{ Route::is('warranty_types.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('warranty_types.index') }}" class="menu-link">
+                                                        <i class="bi bi-shield-check" style="margin-right: 10px;"></i>
+                                                        <div>Types de garantie SAV</div>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item {{ Route::is('repair_diagnoses.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('repair_diagnoses.index') }}" class="menu-link">
+                                                        <i class="bi bi-clipboard2-check" style="margin-right: 10px;"></i>
+                                                        <div>Diagnostics / Résultats SAV</div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        @endif
+
+                                        {{-- 6. Interventions Techniques & VP (Tech Interventions Settings) --}}
+                                        @if (
+                                            Auth::user()->hasPermission('manage-tech-interv-settings') || 
+                                            Auth::user()->hasPermission('view-installers') || 
+                                            Auth::user()->hasPermission('settings-access') || 
+                                            Auth::user()->is_admin == 1
+                                        )
+                                        <li class="menu-item {{ 
+                                            Route::is('tech_intervention_types.*') || 
+                                            Route::is('tech_intervention_statuses.*') || 
+                                            Route::is('tech_intervention_states.*') || 
+                                            Route::is('tech_intervention_severities.*') || 
+                                            Route::is('process_stages.*') || 
+                                            Route::is('installers.*') || 
+                                            Route::is('vp-checklist-templates.*') ? 'active open' : '' 
+                                        }}">
+                                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                <i class="bi bi-tools" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_tech_interventions') }}</div>
+                                            </a>
+                                            <ul class="menu-sub">
+                                                @if (Auth::user()->hasPermission('view-tech-types') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('tech_intervention_types.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('tech_intervention_types.index') }}" class="menu-link">
+                                                        <i class="bi bi-collection" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_types') }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('view-tech-statuses') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('tech_intervention_statuses.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('tech_intervention_statuses.index') }}" class="menu-link">
+                                                        <i class="bi bi-info-circle" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_statuses') }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('view-tech-states') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('tech_intervention_states.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('tech_intervention_states.index') }}" class="menu-link">
+                                                        <i class="bi bi-activity" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_states') }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('view-tech-severities') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('tech_intervention_severities.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('tech_intervention_severities.index') }}" class="menu-link">
+                                                        <i class="bi bi-exclamation-triangle" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_severity') }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('view-progress-stages') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('process_stages.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('process_stages.index') }}" class="menu-link">
+                                                        <i class="bi bi-bar-chart-steps" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_progress_stages') }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('view-installers') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('installers.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('installers.index') }}" class="menu-link">
+                                                        <i class="bi bi-diagram-2" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_installers') }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->hasPermission('settings-access') || Auth::user()->is_admin == 1)
+                                                <li class="menu-item {{ Route::is('vp-checklist-templates.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('vp-checklist-templates.index') }}" class="menu-link">
+                                                        <i class="bi bi-card-checklist" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_vp_checklist_templates') ?? 'Modèles de checklist' }}</div>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                            </ul>
+                                        </li>
+                                        @endif
+
+                                        {{-- 7. Comptabilité & Odoo (Accounting & Odoo) --}}
+                                        @if (Auth::user()->hasPermission('settings-access') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ 
+                                            Route::is('odoo.settings') || 
+                                            Route::is('odoo_categories.*') || 
+                                            Route::is('odoo_fiscal_positions.*') || 
+                                            Route::is('accounting_families.*') || 
+                                            Route::is('remises_ascom.*') ? 'active open' : '' 
+                                        }}">
+                                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                <i class="bi bi-calculator" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.menu_accounting_odoo') ?? 'Comptabilité & Odoo' }}</div>
+                                            </a>
+                                            <ul class="menu-sub">
+                                                <li class="menu-item {{ Route::is('odoo.settings') ? 'active' : '' }}">
+                                                    <a href="{{ route('odoo.settings') }}" class="menu-link">
+                                                        <i class="bi bi-cloud-arrow-down" style="margin-right: 10px;"></i>
+                                                        <div>Odoo Settings</div>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item {{ Route::is('odoo_categories.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('odoo_categories.index') }}" class="menu-link">
+                                                        <i class="bi bi-folder2" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_odoo_categories') ?? 'Catégories Odoo' }}</div>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item {{ Route::is('odoo_fiscal_positions.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('odoo_fiscal_positions.index') }}" class="menu-link">
+                                                        <i class="bi bi-receipt" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.menu_odoo_fiscal_positions') ?? 'Positions Fiscales' }}</div>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item {{ Route::is('accounting_families.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('accounting_families.index') }}" class="menu-link">
+                                                        <i class="bi bi-calculator" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.lbl_accounting_family') ?? 'Familles Comptables' }}</div>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item {{ Route::is('remises_ascom.*') ? 'active' : '' }}">
+                                                    <a href="{{ route('remises_ascom.index') }}" class="menu-link">
+                                                        <i class="bi bi-percent" style="margin-right: 10px;"></i>
+                                                        <div>{{ __('locale.remises_ascom') ?? 'Remises Ascom' }}</div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        @endif
+
+                                        {{-- 8. Modèles de messages (Message Templates) --}}
+                                        @if (Auth::user()->hasPermission('view-message-templates') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ Route::is('message_templates.*') ? 'active' : '' }}">
+                                            <a href="{{ route('message_templates.index') }}" class="menu-link">
+                                                <i class="bi bi-envelope" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.message_templates') }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+
+                                        {{-- 9. Logs --}}
+                                        @if (Auth::user()->hasPermission('dashboard-view-logs') || Auth::user()->is_admin == 1)
+                                        <li class="menu-item {{ Route::is('logs.*') ? 'active' : '' }}">
+                                            <a href="{{ route('logs.index') }}" class="menu-link">
+                                                <i class="bi bi-list-columns-reverse" style="margin-right: 10px;"></i>
+                                                <div>{{ __('locale.logs') }}</div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                    </ul>
+                                @endif
+                            </li>
+                </ul>
+            @endauth
+            @auth
+                <div class="sidebar-footer">
+                    <div class="sidebar-profile">
+                        @php
+                            $sidebarUser = Auth::user();
+                            $sidebarInits = $sidebarUser->name ? strtoupper(substr($sidebarUser->name, 0, 1)) : 'U';
+                            if ($sidebarUser->name && strpos($sidebarUser->name, ' ') !== false) {
+                                $sidebarParts = explode(' ', $sidebarUser->name);
+                                $sidebarInits = strtoupper(substr($sidebarParts[0], 0, 1) . substr($sidebarParts[1], 0, 1));
+                            }
+                        @endphp
+                        <div class="sidebar-avatar">{{ $sidebarInits }}</div>
+                        <div class="sidebar-profile-info">
+                            <div class="sidebar-profile-name">{{ $sidebarUser->name }}</div>
+                            <small class="sidebar-profile-role">{{ $sidebarUser->is_admin ? 'Administrateur' : ($sidebarUser->email ?? 'Utilisateur') }}</small>
+                        </div>
+                    </div>
+                </div>
+            @endauth
+            </aside>
+            <!-- / Menu -->
+            <!-- Layout container -->
+                <div class="layout-page main">
+                    <!-- Unified Modern Top Navbar -->
+                    <header class="layout-navbar topbar">
+                        <!-- Left Section: Mobile Menu Toggle, Title & Subtitle -->
+                        <div class="topbar-left-wrapper d-flex align-items-center gap-2">
+                            <button type="button" class="btn mobile-menu-toggle layout-menu-toggle d-xl-none" id="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                                <i class="bi bi-list"></i>
+                            </button>
+                            <div class="title-block">
+                                <div class="title-line">
+                                    @hasSection('navbar-icon')
+                                        @yield('navbar-icon')
+                                    @endif
+                                    @hasSection('navbar-title')
+                                        @yield('navbar-title')
+                                    @elseif(View::hasSection('title'))
+                                        <h1>@yield('title')</h1>
+                                    @else
+                                        <h1>Novalyo 360</h1>
+                                    @endif
+                                </div>
+                                @hasSection('navbar-subtitle')
+                                    <div class="subtitle">@yield('navbar-subtitle')</div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!-- Right Section: Search, Actions, Company, Notifications, Profile -->
+                        <div class="top-actions">
+                            <div class="navbar-search-container">
+                                @yield('navbar-search')
+                            </div>
+
+                            @yield('page-actions')
+
+                            @auth
+                            @php
+                                $availableCompanies = auth()->user()->getAvailableCompanies();
+                                $activeCompany = request()->hasSession() ? session('active_company_prefix') : null;
+                            @endphp
+                            @if(count($availableCompanies) > 0)
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle d-flex align-items-center" type="button" id="companyDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-building me-1 text-muted"></i>
+                                    <span>
+                                        {{ $activeCompany && isset($availableCompanies[$activeCompany]) ? $availableCompanies[$activeCompany] : __('locale.all_companies') }}
+                                    </span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="companyDropdown">
+                                    @if(count($availableCompanies) > 1)
+                                        <li>
+                                            <a class="dropdown-item d-flex align-items-center {{ !$activeCompany ? 'active' : '' }}" href="{{ route('company.swap', ['prefix' => 'all']) }}">
+                                                <i class="bi bi-grid me-2"></i>
+                                                <span>{{ __('locale.all_companies') }}</span>
+                                            </a>
+                                        </li>
+                                        <li><div class="dropdown-divider"></div></li>
+                                    @endif
+                                    @foreach($availableCompanies as $prefix => $name)
+                                        <li>
+                                            <a class="dropdown-item d-flex align-items-center {{ $activeCompany === $prefix ? 'active' : '' }}" href="{{ route('company.swap', ['prefix' => $prefix]) }}">
+                                                <i class="bi bi-circle-fill me-2 {{ $prefix === 'NO' ? 'text-primary' : 'text-success' }}" style="font-size: 8px;"></i>
+                                                <span>{{ $name }}</span>
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+
+                            {{-- Notification Bell --}}
+                            @php
+                                $totalNotifsCount = ($newTicketMessagesCount ?? 0) + ($newIntervMessagesCount ?? 0) + ($newRepairsCount ?? 0);
+                            @endphp
+                            <div class="dropdown">
+                                <button class="bell" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications">
+                                    <i class="fa-regular fa-bell"></i>
+                                    @if($totalNotifsCount > 0)
+                                        <span class="dot">{{ $totalNotifsCount > 99 ? '99+' : $totalNotifsCount }}</span>
+                                    @endif
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" style="min-width: 260px;">
+                                    <li class="dropdown-header text-uppercase text-muted small fw-bold">{{ __('locale.dashboard_new.notifications') }}</li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center py-2" href="{{ route('issues.index', ['new_messages' => 1]) }}">
+                                            <i class="fa-solid fa-ticket me-2 text-primary"></i>
+                                            <span class="align-middle me-2">{{ __('locale.menu_tickets') }}</span>
+                                            @if(($newTicketMessagesCount ?? 0) > 0)
+                                                <span class="badge bg-danger ms-auto">{{ $newTicketMessagesCount }}</span>
+                                            @endif
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center py-2" href="{{ route('tech_intervs.index', ['new_messages' => 1]) }}">
+                                            <i class="fa-solid fa-screwdriver-wrench me-2 text-primary"></i>
+                                            <span class="align-middle me-2">{{ __('locale.menu_interventions') }}</span>
+                                            @if(($newIntervMessagesCount ?? 0) > 0)
+                                                <span class="badge bg-danger ms-auto">{{ $newIntervMessagesCount }}</span>
+                                            @endif
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center py-2" href="{{ route('repairs.index', ['new_items' => 1]) }}">
+                                            <i class="fa-solid fa-wrench me-2 text-primary"></i>
+                                            <span class="align-middle me-2">{{ __('locale.menu_repairs') }}</span>
+                                            @if(($newRepairsCount ?? 0) > 0)
+                                                <span class="badge bg-danger ms-auto">{{ $newRepairsCount }}</span>
+                                            @endif
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            {{-- User Avatar Dropdown --}}
+                            <div class="dropdown">
+                                <div class="avatar avatar-online" data-bs-toggle="dropdown" style="cursor: pointer;">
+                                    <div class="sidebar-avatar" style="width: 38px; height: 38px; font-size: 13px;">
+                                        {{ $sidebarInits }}
+                                    </div>
+                                </div>
+                                <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center py-2" href="{{ route('user.settings.edit') }}">
+                                            <div class="sidebar-avatar me-2" style="width: 32px; height: 32px; font-size: 11px;">
+                                                {{ $sidebarInits }}
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <span class="fw-semibold d-block small text-dark">{{ auth()->user()->name }}</span>
+                                                <small class="text-muted">{{ auth()->user()->email }}</small>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li><div class="dropdown-divider"></div></li>
+                                    <li>
+                                        <a class="dropdown-item py-2" href="{{ route('user.settings.edit') }}">
+                                            <i class="bi bi-person me-2"></i>
+                                            <span class="align-middle">{{ __('locale.dashboard_new.my_profile') }}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item py-2" href="{{ route('user.settings.edit') }}">
+                                            <i class="bi bi-gear me-2"></i>
+                                            <span class="align-middle">{{ __('locale.dashboard_new.user_settings') }}</span>
+                                        </a>
+                                    </li>
+                                    <li><div class="dropdown-divider"></div></li>
+                                    <li class="dropdown-header text-uppercase text-muted small fw-bold">{{ __('locale.dashboard_new.language') }}</li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center py-2" href="{{ route('lang', ['locale' => 'fr']) }}">
+                                            <i class="fi fi-fr rounded-circle fs-4 me-2"></i>
+                                            <span class="align-middle">{{ __('locale.dashboard_new.french') }}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center py-2" href="{{ route('lang', ['locale' => 'en']) }}">
+                                            <i class="fi fi-us rounded-circle fs-4 me-2"></i>
+                                            <span class="align-middle">{{ __('locale.dashboard_new.english') }}</span>
+                                        </a>
+                                    </li>
+                                    <li><div class="dropdown-divider"></div></li>
+                                    <li>
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item text-danger py-2">
+                                                <i class="bi bi-box-arrow-right me-2"></i> {{ __('locale.dashboard_new.logout') }}
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                            @endauth
+                        </div>
+                    </header>
+
+                    <div class="content-area-main flex-grow-1">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
+            <!-- / Layout page -->
+        </div>
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle" id="mobile-menu-overlay"></div>
+        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+        <div class="drag-target"></div>
+    </div>
+    <!-- / Layout wrapper -->
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="{{ asset('libs/popper/popper.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
+    <script src="{{ asset('libs/node-waves/node-waves.js') }}"></script>
+    <script src="{{ asset('libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+    <script src="{{ asset('libs/hammer/hammer.js') }}"></script>
+    <script src="{{ asset('libs/typeahead-js/typeahead.js') }}"></script>
+    <script src="{{ asset('js/menu.js') }}"></script>
+    <!-- endbuild -->
+    <!-- Vendors JS -->
+    <script src="{{ asset('libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
+    <script src="{{ asset('libs/apex-charts/apexcharts.js') }}"></script>
+    <script src="{{ asset('libs/swiper/swiper.js') }}"></script>
+    <!-- Main JS -->
+    <script src="{{ asset('js/main.js') }}"></script>
+    <!-- Page JS -->
+    <script src="{{ asset('js/dashboards-crm.js') }}"></script>
+    <script>
+        (function() {
+            function decodeHtmlEntities(value) {
+                if (typeof value !== 'string') {
+                    return '';
+                }
+
+                if (!value.includes('&')) {
+                    return value;
+                }
+
+                const parser = decodeHtmlEntities.parser || document.createElement('textarea');
+                parser.innerHTML = value;
+                decodeHtmlEntities.parser = parser;
+
+                return parser.value;
+            }
+
+            function parseCategories(select) {
+                if (!select) {
+                    return {};
+                }
+
+                const rawValue = (select.dataset && select.dataset.categories) ||
+                    select.getAttribute('data-categories') ||
+                    '';
+
+                const trimmed = rawValue.trim();
+                if (!trimmed) {
+                    return {};
+                }
+
+                const decoded = decodeHtmlEntities(trimmed);
+
+                try {
+                    return JSON.parse(decoded);
+                } catch (error) {
+                    try {
+                        return Function('return (' + decoded + ')')();
+                    } catch (secondaryError) {
+                        console.warn('Unable to parse category options', error, {
+                            raw: rawValue
+                        });
+                    }
+
+                    return {};
+                }
+            }
+
+            function normalizeKey(value) {
+                if (value === undefined || value === null) {
+                    return '';
+                }
+
+                return String(value);
+            }
+
+            function resolveCategoryOptions(entry) {
+                if (Array.isArray(entry)) {
+                    return {
+                        options: entry,
+                        placeholder: undefined
+                    };
+                }
+
+                if (entry && typeof entry === 'object') {
+                    const options = Array.isArray(entry.options) ? entry.options : [];
+                    const placeholder = typeof entry.placeholder === 'string' ? entry.placeholder : undefined;
+
+                    return {
+                        options,
+                        placeholder
+                    };
+                }
+
+                return {
+                    options: [],
+                    placeholder: undefined
+                };
+            }
+
+            function applyCategoryOptions(typeSelect, categorySelect, categories, placeholder, preserveSelection) {
+                const key = normalizeKey(typeSelect?.value ?? '');
+                const primary = resolveCategoryOptions(categories[key]);
+                let options = primary.options;
+                let derivedPlaceholder = primary.placeholder;
+
+                if (!options.length && key !== '') {
+                    const fallback = resolveCategoryOptions(categories['']);
+                    options = fallback.options;
+
+                    if (!derivedPlaceholder) {
+                        derivedPlaceholder = fallback.placeholder;
+                    }
+                }
+
+                const effectivePlaceholder = placeholder || derivedPlaceholder || '';
+                const storedSelection = categorySelect.dataset.selected ?? '';
+                const previousValue = preserveSelection ? (storedSelection || categorySelect.value || '') : '';
+
+                categorySelect.innerHTML = '';
+
+                const placeholderOption = document.createElement('option');
+                placeholderOption.value = '';
+                placeholderOption.textContent = effectivePlaceholder;
+                categorySelect.appendChild(placeholderOption);
+
+                let selectedValue = previousValue;
+
+                if (selectedValue && !options.some(option => String(option.id ?? option.value ?? '') === String(
+                        selectedValue))) {
+                    selectedValue = '';
+                }
+
+                // Group options by equipment_type_name
+                const groups = {};
+                const noGroup = [];
+
+                options.forEach(option => {
+                    const groupName = option.equipment_type_name;
+                    if (groupName) {
+                        if (!groups[groupName]) {
+                            groups[groupName] = [];
+                        }
+                        groups[groupName].push(option);
+                    } else {
+                        noGroup.push(option);
+                    }
+                });
+
+                const groupKeys = Object.keys(groups).sort();
+
+                function createOptionElement(option, selectedVal) {
+                    const optionValue = option.id ?? option.value ?? '';
+                    const optionLabel = option.name ?? option.label ?? option.text ?? '';
+                    const optionEl = document.createElement('option');
+                    optionEl.value = optionValue;
+                    optionEl.textContent = optionLabel;
+
+                    if (String(optionValue) === String(selectedVal)) {
+                        optionEl.selected = true;
+                    }
+                    return optionEl;
+                }
+
+                if (groupKeys.length > 0) {
+                    // Render grouped options
+                    groupKeys.forEach(groupName => {
+                        const optgroup = document.createElement('optgroup');
+                        optgroup.label = groupName;
+                        groups[groupName].forEach(option => {
+                            const optionEl = createOptionElement(option, selectedValue);
+                            optgroup.appendChild(optionEl);
+                        });
+                        categorySelect.appendChild(optgroup);
+                    });
+
+                    // Render ungrouped options under "Autres"
+                    if (noGroup.length > 0) {
+                        const optgroup = document.createElement('optgroup');
+                        optgroup.label = 'Autres';
+                        noGroup.forEach(option => {
+                            const optionEl = createOptionElement(option, selectedValue);
+                            optgroup.appendChild(optionEl);
+                        });
+                        categorySelect.appendChild(optgroup);
+                    }
+                } else {
+                    // Render all options flat
+                    options.forEach(option => {
+                        const optionEl = createOptionElement(option, selectedValue);
+                        categorySelect.appendChild(optionEl);
+                    });
+                }
+
+                if (!selectedValue) {
+                    categorySelect.selectedIndex = 0;
+                }
+
+                const shouldDisable = !key || options.length === 0;
+                categorySelect.disabled = shouldDisable;
+
+                if (shouldDisable) {
+                    categorySelect.dataset.selected = '';
+                } else {
+                    categorySelect.dataset.selected = categorySelect.value;
+                }
+            }
+
+            const typeChangeHandlers = new WeakMap();
+
+            function bindTypeChange(typeSelect, categorySelect, categories, placeholder) {
+                let handlers = typeChangeHandlers.get(typeSelect);
+
+                if (!handlers) {
+                    handlers = [];
+                    typeChangeHandlers.set(typeSelect, handlers);
+                }
+
+                if (handlers.some(entry => entry.category === categorySelect)) {
+                    return;
+                }
+
+                const handler = () => {
+                    applyCategoryOptions(typeSelect, categorySelect, categories, placeholder, false);
+                };
+
+                handlers.push({
+                    category: categorySelect,
+                    handler
+                });
+                typeSelect.addEventListener('change', handler);
+            }
+
+            function initCategoryDropdown(root) {
+                const scope = root || document;
+                const categorySelects = scope.querySelectorAll('select[data-categories]');
+
+                categorySelects.forEach(categorySelect => {
+                    const context = categorySelect.closest('form') || scope;
+                    let typeSelect = context.querySelector('select[name="issue_type_id"]');
+
+                    if (!typeSelect && context !== document) {
+                        typeSelect = document.querySelector('select[name="issue_type_id"]');
+                    }
+
+                    if (!typeSelect) {
+                        return;
+                    }
+
+                    const categories = parseCategories(categorySelect);
+                    const placeholder = categorySelect.dataset.placeholder || '';
+                    const preserve = categorySelect.dataset.enhanced === '1';
+
+                    applyCategoryOptions(typeSelect, categorySelect, categories, placeholder, true);
+
+                    if (preserve) {
+                        return;
+                    }
+
+                    categorySelect.dataset.enhanced = '1';
+
+                    bindTypeChange(typeSelect, categorySelect, categories, placeholder);
+
+                    categorySelect.addEventListener('change', () => {
+                        categorySelect.dataset.selected = categorySelect.value;
+                    });
+                });
+            }
+
+            const runIssueCategoryInitialization = (target) => {
+                let scope = target || document;
+
+                const isNodeList = typeof NodeList !== 'undefined' && scope instanceof NodeList;
+                if (isNodeList || Array.isArray(scope)) {
+                    scope = scope.length ? scope[0] : document;
+                }
+
+                const isElement = typeof Element !== 'undefined' && scope instanceof Element;
+                const isFragment = typeof DocumentFragment !== 'undefined' && scope instanceof DocumentFragment;
+                if (!isElement && scope !== document && !isFragment) {
+                    scope = document;
+                }
+
+                try {
+                    initCategoryDropdown(scope);
+                } catch (error) {
+                    console.error('Failed to initialize issue category dropdowns', error);
+                }
+            };
+
+            window.initIssueCategoryDropdown = runIssueCategoryInitialization;
+            window.refreshIssueCategoryDropdowns = runIssueCategoryInitialization;
+
+            document.addEventListener('issue:categories:init', (event) => {
+                const detailScope = event && event.detail ? event.detail.scope : undefined;
+                const targetScope = detailScope || (event ? event.target : null) || document;
+                runIssueCategoryInitialization(targetScope);
+            });
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => {
+                    runIssueCategoryInitialization(document);
+                });
+            } else {
+                runIssueCategoryInitialization(document);
+            }
+        })();
+    </script>
+    <script>
+        document.addEventListener('click', function(event) {
+            const dismissButton = event.target.closest('[data-bs-dismiss="modal"]');
+            if (!dismissButton) return;
+            event.preventDefault();
+            const modalEl = dismissButton.closest('.modal');
+            if (!modalEl) return;
+            modalEl.classList.remove('show');
+            modalEl.setAttribute('aria-hidden', 'true');
+            modalEl.style.display = 'none';
+            document.body.classList.remove('modal-open');
+            const backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) backdrop.remove();
+        });
+    </script>
+    <script>
+        (function() {
+            function adjustBadgeContrast() {
+                const badges = document.querySelectorAll('.badge');
+                badges.forEach(badge => {
+                    const style = window.getComputedStyle(badge);
+                    const bgColor = style.backgroundColor;
+                    const textColor = style.color;
+
+                    // Helper to parse rgb/rgba strings
+                    function parseRgb(color) {
+                        const match = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+                        return match ? {
+                            r: parseInt(match[1]),
+                            g: parseInt(match[2]),
+                            b: parseInt(match[3])
+                        } : null;
+                    }
+
+                    const bg = parseRgb(bgColor);
+                    const fg = parseRgb(textColor);
+
+                    if (!bg || !fg) return;
+
+                    // Calculate relative luminance (W3C formula)
+                    function getLuminance(c) {
+                        const a = [c.r, c.g, c.b].map(v => {
+                            v /= 255;
+                            return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+                        });
+                        return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+                    }
+
+                    const lum1 = getLuminance(bg);
+                    const lum2 = getLuminance(fg);
+
+                    const ratio = (Math.max(lum1, lum2) + 0.05) / (Math.min(lum1, lum2) + 0.05);
+
+                    // If contrast ratio is low (WCAG AA for small text is 4.5:1, but these are small decorative badges)
+                    // Let's use 3:1 as a minimum for these specific badges since they are mostly light-themed
+                    if (ratio < 3.5) {
+                        // Darken the text color
+                        // We can just set a darker version of the current foreground color
+                        // or explicitly darken it by 30-50%
+                        const darkened =
+                            `rgb(${Math.floor(fg.r * 0.6)}, ${Math.floor(fg.g * 0.6)}, ${Math.floor(fg.b * 0.6)})`;
+                        badge.style.setProperty('color', darkened, 'important');
+                    }
+                });
+            }
+
+            // Run on load and whenever the DOM might change significantly (optional)
+            window.addEventListener('load', adjustBadgeContrast);
+            // Also handle dynamic content if needed (e.g. after AJAX loads)
+            const observer = new MutationObserver(adjustBadgeContrast);
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        })();
+    </script>
+
+    <script>
+        $(document).on('select2:open', function() {
+            setTimeout(function() {
+                const searchField = document.querySelector('.select2-container--open .select2-search__field');
+                if (searchField) {
+                    searchField.focus();
+                }
+            }, 10);
+        });
+    </script>
+
+    <!-- Flatpickr JS -->
+    <script src="{{ asset('libs/flatpickr/flatpickr.js') }}"></script>
+    <script>
+        (function() {
+            function initGlobalDatePickers(root) {
+                const scope = root || document;
+                if (typeof flatpickr === 'undefined') return;
+
+                // Date inputs: display dd/mm/YYYY (d/m/Y)
+                scope.querySelectorAll('input[type="date"], input.flatpickr-date').forEach(function(el) {
+                    if (!el._flatpickr && !el.dataset.noFlatpickr) {
+                        flatpickr(el, {
+                            dateFormat: "Y-m-d",
+                            altInput: true,
+                            altFormat: "d/m/Y",
+                            allowInput: true
+                        });
+                    }
+                });
+
+                // Datetime inputs: display dd/mm/YYYY HH:ii (d/m/Y H:i)
+                scope.querySelectorAll('input[type="datetime-local"], input.flatpickr-datetime').forEach(function(el) {
+                    if (!el._flatpickr && !el.dataset.noFlatpickr) {
+                        flatpickr(el, {
+                            enableTime: true,
+                            time_24hr: true,
+                            dateFormat: "Y-m-d\\TH:i",
+                            altInput: true,
+                            altFormat: "d/m/Y H:i",
+                            allowInput: true
+                        });
+                    }
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => initGlobalDatePickers());
+            } else {
+                initGlobalDatePickers();
+            }
+
+            // Support dynamically added inputs / modals
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    mutation.addedNodes.forEach(function(node) {
+                        if (node.nodeType === 1) {
+                            initGlobalDatePickers(node);
+                        }
+                    });
+                });
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+        })();
+    </script>
+
+    <!-- Mobile Menu Popup Controller -->
+    <script>
+        (function() {
+            var toggleBtn = document.getElementById('mobile-menu-toggle');
+            var closeBtn = document.getElementById('mobile-menu-close');
+            var overlay = document.getElementById('mobile-menu-overlay');
+            var menuEl = document.getElementById('layout-menu');
+
+            function syncActiveSubmenus() {
+                if (!menuEl) return;
+                var activeItems = menuEl.querySelectorAll('.menu-item.active');
+                activeItems.forEach(function(item) {
+                    var parent = item.parentElement;
+                    while (parent && parent !== menuEl) {
+                        if (parent.classList.contains('menu-item')) {
+                            parent.classList.add('open');
+                            var sub = parent.querySelector(':scope > .menu-sub');
+                            if (sub) {
+                                sub.style.display = 'flex';
+                            }
+                        }
+                        parent = parent.parentElement;
+                    }
+                });
+            }
+
+            function openMobileMenu(e) {
+                if (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                document.documentElement.classList.remove('layout-menu-collapsed');
+                document.body.classList.remove('layout-menu-collapsed');
+                document.documentElement.classList.add('layout-menu-expanded');
+                document.body.classList.add('layout-menu-expanded');
+                if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
+                if (window.Helpers && typeof window.Helpers._setCollapsed === 'function') {
+                    try { window.Helpers._setCollapsed(false); } catch(err) {}
+                }
+                syncActiveSubmenus();
+            }
+
+            function closeMobileMenu(e) {
+                if (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                document.documentElement.classList.remove('layout-menu-expanded');
+                document.body.classList.remove('layout-menu-expanded');
+                if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
+                if (window.Helpers && typeof window.Helpers._setCollapsed === 'function') {
+                    try { window.Helpers._setCollapsed(true); } catch(err) {}
+                }
+            }
+
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', function(e) {
+                    if (document.documentElement.classList.contains('layout-menu-expanded')) {
+                        closeMobileMenu(e);
+                    } else {
+                        openMobileMenu(e);
+                    }
+                });
+            }
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function(e) {
+                    if (window.innerWidth < 1200) {
+                        closeMobileMenu(e);
+                    }
+                });
+            }
+
+            if (overlay) {
+                overlay.addEventListener('click', closeMobileMenu);
+                overlay.addEventListener('touchend', closeMobileMenu);
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && document.documentElement.classList.contains('layout-menu-expanded')) {
+                    closeMobileMenu(e);
+                }
+            });
+
+            // Submenu accordion toggle handler for mobile/drawer
+            if (menuEl) {
+                menuEl.addEventListener('click', function(e) {
+                    var toggleLink = e.target.closest('.menu-toggle');
+                    if (toggleLink && window.innerWidth < 1200) {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        var menuItem = toggleLink.closest('.menu-item');
+                        if (!menuItem) return;
+
+                        var menuSub = menuItem.querySelector(':scope > .menu-sub');
+                        var willOpen = !menuItem.classList.contains('open');
+
+                        if (willOpen) {
+                            menuItem.classList.add('open');
+                            menuItem.style.height = '';
+                            menuItem.style.overflow = '';
+                            if (menuSub) {
+                                menuSub.style.display = 'flex';
+                            }
+                        } else {
+                            menuItem.classList.remove('open');
+                            menuItem.style.height = '';
+                            menuItem.style.overflow = '';
+                            if (menuSub) {
+                                menuSub.style.display = 'none';
+                            }
+                        }
+                        return;
+                    }
+
+                    // Navigation link clicked - close drawer
+                    var navLink = e.target.closest('a');
+                    if (navLink && window.innerWidth < 1200) {
+                        var href = navLink.getAttribute('href');
+                        if (href && href !== '#' && !href.startsWith('javascript:') && !navLink.classList.contains('menu-toggle')) {
+                            closeMobileMenu();
+                        }
+                    }
+                }, true); // Capture phase to guarantee interception before menu.js animation
+            }
+
+            // Sync open state on page load
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', syncActiveSubmenus);
+            } else {
+                syncActiveSubmenus();
+            }
+        })();
+    </script>
+
+    @yield('scripts')
+    @stack('scripts')
+</body>
+
+</html>
