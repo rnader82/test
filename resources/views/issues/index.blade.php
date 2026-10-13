@@ -3,7 +3,7 @@
 @section('title', __('locale.menu_tickets')) 
 
 @section('navbar-icon')
-    <i class="fa-solid fa-ticket title-icon me-2"></i>
+    <i class="fa-solid fa-headset title-icon"></i>
 @endsection
 
 @section('navbar-title')
@@ -18,9 +18,9 @@
     <form method="GET" action="{{ route('issues.index') }}" class="w-100" id="searchForm">
         <label class="search">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input id="searchInput" type="search" name="search" value="{{ request('search') }}" placeholder="{{ __('locale.search_placeholder') }}" />
+            <input id="searchInput" type="search" name="search" value="{{ request('search') }}" placeholder="{{ __('locale.portal.ticket_search') }}" />
         </label>
-        @foreach(request()->except(['search', 'page']) as $key => $value)
+        @foreach(request()->except(['search', 'page', 'group_id']) as $key => $value)
             <input type="hidden" name="{{ $key }}" value="{{ $value }}">
         @endforeach
     </form>
@@ -52,7 +52,7 @@
     @endphp
 
     <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#advancedFilters" aria-expanded="{{ $hasActiveFilters ? 'true' : 'false' }}">
-        <i class="fa-solid fa-filter"></i> {{ __('locale.advanced_filters') }}
+        <i class="fa-solid fa-filter"></i> {{ __('locale.portal.filters') }}
         @if($hasActiveFilters)
             <span class="badge bg-primary rounded-circle p-1 ms-1" style="width: 7px; height: 7px; display: inline-block;"></span>
         @endif
@@ -100,8 +100,51 @@
     </div>
 @endsection
 
+
+@section('page-filters')
+    <select id="ticket-group-filter" class="group-filter ticket-group-filter" name="group_id" form="searchForm" aria-label="{{ __('locale.lbl_group') }}" onchange="document.getElementById('searchForm').requestSubmit()">
+        <option value="">{{ __('locale.portal.all_clients') }}</option>
+        @foreach($groups as $group)
+            <option value="{{ $group->id }}" @selected((string)request('group_id') === (string)$group->id)>{{ $group->raison_sociale }}</option>
+        @endforeach
+    </select>
+@endsection
+
 @section('content') 
-<div class="panel">
+<div class="panel" data-portal-tickets>
+
+    @php
+        $ticketMeta = [];
+        $pageOverview = ['overdue' => 0, 'sla' => 0, 'today' => 0, 'unassigned' => 0, 'priority' => 0, 'mine' => 0];
+        foreach ($issues as $summaryIssue) {
+            $attributes = $summaryIssue->getAttributes();
+            $callbackValue = $attributes['callback_at'] ?? $attributes['reminder_at'] ?? $attributes['next_callback_at'] ?? null;
+            $callbackAt = null;
+            try { if ($callbackValue) $callbackAt = \Carbon\Carbon::parse($callbackValue); } catch (\Throwable $ignored) {}
+            $slaAt = null;
+            try { if (!empty($attributes['sla_deadline'])) $slaAt = \Carbon\Carbon::parse($attributes['sla_deadline']); } catch (\Throwable $ignored) {}
+            $summaryPriority = strtolower($summaryIssue->issueCriticityInternal?->name ?? ($summaryIssue->issueSeverity?->name ?? ''));
+            $meta = [
+                'overdue' => $callbackAt && $callbackAt->lessThan(now()),
+                'today' => $callbackAt && $callbackAt->isToday(),
+                'callback' => (bool) $callbackAt,
+                'sla' => $slaAt && now()->diffInMinutes($slaAt, false) <= 60,
+                'unassigned' => $summaryIssue->users->isEmpty(),
+                'mine' => $summaryIssue->users->contains('id', Auth::id()),
+                'priority' => ($summaryIssue->client?->contract_status === 'avec_contrat') && (str_contains($summaryPriority, 'high') || str_contains($summaryPriority, 'haut') || str_contains($summaryPriority, 'crit') || str_contains($summaryPriority, 'urg')),
+            ];
+            $ticketMeta[$summaryIssue->id] = $meta;
+            foreach ($pageOverview as $key => $value) { if ($meta[$key]) $pageOverview[$key]++; }
+        }
+        $overviewValues = isset($ticketOverview) && is_array($ticketOverview) ? array_merge($pageOverview, $ticketOverview) : $pageOverview;
+    @endphp
+    <div class="ticket-overview" id="ticketOverview" aria-label="{{ __('locale.portal.page_scope') }}">
+        @foreach([['overdue','danger','phone-slash','overdue_callbacks'],['sla','warning','hourglass-half','critical_sla'],['today','primary','phone','today_callbacks'],['unassigned','','user-slash','unassigned_tickets']] as [$metric,$tone,$icon,$label])
+            <button class="overview-card {{ $tone }}" type="button" data-overview-filter="{{ $metric }}" title="{{ isset($ticketOverview) ? __('locale.portal.'.$label) : __('locale.portal.page_scope') }}"><span class="overview-icon"><i class="fa-solid fa-{{ $icon }}" aria-hidden="true"></i></span><span><strong>{{ $overviewValues[$metric] }}</strong><small>{{ __('locale.portal.'.$label) }}</small></span></button>
+        @endforeach
+    </div>
+    <div class="bulk-action-bar" id="bulkActionBar" hidden><span class="bulk-selection-count" id="bulkSelectionCount"></span><button type="button" class="bulk-apply" id="portal-export-tickets"><i class="fa-solid fa-file-csv" aria-hidden="true"></i> {{ __('locale.portal.export_csv') }}</button><button type="button" class="bulk-clear" id="portal-clear-selection">{{ __('locale.portal.clear_selection') }}</button></div>
+
     <!-- Toolbar with Modern Tabs and Pager -->
     <div class="toolbar">
         <div class="tabs">
@@ -111,26 +154,11 @@
                 $isAll = !$isMine && !$isPriority && !request()->filled('status_id') && !request()->filled('new_messages');
                 $isNewMessages = request('new_messages') == 1;
             @endphp
-            <a href="{{ route('issues.index') }}" class="tab {{ $isAll ? 'active' : '' }}">
-                Tous les tickets <span class="count">{{ $issues->total() }}</span>
-            </a>
-            <a href="{{ route('issues.index', ['user_id' => Auth::id()]) }}" class="tab {{ $isMine ? 'active' : '' }}">
-                Mes tickets
-            </a>
-            <a href="{{ route('issues.index', ['contract_status' => 'avec_contrat', 'criticity_internal' => 'high']) }}" class="tab priority {{ $isPriority ? 'active' : '' }}">
-                Prioritaire (En panne &amp; sous contrat)
-            </a>
-            @if(isset($statuses) && $statuses->isNotEmpty())
-                @foreach($statuses->take(3) as $st)
-                    @php
-                        $isStatusTab = (string)request('status_id') === (string)$st->id;
-                    @endphp
-                    <a href="{{ route('issues.index', ['status_id' => $st->id]) }}" class="tab {{ $isStatusTab ? 'active' : '' }}">
-                        <span style="background-color: {{ $st->color }}; width: 8px; height: 8px; border-radius: 50%; display: inline-block;"></span>
-                        {{ $st->translated_name }}
-                    </a>
-                @endforeach
-            @endif
+            <a href="{{ route('issues.index') }}" class="tab {{ $isAll ? 'active' : '' }}" data-ticket-tab="all">Tous les tickets <span class="count">{{ $issues->total() }}</span></a>
+            <a href="{{ route('issues.index', ['contract_status' => 'avec_contrat', 'criticity_internal' => 'high']) }}" class="tab priority {{ $isPriority ? 'active' : '' }}" data-ticket-tab="priority">{{ __('locale.portal.priority_tickets') }} <span class="count" title="{{ __('locale.portal.page_scope') }}">{{ $overviewValues['priority'] }}</span></a>
+            <a href="{{ route('issues.index', ['user_id' => Auth::id()]) }}" class="tab {{ $isMine ? 'active' : '' }}" data-ticket-tab="mine">Mes tickets <span class="count" title="{{ __('locale.portal.page_scope') }}">{{ $overviewValues['mine'] }}</span></a>
+            <button class="tab" type="button" data-ticket-tab="favorites" title="{{ __('locale.portal.page_scope') }}">{{ __('locale.portal.favorites') }} <span class="count" id="ticket-favorite-count">0</span></button>
+            <button class="tab" type="button" data-ticket-tab="callbacks" title="{{ __('locale.portal.page_scope') }}">{{ __('locale.portal.callbacks') }} <span class="count">{{ count(array_filter($ticketMeta, fn($meta) => $meta['callback'])) }}</span></button>
         </div>
 
         <div class="toolbar-right">
@@ -297,16 +325,16 @@
 
     <!-- Table -->
     @if (count($issues) > 0)
-        @php $typeIcons = $issueTypeDisplay; @endphp
+        @php $typeIcons = $issueTypeDisplay ?? []; @endphp
         <div class="table-wrap">
-            <table>
+            <table class="portal-ticket-table" id="portal-ticket-table">
                 <thead>
                     <tr>
                         <th class="check-col"><input id="checkAll" type="checkbox" aria-label="Tout sélectionner"></th>
 
                         <th class="ticket-col">
                             <a href="{{ route('issues.index', array_merge(request()->query(), ['sort' => 'id', 'direction' => request('sort') === 'id' && request('direction') === 'asc' ? 'desc' : 'asc'])) }}" class="sortable {{ request('sort') === 'id' ? 'sorted' : '' }}">
-                                {{ __('locale.lbl_id') ?? 'N° ticket' }}
+                                {{ __('locale.portal.ticket_number') }}
                                 <span class="sort-icons">
                                     <i class="fa-solid fa-caret-up {{ request('sort') === 'id' && request('direction') === 'asc' ? 'text-primary' : '' }}"></i>
                                     <i class="fa-solid fa-caret-down {{ request('sort') === 'id' && request('direction') === 'desc' ? 'text-primary' : '' }}"></i>
@@ -316,7 +344,7 @@
 
                         <th class="title-col">
                             <a href="{{ route('issues.index', array_merge(request()->query(), ['sort' => 'subject', 'direction' => request('sort') === 'subject' && request('direction') === 'asc' ? 'desc' : 'asc'])) }}" class="sortable {{ request('sort') === 'subject' ? 'sorted' : '' }}">
-                                {{ __('locale.lbl_subject') ?? 'Titre' }}
+                                {{ __('locale.portal.ticket_title') }}
                                 <span class="sort-icons">
                                     <i class="fa-solid fa-caret-up {{ request('sort') === 'subject' && request('direction') === 'asc' ? 'text-primary' : '' }}"></i>
                                     <i class="fa-solid fa-caret-down {{ request('sort') === 'subject' && request('direction') === 'desc' ? 'text-primary' : '' }}"></i>
@@ -334,15 +362,16 @@
                             </a>
                         </th>
 
-                        <th class="contract-col">{{ __('locale.lbl_contract_status') ?? 'Contrat' }}</th>
+                        <th class="contract-col">{{ __('locale.portal.ticket_contract') }}</th>
 
-                        <th class="assignee-col">{{ __('locale.lbl_assigned_user') ?? 'Affecté à' }}</th>
+                        <th class="assignee-col">{{ __('locale.portal.ticket_assignee') }}</th>
 
                         <th class="priority-col">{{ __('locale.lbl_priority') ?? 'Priorité' }}</th>
 
+                        <th class="type-col">{{ __('locale.portal.ticket_type') }}</th>
                         <th class="created-col">
                             <a href="{{ route('issues.index', array_merge(request()->query(), ['sort' => 'created_at', 'direction' => request('sort') === 'created_at' && request('direction') === 'asc' ? 'desc' : 'asc'])) }}" class="sortable {{ request('sort') === 'created_at' ? 'sorted' : '' }}">
-                                Date &amp; heure<br>de création
+                                {{ __('locale.portal.created_date') }}
                                 <span class="sort-icons">
                                     <i class="fa-solid fa-caret-up {{ request('sort') === 'created_at' && request('direction') === 'asc' ? 'text-primary' : '' }}"></i>
                                     <i class="fa-solid fa-caret-down {{ request('sort') === 'created_at' && request('direction') === 'desc' ? 'text-primary' : '' }}"></i>
@@ -354,7 +383,7 @@
 
                         <th class="status-col">{{ __('locale.lbl_status') ?? 'Statut' }}</th>
 
-                        <th style="width: 50px; text-align: center;"></th>
+                        <th class="action-col" style="width: 46px; text-align: center;"></th>
                     </tr>
                 </thead>
 
@@ -397,7 +426,7 @@
                             $prioText = $issue->issueCriticityInternal?->translated_name ?? ($issue->issueSeverity?->translated_name ?? 'Normale');
                             if (str_contains($prioSlug, 'haut') || str_contains($prioSlug, 'high') || str_contains($prioSlug, 'crit') || str_contains($prioSlug, 'urg')) {
                                 $prioClass = 'high';
-                            } elseif (str_contains($prioSlug, 'moy') || str_contains($prioSlug, 'med')) {
+                            } elseif (str_contains($prioSlug, 'moy') || str_contains($prioSlug, 'med') || str_contains($prioSlug, 'important')) {
                                 $prioClass = 'medium';
                             }
 
@@ -428,13 +457,13 @@
                                 $sIcon = 'fa-comment';
                             }
                         @endphp
-                        <tr class="clickable" style="cursor: pointer;" onclick='window.open("{{ $url }}", "_blank")'>
+                        <tr data-ticket-id="{{ $issue->id }}" data-ticket-overdue="{{ !empty($ticketMeta[$issue->id]['overdue']) ? '1' : '0' }}" data-ticket-today="{{ !empty($ticketMeta[$issue->id]['today']) ? '1' : '0' }}" data-ticket-callback="{{ !empty($ticketMeta[$issue->id]['callback']) ? '1' : '0' }}" data-ticket-sla="{{ !empty($ticketMeta[$issue->id]['sla']) ? '1' : '0' }}" data-ticket-unassigned="{{ !empty($ticketMeta[$issue->id]['unassigned']) ? '1' : '0' }}" class="clickable" style="cursor: pointer;" onclick='window.open("{{ $url }}", "_blank")'>
                             <td class="check-col" onclick="event.stopPropagation();">
                                 <input type="checkbox" aria-label="Sélectionner {{ $issue->id }}">
                             </td>
 
                             <td class="ticket-col">
-                                <span class="ticket-id">{{ $issue->id }}</span>
+                                <div class="ticket-id-wrap"><button type="button" class="favorite-toggle" data-ticket-favorite="{{ $issue->id }}" aria-pressed="false" aria-label="{{ __('locale.portal.ticket_favorite') }}"><i class="bi bi-star" aria-hidden="true"></i></button><span class="ticket-id">{{ $issue->id }}</span></div>
                             </td>
 
                             <td class="title-col">
@@ -484,6 +513,15 @@
                                 </span>
                             </td>
 
+                            <td class="type-col">
+                                @php
+                                    $typePresentation = $typeIcons[$typeSlug] ?? $typeIcons[$issue->getAttributes()['issue_type_id'] ?? ''] ?? [];
+                                    $typeLabel = is_array($typePresentation) ? ($typePresentation['label'] ?? $typePresentation['name'] ?? null) : (is_string($typePresentation) ? $typePresentation : null);
+                                    $typeLabel = $typeLabel ?: \Illuminate\Support\Str::headline((string) $issue->type);
+                                    $typeTone = str_contains($typeSlug, 'grave') || str_contains($typeSlug, 'critical') ? 'critical' : (str_contains($typeSlug, 'majeur') || str_contains($typeSlug, 'major') ? 'major' : 'minor');
+                                @endphp
+                                <span class="outage-type {{ $typeTone }}">{{ $typeLabel ?: '—' }}</span>
+                            </td>
                             <td class="created-col">
                                 <div class="datetime">
                                     <strong>{{ $issue->created_at ? $issue->created_at->format('d/m/Y') : '—' }}</strong>
@@ -495,7 +533,7 @@
                                 @php
                                     $remMin = null;
                                     if ($issue->sla_deadline && now()->lessThan($issue->sla_deadline)) {
-                                        $remMin = now()->diffInMinutes($issue->sla_deadline);
+                                        $remMin = max(0, (int) ceil(now()->diffInMinutes($issue->sla_deadline)));
                                     }
                                 @endphp
                                 @if ($remMin !== null)
@@ -520,7 +558,7 @@
                                 </span>
                             </td>
 
-                            <td style="text-align: center;" onclick="event.stopPropagation();">
+                            <td class="action-col" style="text-align: center;" onclick="event.stopPropagation();">
                                 @php
                                     $canEdit = Auth::user()->is_admin || Auth::user()->hasPermission('edit-ticket');
                                     $canDelete = Auth::user()->is_admin || Auth::user()->hasPermission('delete-ticket');
@@ -559,6 +597,7 @@
             </table>
         </div>
 
+        <p class="state-message" id="portal-ticket-empty" hidden>{{ __('locale.portal.no_filtered_tickets') }}</p>
         <div class="footer-note d-flex justify-content-between align-items-center">
             <span>{{ $issues->perPage() }} tickets par page</span>
             <div>{{ $issues->withQueryString()->links() }}</div>
@@ -803,14 +842,6 @@
             });
         }
 
-        const checkAll = document.getElementById('checkAll');
-        if (checkAll) {
-            checkAll.addEventListener('change', function(e) {
-                document.querySelectorAll('#ticketRows input[type="checkbox"]').forEach(cb => {
-                    cb.checked = e.target.checked;
-                });
-            });
-        }
 
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
         tooltipTriggerList.map(function(tooltipTriggerEl) {

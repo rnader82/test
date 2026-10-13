@@ -8,11 +8,77 @@ import './bootstrap';
     if (!body.classList.contains('novalyo-portal') || body.dataset.portalInitialized) return;
     body.dataset.portalInitialized = 'true';
     const root = document.documentElement;
+    document.querySelectorAll('.form-password-toggle .input-group-text').forEach(toggle => {
+      toggle.setAttribute('role','button'); toggle.setAttribute('tabindex','0');
+      const activate = () => { const input=toggle.closest('.form-password-toggle')?.querySelector('input[type="password"],input[type="text"]'); if(!input)return; input.type=input.type==='password'?'text':'password'; toggle.setAttribute('aria-pressed',String(input.type==='text')); const icon=toggle.querySelector('i'); if(icon)icon.className=input.type==='text'?'ri-eye-line':'ri-eye-off-line'; };
+      toggle.addEventListener('click',activate); toggle.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();activate();}});
+    });
+    if(window.bootstrap) {
+      document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el=>bootstrap.Tooltip.getOrCreateInstance(el));
+      document.querySelectorAll('[data-bs-toggle="popover"]').forEach(el=>bootstrap.Popover.getOrCreateInstance(el));
+    }
     const menu = document.getElementById('layout-menu');
     if (!menu) return;
     const labelsNode = document.getElementById('novalyo-labels');
     let labels = {};
     try { labels = JSON.parse(labelsNode ? labelsNode.textContent : '{}'); } catch (_) { /* No dynamic labels. */ }
+    // Regroup only links already rendered by Laravel's permission checks.
+    const navDefinitions = [
+      { key:'dashboard', label:'dashboard', icon:'house', routes:['dashboard','todos.'] },
+      { key:'clients', section:'relations', label:'nav_clients', icon:'users', routes:['clients.','contacts.','contracts.'] },
+      { key:'articles', section:'relations', label:'nav_articles', icon:'tags', routes:['equipments.','combos.','warehouses.','equipment_categories.','equipment_types.','brands.'] },
+      { key:'commerce', section:'relations', label:'nav_commerce', icon:'arrow-trend-up', routes:['commerce.','pricelists.'] },
+      { key:'quotes', section:'relations', label:'nav_quotes', icon:'file-lines', routes:['issues.devis','quote-templates.','quote-reserves.'] },
+      { key:'adv', section:'operations', label:'nav_adv', icon:'boxes-stacked', routes:['orders.','deliveries.','projects.','construction-reports.'] },
+      { key:'purchasing', section:'operations', label:'nav_purchasing', icon:'cart-flatbed', routes:['suppliers.','supplier-contacts.','supplier-orders.','purchases.'] },
+      { key:'technical', section:'operations', label:'nav_technical', icon:'screwdriver-wrench', routes:['reports.','issues.index','tech_intervs.','planning.','repairs.','visite-prev.','knowledge-base.'] },
+      { key:'billing', section:'operations', label:'nav_billing', icon:'file-invoice-dollar', routes:['facturation.'] },
+      { key:'collection', section:'operations', label:'nav_collection', icon:'money-bill-transfer', routes:['recouvrement.'] },
+      { key:'admin', section:'configuration', label:'nav_admin', icon:'gear', routes:[] }
+    ];
+    const list = menu.querySelector('.menu-inner');
+    const originalLinks = Array.from(list?.querySelectorAll('a[data-portal-route]:not(.menu-toggle)') || []);
+    const used = new Set();
+    const items = originalLinks.map(anchor => ({ anchor, route:anchor.dataset.portalRoute, active:anchor.closest('.menu-item')?.classList.contains('active') }));
+    const groups = [];
+    const navLabels = { 'clients.index':'nav_companies', 'equipments.index':'nav_catalog', 'reports.index':'nav_technical_overview', 'issues.index':'tickets', 'knowledge-base.index':'nav_knowledge', 'tech_intervs.index':'nav_interventions', 'planning.week':'nav_planning' };
+    const navIcons = { 'clients.index':'building', 'contacts.index':'address-book', 'equipments.index':'box-open', 'reports.index':'gauge-high', 'issues.index':'headset', 'tech_intervs.index':'user-gear', 'planning.week':'calendar-days', 'repairs.index':'wrench', 'visite-prev.index':'shield-heart', 'knowledge-base.index':'book-open' };
+    navDefinitions.forEach(definition => {
+      const selected = items.filter(item => !used.has(item) && (definition.key==='admin' || definition.routes.some(prefix => item.route === prefix || item.route.startsWith(prefix))));
+      if(definition.key==='technical') {
+        const order=['reports.index','issues.index','planning.week','tech_intervs.index','repairs.index','visite-prev.index','knowledge-base.index'];
+        selected.sort((a,b)=>(order.indexOf(a.route)<0?100:order.indexOf(a.route))-(order.indexOf(b.route)<0?100:order.indexOf(b.route)));
+      }
+      selected.forEach(item => used.add(item));
+      if (!selected.length) return;
+      const group = document.createElement('li'); group.className = 'menu-item nav-group'; group.dataset.navGroup=definition.key;
+      const toggle = document.createElement('button'); toggle.type='button'; toggle.className='menu-toggle nav-item'; toggle.title=labels[definition.label];
+      const icon=document.createElement('i'); icon.className='fa-solid fa-'+definition.icon; icon.setAttribute('aria-hidden','true');
+      const name=document.createElement('span'); name.className='nav-label'; name.textContent=labels[definition.label];
+      const chevron=document.createElement('i'); chevron.className='fa-solid fa-chevron-right nav-chevron'; chevron.setAttribute('aria-hidden','true');
+      toggle.append(icon,name,chevron); group.append(toggle);
+      const sub=document.createElement('ul'); sub.className='menu-sub nav-submenu'; sub.hidden=true;
+      selected.forEach(item => {
+        const raw=item.anchor.getAttribute('href');
+        if (!raw || raw.startsWith('javascript:') || raw==='#') return;
+        const li=document.createElement('li'); li.className='menu-item'; if(item.active) { li.classList.add('active'); group.classList.add('active','open'); }
+        const a=item.anchor; a.className='menu-link nav-subitem'; if(item.active)a.classList.add('active');
+        const caption=a.querySelector('div'); if(caption) { const span=document.createElement('span'); span.textContent=labels[navLabels[item.route]] || caption.textContent; caption.replaceWith(span); }
+        if (navIcons[item.route] && a.querySelector('i')) a.querySelector('i').className='fa-solid fa-'+navIcons[item.route];
+        a.querySelectorAll('i').forEach(i=>{i.style.removeProperty('margin-right');i.setAttribute('aria-hidden','true');});
+        li.append(a);sub.append(li);
+      });
+      if (!sub.children.length) { toggle.disabled=true; toggle.setAttribute('aria-disabled','true'); chevron.remove(); }
+      group.append(sub);groups.push({definition,group});
+    });
+    if(list) {
+      list.replaceChildren(); let section='';
+      groups.forEach(({definition,group})=>{
+        if(definition.section && definition.section!==section) { section=definition.section; const heading=document.createElement('li');heading.className='nav-section-label';heading.dataset.navSection=section;heading.textContent=labels[section];list.append(heading); }
+        list.append(group);
+      });
+    }
+
     const storage = {
       get(key, fallback) { try { const value = JSON.parse(localStorage.getItem('novalyo.portal.' + key)); return value === null ? fallback : value; } catch (_) { return fallback; } },
       set(key, value) { try { localStorage.setItem('novalyo.portal.' + key, JSON.stringify(value)); } catch (_) { /* Controls work when browser storage is unavailable. */ } }
@@ -21,7 +87,7 @@ import './bootstrap';
     const desktopToggle = document.getElementById('desktop-menu-toggle');
     const closeToggle = document.getElementById('mobile-menu-close');
     const overlay = document.getElementById('mobile-menu-overlay');
-    const desktop = window.matchMedia('(min-width: 1200px)');
+    const desktop = window.matchMedia('(min-width: 801px)');
     let collapsed = storage.get('collapsed', false) === true;
     let previousFocus = null;
     let inertBeforeDrawer = null;
@@ -33,6 +99,7 @@ import './bootstrap';
         if (!toggle || !sub) return;
         toggle.setAttribute('role', 'button');
         toggle.setAttribute('aria-expanded', String(item.classList.contains('open')));
+        toggle.classList.toggle('expanded',item.classList.contains('open')); toggle.classList.toggle('current',item.classList.contains('active')); sub.hidden=!item.classList.contains('open');
         if (!sub.id) sub.id = 'portal-submenu-' + Array.from(menu.querySelectorAll('.menu-sub')).indexOf(sub);
         toggle.setAttribute('aria-controls', sub.id);
       });
@@ -48,6 +115,7 @@ import './bootstrap';
     });
     function setCollapsed(value) {
       collapsed = value;
+      document.querySelector('.app')?.classList.toggle('sidebar-collapsed',value);
       root.classList.toggle('layout-menu-collapsed', value);
       body.classList.remove('layout-menu-collapsed');
       root.classList.remove('layout-menu-hover');
@@ -107,7 +175,7 @@ import './bootstrap';
     function applyViewport() {
       setDrawer(false, false);
       if (desktop.matches) setCollapsed(collapsed);
-      else root.classList.remove('layout-menu-collapsed');
+      else { root.classList.remove('layout-menu-collapsed'); document.querySelector('.app')?.classList.remove('sidebar-collapsed'); }
     }
     desktop.addEventListener('change', applyViewport);
     applyViewport(); syncNavigation();
@@ -123,11 +191,18 @@ import './bootstrap';
       if (!links.some(link => link.href === href)) links.push({ href, title: anchor.textContent.trim().replace(/\s+/g, ' '), icon: anchor.querySelector('i')?.className || 'bi bi-link-45deg' });
     });
     function createLink(link) {
-      const a = document.createElement('a'); a.href = link.href;
+      const a = document.createElement('a'); a.href = link.href; a.className='nav-quick-link';
       const i = document.createElement('i'); i.className = link.icon; i.setAttribute('aria-hidden', 'true');
       const span = document.createElement('span'); span.textContent = link.title;
       a.append(i, span); return a;
     }
+    const activeGroup=menu.querySelector('[data-nav-group].active');
+    const crumb=document.getElementById('portal-breadcrumb-group');
+    if(activeGroup&&crumb) { crumb.textContent=activeGroup.querySelector('.nav-label')?.textContent||'';crumb.hidden=false;document.getElementById('portal-breadcrumb-separator').hidden=false; }
+    const workspace=document.getElementById('portal-workspace');
+    const workspaces={manager:navDefinitions.map(d=>d.key),technician:['dashboard','technical'],commerce:['dashboard','clients','articles','commerce','quotes'],adv:['dashboard','clients','articles','adv'],purchasing:['dashboard','articles','purchasing'],billing:['dashboard','clients','billing'],collection:['dashboard','clients','collection']};
+    function applyWorkspace(value) { const allowed=workspaces[value]||workspaces.manager;groups.forEach(({definition,group})=>group.hidden=!allowed.includes(definition.key)&&group!==activeGroup);menu.querySelectorAll('[data-nav-section]').forEach(heading=>{const section=heading.dataset.navSection;heading.hidden=!groups.some(({definition,group})=>definition.section===section&&!group.hidden);});storage.set('workspace.'+(body.dataset.portalUser||'guest'),value); }
+    if(workspace) { const savedWorkspace=storage.get('workspace.'+(body.dataset.portalUser||'guest'),'manager');workspace.value=workspaces[savedWorkspace]?savedWorkspace:'manager';applyWorkspace(workspace.value);workspace.addEventListener('change',()=>applyWorkspace(workspace.value)); }
     const current = links.find(link => link.href === location.pathname + location.search) || links.find(link => new URL(link.href, location.origin).pathname === location.pathname);
     const favoriteButton = document.getElementById('portal-favorite-toggle');
     const savedPages = document.getElementById('portal-saved-pages');
@@ -144,10 +219,16 @@ import './bootstrap';
       if (!savedPages) return;
       savedPages.replaceChildren();
       [['favorites', 'empty_favorites'], ['recent', 'empty_recent']].forEach(([key, empty]) => {
-        const heading = document.createElement('h2'); heading.textContent = labels[key]; savedPages.append(heading);
-        if (!saved[key].length) { const p = document.createElement('p'); p.textContent = labels[empty]; savedPages.append(p); }
-        saved[key].forEach(href => { const link = links.find(entry => entry.href === href); if (link) savedPages.append(createLink(link)); });
+        const heading=document.createElement('div');heading.className='nav-quick-title';
+        const caption=document.createElement('span');const icon=document.createElement('i');icon.className=key==='favorites'?'fa-solid fa-thumbtack':'fa-solid fa-clock-rotate-left';icon.setAttribute('aria-hidden','true');caption.append(icon,document.createTextNode(' '+labels[key]));heading.append(caption);
+        if(key==='favorites') { const count=document.createElement('span');count.textContent=saved[key].length;heading.append(count); }
+        else heading.style.marginTop='8px'; savedPages.append(heading);
+        const list=document.createElement('div');list.className='nav-quick-list';savedPages.append(list);
+        if (!saved[key].length) { const p = document.createElement('p');p.className='nav-quick-empty'; p.textContent = labels[empty]; list.append(p); }
+        saved[key].forEach(href => { const link = links.find(entry => entry.href === href); if (link) list.append(createLink(link)); });
       });
+      const recentItems=document.getElementById('portal-recent-items');
+      if(recentItems) { recentItems.replaceChildren();saved.recent.forEach(href=>{const link=links.find(entry=>entry.href===href);if(link){const li=document.createElement('li');const a=createLink(link);a.className='dropdown-item d-flex align-items-center gap-2';li.append(a);recentItems.append(li);}});if(!saved.recent.length){const li=document.createElement('li');li.className='dropdown-item-text';li.textContent=labels.empty_recent;recentItems.append(li);} }
       savedPages.hidden = links.length === 0;
       if (favoriteButton && current) {
         favoriteButton.hidden = false;
@@ -205,7 +286,7 @@ import './bootstrap';
     body.dataset.novalyoDensity = density;
     if (densitySelect) {
       densitySelect.value = density;
-      densitySelect.addEventListener('change', () => { body.dataset.novalyoDensity = densitySelect.value; storage.set('density',densitySelect.value); });
+      densitySelect.addEventListener('change', () => { body.dataset.novalyoDensity = densitySelect.value; body.classList.toggle('density-compact',densitySelect.value==='compact'); body.classList.toggle('density-large',densitySelect.value==='large'); storage.set('density',densitySelect.value); });
     }
     const content = document.querySelector('.content-area-main');
     const columnsButton = document.getElementById('portal-columns-toggle');
@@ -278,6 +359,58 @@ import './bootstrap';
     if (window.jQuery) window.jQuery(document).on('draw.dt shown.bs.tab shown.bs.collapse', scheduleRefresh);
     window.addEventListener('load',scheduleRefresh);
     refreshTables();
+    const ticketsPanel=document.querySelector('[data-portal-tickets]');
+    if(ticketsPanel) {
+      const ticketTable=document.getElementById('portal-ticket-table');
+      const ticketRows=Array.from(ticketsPanel.querySelectorAll('tr[data-ticket-id]'));
+      const ticketFavoritesKey='ticket-favorites.'+(body.dataset.portalUser||'guest');
+      let ticketFavorites=storage.get(ticketFavoritesKey,[]);
+      if(!Array.isArray(ticketFavorites))ticketFavorites=[];
+      ticketFavorites=ticketFavorites.filter(id=>typeof id==='string');
+      let ticketFilter=null;
+      const tabs=Array.from(ticketsPanel.querySelectorAll('[data-ticket-tab]'));
+      const originalTabState=tabs.map(tab=>tab.classList.contains('active'));
+      const pager=ticketsPanel.querySelector('#pagerLabel');const originalPager=pager?.textContent;
+      const selectAll=ticketsPanel.querySelector('#checkAll');
+      const empty=document.getElementById('portal-ticket-empty');
+      function selectedRows(){return ticketRows.filter(row=>row.querySelector('input[type="checkbox"]')?.checked);}
+      function syncSelection(){
+        const selected=selectedRows();const bar=document.getElementById('bulkActionBar');if(bar){bar.hidden=!selected.length;bar.classList.toggle('show',selected.length>0);}
+        const count=document.getElementById('bulkSelectionCount');if(count)count.textContent=selected.length+' '+labels.selected_tickets;
+        const visible=ticketRows.filter(row=>!row.hidden);const visibleSelected=visible.filter(row=>row.querySelector('input[type="checkbox"]')?.checked);
+        if(selectAll){selectAll.checked=visible.length>0&&visibleSelected.length===visible.length;selectAll.indeterminate=visibleSelected.length>0&&visibleSelected.length<visible.length;}
+      }
+      function applyTicketFilter(){
+        ticketRows.forEach(row=>{
+          const matches=!ticketFilter||(ticketFilter==='favorites'?ticketFavorites.includes(row.dataset.ticketId):row.dataset['ticket'+ticketFilter.charAt(0).toUpperCase()+ticketFilter.slice(1)]==='1');
+          row.hidden=!matches;
+        });
+        tabs.forEach((tab,index)=>tab.classList.toggle('active',ticketFilter?tab.dataset.ticketTab===(['overdue','today','callback'].includes(ticketFilter)?'callbacks':ticketFilter):originalTabState[index]));
+        ticketsPanel.querySelectorAll('[data-overview-filter]').forEach(button=>button.classList.toggle('active',button.dataset.overviewFilter===ticketFilter));
+        const visible=ticketRows.filter(row=>!row.hidden);if(pager)pager.textContent=ticketFilter?visible.length+' / '+ticketRows.length:originalPager;
+        if(empty)empty.hidden=!ticketRows.length||visible.length>0;
+        syncSelection();
+      }
+      function syncTicketFavorites(){
+        ticketsPanel.querySelectorAll('[data-ticket-favorite]').forEach(button=>{const active=ticketFavorites.includes(button.dataset.ticketFavorite);button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));const icon=button.querySelector('i');if(icon)icon.className=active?'bi bi-star-fill':'bi bi-star';});
+        const count=document.getElementById('ticket-favorite-count');if(count)count.textContent=ticketRows.filter(row=>ticketFavorites.includes(row.dataset.ticketId)).length;
+        storage.set(ticketFavoritesKey,ticketFavorites);applyTicketFilter();
+      }
+      ticketsPanel.querySelectorAll('[data-ticket-favorite]').forEach(button=>button.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();const id=button.dataset.ticketFavorite;ticketFavorites=ticketFavorites.includes(id)?ticketFavorites.filter(value=>value!==id):[...ticketFavorites,id];syncTicketFavorites();}));
+      ticketsPanel.querySelectorAll('button[data-ticket-tab]').forEach(button=>button.addEventListener('click',()=>{const filter=button.dataset.ticketTab==='callbacks'?'callback':button.dataset.ticketTab;ticketFilter=ticketFilter===filter?null:filter;applyTicketFilter();}));
+      ticketsPanel.querySelectorAll('[data-overview-filter]').forEach(button=>button.addEventListener('click',()=>{ticketFilter=ticketFilter===button.dataset.overviewFilter?null:button.dataset.overviewFilter;applyTicketFilter();}));
+      ticketTable?.addEventListener('change',event=>{if(event.target===selectAll)ticketRows.filter(row=>!row.hidden).forEach(row=>{const checkbox=row.querySelector('input[type="checkbox"]');if(checkbox)checkbox.checked=selectAll.checked;});syncSelection();});
+      document.getElementById('portal-clear-selection')?.addEventListener('click',()=>{ticketRows.forEach(row=>{const checkbox=row.querySelector('input[type="checkbox"]');if(checkbox)checkbox.checked=false;});syncSelection();});
+      document.getElementById('portal-export-tickets')?.addEventListener('click',()=>{
+        const selected=selectedRows();if(!selected.length||!ticketTable)return;
+        const allHeaders=Array.from(ticketTable.tHead.rows[0].cells);const indexes=allHeaders.map((cell,index)=>({cell,index})).filter(({cell})=>cell.textContent.trim()&&!cell.classList.contains('novalyo-column-hidden')).map(({index})=>index);
+        const quote=value=>{let text=value.trim().replace(/\s+/g,' ');if(/^[=+\-@]/.test(text))text="'"+text;return '"'+text.replace(/"/g,'""')+'"';};
+        const csv=[indexes.map(index=>quote(allHeaders[index].textContent)).join(','),...selected.map(row=>indexes.map(index=>quote(row.cells[index].textContent)).join(','))].join('\r\n');
+        const url=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'}));const a=document.createElement('a');a.href=url;a.download='novalyo-tickets.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+      });
+      syncTicketFavorites();
+    }
+
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',initPortal);
   else initPortal();

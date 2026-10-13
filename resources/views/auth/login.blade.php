@@ -36,8 +36,8 @@
 		<!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
 		<!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  --> {{-- <script src="{{ asset('js/template-customizer.js') }}"></script> --}}
 		<!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-		<script src="{{ asset('js/config.js') }}"></script>
-	    <link rel="stylesheet" href="{{ asset('css/demo.css') }}?v=novalyo-v01" />
+		<script src="{{ asset('js/config.js') }}?v=novalyo-html-v02"></script>
+	    <link rel="stylesheet" href="{{ asset('css/demo.css') }}?v=novalyo-html-v02" />
 	</head>
 
 	<body class="novalyo-portal novalyo-auth">
@@ -124,7 +124,7 @@
 		<script src="{{ asset('libs/@form-validation/bootstrap5.js') }}"></script>
 		<script src="{{ asset('libs/@form-validation/auto-focus.js') }}"></script>
 		<!-- Main JS -->
-		<script src="{{ asset('js/main.js') }}?v=novalyo-v01"></script>
+		<script src="{{ asset('js/main.js') }}?v=novalyo-html-v02"></script>
 		<!-- Page JS -->
 		<script src="{{ asset('js/pages-auth.js') }}"></script>
 	</body>
