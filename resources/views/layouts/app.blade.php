@@ -90,7 +90,7 @@
     @stack('styles')
 
     <!-- Loaded last so copied views/assets also work with the existing Vite build. -->
-    <link rel="stylesheet" href="{{ asset('css/demo.css') }}?v=novalyo-html-v02" />
+    <link rel="stylesheet" href="{{ asset('css/demo.css') }}?v=novalyo-html-v03" />
 </head>
 
 <body class="novalyo-portal" data-novalyo-density="comfortable" data-portal-user="{{ auth()->id() ?? 'guest' }}">

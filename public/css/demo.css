@@ -220,7 +220,8 @@ h1, h2, h3, h4, h5, h6 {
     .novalyo-symbol{display:none;width:54px;height:49px;border-radius:22px 22px 18px 18px;background:#91378e;color:#fff;place-items:center;font-size:24px;border:0;margin:auto}
     .sidebar-toggle{margin-left:auto;width:30px;height:30px;border:0;background:#fff;border-radius:50%;display:grid;place-items:center;color:#526078;font-size:17px}
     .sidebar-toggle:hover{background:#f3f4f6}
-    .nav{display:flex;flex-direction:column;gap:3px;padding-top:7px}
+    /* These classes are also used by Bootstrap tabs; keep sidebar sizing local. */
+    .sidebar .nav{display:flex;flex-direction:column;gap:3px;padding-top:7px}
     .nav-section-label{
       padding:15px 10px 5px;
       color:#9aa3b2;
@@ -230,18 +231,18 @@ h1, h2, h3, h4, h5, h6 {
       text-transform:uppercase;
       white-space:nowrap;
     }
-    .nav-item{
+    .sidebar .nav-item{
       width:100%;min-height:42px;border:0;background:transparent;display:flex;align-items:center;gap:14px;
       padding:8px 10px;border-radius:8px;
       color:#4d5a70;text-decoration:none;font-size:14px;font-weight:500;text-align:left;
     }
-    .nav-item:hover{background:#f7f8fa;color:#2f3b50}
-    .nav-item > i:first-child{width:24px;flex:0 0 24px;color:#526078;font-size:17px;text-align:center}
+    .sidebar .nav-item:hover{background:#f7f8fa;color:#2f3b50}
+    .sidebar .nav-item > i:first-child{width:24px;flex:0 0 24px;color:#526078;font-size:17px;text-align:center}
     .nav-label{min-width:0;white-space:nowrap}
     .nav-chevron{margin-left:auto!important;width:auto!important;font-size:13px!important;transition:transform .18s ease}
-    .nav-item.expanded .nav-chevron{transform:rotate(90deg)}
-    .nav-item.current,.nav-item.active,.nav-subitem.active{background:#f8f3f8;color:#8d3989;font-weight:700}
-    .nav-item.current > i:first-child,.nav-item.active > i:first-child,.nav-subitem.active i{color:#8d3989}
+    .sidebar .nav-item.expanded .nav-chevron{transform:rotate(90deg)}
+    .sidebar .nav-item.current,.sidebar .nav-item.active,.nav-subitem.active{background:#f8f3f8;color:#8d3989;font-weight:700}
+    .sidebar .nav-item.current > i:first-child,.sidebar .nav-item.active > i:first-child,.nav-subitem.active i{color:#8d3989}
     .nav-section-gap{margin-top:13px}
     .nav-submenu{display:grid;gap:2px;margin:3px 0 7px 35px;padding-left:8px;border-left:0}
     .nav-submenu[hidden]{display:none}
@@ -252,9 +253,9 @@ h1, h2, h3, h4, h5, h6 {
     .app.sidebar-collapsed .brand{padding:0 0 18px;justify-content:center}
     .app.sidebar-collapsed .novalyo-logo-full,.app.sidebar-collapsed .sidebar-toggle{display:none}
     .app.sidebar-collapsed .novalyo-symbol{display:grid}
-    .app.sidebar-collapsed .nav{gap:5px}
-    .app.sidebar-collapsed .nav-item{width:50px;min-height:50px;margin:0 auto;padding:0;justify-content:center}
-    .app.sidebar-collapsed .nav-item > i:first-child{font-size:19px;width:24px}
+    .app.sidebar-collapsed .sidebar .nav{gap:5px}
+    .app.sidebar-collapsed .sidebar .nav-item{width:50px;min-height:50px;margin:0 auto;padding:0;justify-content:center}
+    .app.sidebar-collapsed .sidebar .nav-item > i:first-child{font-size:19px;width:24px}
     .app.sidebar-collapsed .nav-label,.app.sidebar-collapsed .nav-chevron,.app.sidebar-collapsed .nav-submenu{display:none}
     .app.sidebar-collapsed .nav-section-label{display:none}
     .app.sidebar-collapsed .nav-section-gap{margin-top:7px}
@@ -1588,9 +1589,11 @@ h1, h2, h3, h4, h5, h6 {
 .novalyo-portal .global-breadcrumb a { color:#536075; font-weight:700; text-decoration:none; }
 .novalyo-portal .topbar { width:100%; margin:0; border-radius:0; box-shadow:none; }
 .novalyo-portal .title-line h1 { font-size:26px; font-weight:700; line-height:1.25; letter-spacing:-.4px; color:var(--text); margin:0; }
-.novalyo-portal .title-line > div { min-width:0; }
+.novalyo-portal .title-block { min-width:0; flex:0 1 auto; }
+.novalyo-portal .title-line h1 { min-width:0; overflow-wrap:anywhere; }
+.novalyo-portal .title-line > div { min-width:0; flex-wrap:wrap; }
 .novalyo-portal .title-icon { margin-right:0!important; }
-.novalyo-portal .topbar-left-wrapper { flex:0 0 auto; }
+.novalyo-portal .topbar-left-wrapper { flex:0 1 auto; min-width:0; max-width:100%; }
 .novalyo-portal .top-actions { flex:1 1 720px; gap:10px; }
 .novalyo-portal .navbar-search-container { flex:1 1 300px; max-width:390px; min-width:220px; order:0; }
 .novalyo-portal .navbar-search-container:empty { display:none; }
@@ -1637,9 +1640,11 @@ h1, h2, h3, h4, h5, h6 {
 .novalyo-portal .modal-header, .novalyo-portal .modal-footer { padding:17px 24px; border-color:var(--border); }
 .novalyo-portal .modal-body { padding:24px; }
 .novalyo-portal .modal-title { font-size:18px; font-weight:700; color:var(--text); }
-.novalyo-portal .nav-tabs { gap:18px; border-bottom:1px solid var(--border); }
-.novalyo-portal .nav-tabs .nav-link { border:0; border-bottom:2px solid transparent; border-radius:0; font-size:13px; color:#526078; }
+.novalyo-portal .nav-tabs { flex-direction:row; flex-wrap:nowrap; min-width:0; max-width:100%; overflow-x:auto; overflow-y:hidden; gap:18px; border-bottom:1px solid var(--border); }
+.novalyo-portal .nav-tabs > .nav-item { flex:0 0 auto; }
+.novalyo-portal .nav-tabs .nav-link { white-space:nowrap; border:0; border-bottom:2px solid transparent; border-radius:0; font-size:13px; color:#526078; }
 .novalyo-portal .nav-tabs .nav-link.active { color:var(--primary); border-bottom-color:var(--primary); background:transparent; }
+.novalyo-portal .odoo-nav-tabs .nav-link.active { color:var(--primary)!important; border-bottom-color:var(--primary)!important; }
 .novalyo-portal .nav-pills .nav-link.active, .novalyo-portal .page-item.active .page-link { background:var(--primary); border-color:var(--primary); color:#fff; }
 .novalyo-portal .page-link { color:#526078; }
 .novalyo-portal .table-responsive, .novalyo-portal .table-wrap { max-width:100%; overflow-x:auto; }
