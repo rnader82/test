@@ -35,7 +35,7 @@
 
     .node-content:hover {
         background: #f8f9fa;
-        border-color: #696cff;
+        border-color: #91378e;
         box-shadow: 0 2px 8px rgba(105, 108, 255, 0.08);
     }
 
@@ -59,7 +59,7 @@
 
     .node-expand-btn:hover {
         background: #e4e7eb;
-        color: #696cff;
+        color: #91378e;
     }
 
     .node-expand-btn i {
@@ -86,7 +86,7 @@
         align-items: center;
         justify-content: center;
         background: rgba(105, 108, 255, 0.1);
-        color: #696cff;
+        color: #91378e;
         border-radius: 6px;
         margin-right: 0.75rem;
         font-size: 1rem;

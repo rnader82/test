@@ -23,7 +23,7 @@
 				background-color: #f2f2f2;
 				padding: 10px;
 				font-size: 18px;
-				border-left: 5px solid #007bff;
+				border-left: 5px solid #91378e;
 			}
 
 			.section {
@@ -35,7 +35,7 @@
 				font-weight: bold;
 				border-bottom: 1px solid #ccc;
 				margin-bottom: 10px;
-				color: #007bff;
+				color: #91378e;
 			}
 
 			.field {
@@ -58,7 +58,7 @@
 			}
 
 			.badge-client {
-				background-color: #007bff;
+				background-color: #91378e;
 			}
 
 			.badge-internal {
@@ -71,14 +71,17 @@
 			}
 
 			.timeline {
-				border-left: 2px solid #007bff;
+				border-left: 2px solid #91378e;
 				padding-left: 15px;
 			}
 
 			.timeline-item {
 				margin-bottom: 15px;
 			}
-		</style>
+		/* Novalyo document palette; keep PDF/email layout self-contained. */
+        h1, h2, h3 { color: #7e3e7b; }
+        a { color: #91378e; }
+    </style>
 	</head>
 
 	<body>

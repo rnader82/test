@@ -12,9 +12,9 @@
     --text: #111827;
     --text-secondary: #334155;
     --muted: #6b7280;
-    --primary: #5b4df6;
-    --primary-hover: #4a3df0;
-    --primary-50: #f3f1ff;
+    --primary: #91378e;
+    --primary-hover: #7e3e7b;
+    --primary-50: #f8f3f8;
     
     /* Semantic Colors */
     --green: #16a34a;
@@ -39,10 +39,10 @@
     --blue-border: #9cc7ff;
     --blue-assignee: #0f61ca;
     
-    --purple: #7c3aed;
-    --purple-alt: #6d28d9;
-    --purple-bg: #f5efff;
-    --purple-text: #6d28d9;
+    --purple: #91378e;
+    --purple-alt: #7e3e7b;
+    --purple-bg: #f8f3f8;
+    --purple-text: #7e3e7b;
     
     --brown: #a35d13;
     --brown-alt: #9a5a16;
@@ -62,16 +62,16 @@
     --radius-lg: 12px;
 
     /* Theme Bridge Tokens */
-    --md-sys-color-primary: #5b4df6;
+    --md-sys-color-primary: #91378e;
     --md-sys-color-on-primary: #ffffff;
-    --md-sys-color-primary-container: #f3f1ff;
-    --md-sys-color-on-primary-container: #5b4df6;
+    --md-sys-color-primary-container: #f8f3f8;
+    --md-sys-color-on-primary-container: #91378e;
 
-    --md-sys-color-secondary-rgb: 91, 77, 246;
-    --md-sys-color-secondary: #5b4df6;
+    --md-sys-color-secondary-rgb: 145, 55, 142;
+    --md-sys-color-secondary: #91378e;
     --md-sys-color-on-secondary: #ffffff;
-    --md-sys-color-secondary-container: #f3f1ff;
-    --md-sys-color-on-secondary-container: #5b4df6;
+    --md-sys-color-secondary-container: #f8f3f8;
+    --md-sys-color-on-secondary-container: #91378e;
 
     --md-sys-color-tertiary: #1687ff;
     --md-sys-color-on-tertiary: #ffffff;
@@ -91,8 +91,8 @@
     --md-sys-color-outline-variant: #e7eaf0;
 
     /* Bootstrap Overrides */
-    --bs-primary: #5b4df6;
-    --bs-primary-rgb: 91, 77, 246;
+    --bs-primary: #91378e;
+    --bs-primary-rgb: 145, 55, 142;
     --bs-body-bg: #f7f8fb;
     --bs-body-color: #111827;
     --bs-success: #16a34a;
@@ -125,7 +125,7 @@
     /* Transitions & Gradients */
     --premium-transition: all 0.2s ease;
     --premium-transition-fast: all 0.15s ease;
-    --brand-gradient: linear-gradient(135deg, #5b4df6, #2494ff);
+    --brand-gradient: linear-gradient(135deg, #91378e, #2494ff);
 }
 
 /* Typography Scale */

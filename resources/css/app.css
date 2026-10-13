@@ -1,4 +1,5 @@
 @import "m3-theme.css";
+@import "../../public/css/demo.css";
 
 /* ==========================================================================
    Base Rules & Modern Typography
@@ -254,7 +255,7 @@ a:hover {
     display: grid;
     place-items: center;
     color: #fff;
-    background: linear-gradient(135deg, #5b4df6, #2494ff);
+    background: linear-gradient(135deg, #91378e, #2494ff);
     font-size: 15px;
     flex-shrink: 0;
 }
@@ -413,7 +414,7 @@ a:hover {
     border-radius: 50%;
     display: grid;
     place-items: center;
-    background: linear-gradient(135deg, #5b4df6, #7c3aed);
+    background: linear-gradient(135deg, #91378e, #91378e);
     color: #fff;
     font-weight: 600;
     font-size: 13px;
@@ -527,7 +528,7 @@ a:hover {
 
 .search:focus-within, .search-bar-mockup:focus-within {
     border-color: var(--primary) !important;
-    box-shadow: 0 0 0 3px rgba(91, 77, 246, 0.12) !important;
+    box-shadow: 0 0 0 3px rgba(145, 55, 142, 0.12) !important;
 }
 
 .search i, .search-bar-mockup i {
@@ -830,7 +831,7 @@ a:hover {
 .odoo-nav-tabs .nav-link:hover {
     color: var(--primary) !important;
     background: transparent !important;
-    border-bottom-color: rgba(91, 77, 246, 0.3) !important;
+    border-bottom-color: rgba(145, 55, 142, 0.3) !important;
 }
 
 .nav-tabs .nav-link.active,
@@ -1150,7 +1151,7 @@ th.sorted .sort-icons, th.sorted {
 .s-red { background: #fff0f1; color: #ef233c; }
 .s-orange { background: #fff5e9; color: #ee7d12; }
 .s-blue { background: #edf7ff; color: #087ce7; }
-.s-purple { background: #f5efff; color: #6d28d9; }
+.s-purple { background: #f8f3f8; color: #7e3e7b; }
 .s-brown { background: #fff5ea; color: #9a5a16; }
 .s-gray { background: #f4f5f7; color: #667085; }
 .s-green { background: #eefbf2; color: #14813b; }
@@ -1179,7 +1180,7 @@ th.sorted .sort-icons, th.sorted {
 
 .form-control:focus, .form-select:focus {
     border-color: var(--primary) !important;
-    box-shadow: 0 0 0 3px rgba(91, 77, 246, 0.12) !important;
+    box-shadow: 0 0 0 3px rgba(145, 55, 142, 0.12) !important;
 }
 
 .form-label {
@@ -1199,7 +1200,7 @@ th.sorted .sort-icons, th.sorted {
 
 .select2-container--bootstrap-5.select2-container--focus .select2-selection {
     border-color: var(--primary) !important;
-    box-shadow: 0 0 0 3px rgba(91, 77, 246, 0.12) !important;
+    box-shadow: 0 0 0 3px rgba(145, 55, 142, 0.12) !important;
 }
 
 /* Toast Component */

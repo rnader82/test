@@ -25,7 +25,7 @@
 		}
 
 		.report-header {
-			background: linear-gradient(120deg, #0d6efd 0%, #4f46e5 50%, #16a4d8 100%);
+			background: linear-gradient(120deg, #0d6efd 0%, #91378e 50%, #16a4d8 100%);
 			color: #fff;
 			border-radius: 16px;
 			padding: 24px;
@@ -95,7 +95,7 @@
 		}
 
 		.nav-pills.workflow-tabs .nav-link.active {
-			background: linear-gradient(120deg, #0d6efd 0%, #4f46e5 100%);
+			background: linear-gradient(120deg, #0d6efd 0%, #91378e 100%);
 			color: #fff;
 			border-color: transparent;
 			box-shadow: 0 10px 24px rgba(79, 70, 229, 0.35);

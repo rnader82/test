@@ -66,7 +66,7 @@
             <div class="col-xl-3 col-lg-6 col-md-12">
                 <div class="inner-sub-card">
                     <div class="card-title-custom">
-                        <i class="bi bi-person" style="color: #4f46e5; font-size: 1.25rem;"></i>
+                        <i class="bi bi-person" style="color: #91378e; font-size: 1.25rem;"></i>
                         <span>1. Client</span>
                     </div>
 
@@ -191,7 +191,7 @@
             <div class="col-xl-3 col-lg-6 col-md-12">
                 <div class="inner-sub-card">
                     <div class="card-title-custom">
-                        <i class="bi bi-wrench-adjustable" style="color: #4f46e5; font-size: 1.25rem;"></i>
+                        <i class="bi bi-wrench-adjustable" style="color: #91378e; font-size: 1.25rem;"></i>
                         <span>3. Intervention</span>
                     </div>
 
@@ -266,7 +266,7 @@
                 <div class="inner-sub-card d-flex flex-column">
                     <div class="card-title-custom justify-content-between">
                         <div class="d-flex align-items-center gap-2">
-                            <i class="bi bi-list-check" style="color: #4f46e5; font-size: 1.25rem;"></i>
+                            <i class="bi bi-list-check" style="color: #91378e; font-size: 1.25rem;"></i>
                             <span>4. Checklist des tâches</span>
                         </div>
                         <span class="badge bg-light text-dark border small" id="task_count_badge" style="font-weight: 500;">
@@ -300,7 +300,7 @@
                     <div class="mt-auto pt-2">
                         <div class="input-group input-group-sm">
                             <input type="text" id="new_task_input" class="form-control custom-input" placeholder="Ajouter une tâche...">
-                            <button type="button" class="btn btn-primary px-3" id="btn_quick_add_task" style="background-color: #4f46e5; border-color: #4f46e5;">
+                            <button type="button" class="btn btn-primary px-3" id="btn_quick_add_task" style="background-color: #91378e; border-color: #91378e;">
                                 <i class="bi bi-plus"></i>
                             </button>
                         </div>
@@ -313,7 +313,7 @@
     <!-- BOTTOM SECTION: Grande Card englobant les 2 cartes (Matériels et Outils) -->
     <div class="outer-container-card mb-4">
         <div class="card-title-custom mb-3">
-            <i class="bi bi-box-seam" style="color: #4f46e5; font-size: 1.25rem;"></i>
+            <i class="bi bi-box-seam" style="color: #91378e; font-size: 1.25rem;"></i>
             <span>5. Matériel & outils nécessaires</span>
         </div>
 
@@ -481,7 +481,7 @@
             </div>
             <div class="modal-footer border-0 pt-0">
                 <button type="button" class="btn btn-sm btn-light rounded-pill px-3" data-bs-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3" id="btn_confirm_show_add_mat" style="background-color: #4f46e5; border-color: #4f46e5;">Ajouter</button>
+                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3" id="btn_confirm_show_add_mat" style="background-color: #91378e; border-color: #91378e;">Ajouter</button>
             </div>
         </div>
     </div>
@@ -516,7 +516,7 @@
             </div>
             <div class="modal-footer border-0 pt-0">
                 <button type="button" class="btn btn-sm btn-light rounded-pill px-3" data-bs-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3" id="btn_confirm_show_add_tool" style="background-color: #4f46e5; border-color: #4f46e5;">Ajouter</button>
+                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3" id="btn_confirm_show_add_tool" style="background-color: #91378e; border-color: #91378e;">Ajouter</button>
             </div>
         </div>
     </div>
@@ -620,7 +620,7 @@
 }
 
 .action-link-blue {
-    color: #4f46e5;
+    color: #91378e;
     font-size: 13px;
     font-weight: 600;
     text-decoration: none;
@@ -639,7 +639,7 @@
     border-radius: 4px;
     border: 1px solid #cbd5e1;
     cursor: pointer;
-    accent-color: #4f46e5;
+    accent-color: #91378e;
 }
 
 .task-label-text {

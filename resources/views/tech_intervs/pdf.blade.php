@@ -39,7 +39,7 @@
 			}
 
 			.section-title {
-				background-color: #f7fafc;
+				background-color: #f8f3f8;
 				color: #2d3748;
 				font-weight: bold;
 				padding: 10px 15px;
@@ -107,7 +107,7 @@
 			}
 
 			.stage-item strong {
-				color: #2c5282;
+				color: #7e3e7b;
 				font-size: 12px;
 			}
 
@@ -134,16 +134,19 @@
 			}
 
 			table th {
-				background-color: #ebf4ff;
-				color: #2c5282;
+				background-color: #f8f3f8;
+				color: #7e3e7b;
 				font-weight: bold;
 				text-transform: uppercase;
 			}
 
 			table tbody tr:nth-child(even) {
-				background-color: #f7fafc;
+				background-color: #f8f3f8;
 			}
-		</style>
+		/* Novalyo document palette; keep PDF/email layout self-contained. */
+        h1, h2, h3 { color: #7e3e7b; }
+        a { color: #91378e; }
+    </style>
 	</head>
 
 	<body>

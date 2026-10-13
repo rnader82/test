@@ -1476,7 +1476,7 @@
                         $fieldDefinitions = [
                             'price_per_unit' => [
                                 'label' => __('locale.equipment_show.lbl_sale_price') ?? 'Prix de vente',
-                                'color' => '#696cff',
+                                'color' => '#91378e',
                                 'is_currency' => true,
                                 'badge_class' => 'bg-primary-subtle text-primary border-primary-subtle',
                             ],

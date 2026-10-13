@@ -60,7 +60,7 @@
         <!-- User Profile Hero Card -->
         <div class="card card-premium shadow-sm border-0 mb-4 overflow-hidden position-relative">
             <!-- Colored accent strip -->
-            <div class="position-absolute top-0 start-0 w-100" style="height: 5px; background: linear-gradient(90deg, {{ $userColor }}, #4f46e5);"></div>
+            <div class="position-absolute top-0 start-0 w-100" style="height: 5px; background: linear-gradient(90deg, {{ $userColor }}, #91378e);"></div>
 
             <div class="card-body p-4 pt-4">
                 <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center justify-content-between gap-3 pb-3 mb-3 border-bottom">

@@ -18,7 +18,7 @@
             background-color: #f8fafc;
         }
         h2 {
-            color: #1e3a8a;
+            color: #91378e;
         }
         .footer {
             margin-top: 30px;
@@ -27,6 +27,9 @@
             border-top: 1px solid #cbd5e1;
             padding-top: 15px;
         }
+    /* Novalyo document palette; keep PDF/email layout self-contained. */
+        h1, h2, h3 { color: #7e3e7b; }
+        a { color: #91378e; }
     </style>
 </head>
 <body>

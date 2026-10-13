@@ -78,6 +78,9 @@
             margin: 5px;
             display: inline-block;
         }
+    /* Novalyo document palette; keep PDF/email layout self-contained. */
+        h1, h2, h3 { color: #7e3e7b; }
+        a { color: #91378e; }
     </style>
 </head>
 <body>

@@ -138,7 +138,7 @@
         border-color: #dbdade;
     }
     .select2-container--default.select2-container--focus .select2-selection--multiple {
-        border-color: #696cff;
+        border-color: #91378e;
     }
 </style>
 @endsection

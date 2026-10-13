@@ -264,7 +264,7 @@
         display: inline-block;
         border-radius: 50%;
     }
-    .bg-label-primary { background-color: #e7e7ff !important; color: #696cff !important; }
+    .bg-label-primary { background-color: #f3eaf2 !important; color: #91378e !important; }
     .bg-label-info { background-color: #e1f0ff; color: #03c3ec; }
     .btn-icon {
         padding: 0;

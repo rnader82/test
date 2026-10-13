@@ -187,7 +187,7 @@
 		border-radius: 50%;
 		border: none;
 		background: #ffffff;
-		color: #696cff;
+		color: #91378e;
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 		display: flex;
 		align-items: center;

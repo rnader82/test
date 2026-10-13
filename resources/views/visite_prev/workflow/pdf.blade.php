@@ -41,7 +41,7 @@
 			}
 
 			.section-title {
-				background-color: #f7fafc;
+				background-color: #f8f3f8;
 				color: #2d3748;
 				font-weight: bold;
 				padding: 10px 15px;
@@ -95,20 +95,20 @@
 			}
 
 			table th {
-				background-color: #ebf4ff;
-				color: #2c5282;
+				background-color: #f8f3f8;
+				color: #7e3e7b;
 				font-weight: bold;
 				text-transform: uppercase;
 			}
 
 			table tbody tr:nth-child(even) {
-				background-color: #f7fafc;
+				background-color: #f8f3f8;
 			}
 
 			.info-box {
-				border: 1px solid #cce5ff;
+				border: 1px solid #e3d4e2;
 				/* Lighter blue border */
-				background-color: #e6f3ff;
+				background-color: #f8f3f8;
 				/* Lighter blue background */
 				padding: 10px;
 				margin-bottom: 15px;
@@ -126,7 +126,7 @@
 			}
 
 			.info-box strong {
-				color: #004085;
+				color: #7e3e7b;
 			}
 
 			.signature,
@@ -144,7 +144,10 @@
 			.images-container {
 				margin-top: 10px;
 			}
-		</style>
+		/* Novalyo document palette; keep PDF/email layout self-contained. */
+        h1, h2, h3 { color: #7e3e7b; }
+        a { color: #91378e; }
+    </style>
 	</head>
 
 	<body>

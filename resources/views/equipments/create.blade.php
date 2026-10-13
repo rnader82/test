@@ -375,7 +375,7 @@
         transition: all 0.15s ease;
     }
     .odoo-title-input:focus {
-        border-color: #5b4df6;
+        border-color: #91378e;
         box-shadow: 0 0 0 3px rgba(91, 77, 246, 0.12);
     }
     .odoo-img-box {

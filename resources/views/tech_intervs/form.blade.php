@@ -86,7 +86,7 @@
             <div class="col-xl-3 col-lg-6 col-md-12">
                 <div class="inner-sub-card">
                     <div class="card-title-custom">
-                        <i class="bi bi-person" style="color: #4f46e5; font-size: 1.25rem;"></i>
+                        <i class="bi bi-person" style="color: #91378e; font-size: 1.25rem;"></i>
                         <span>1. Client</span>
                     </div>
 
@@ -186,7 +186,7 @@
                             <input type="text" name="gps_coordinates" id="gps_coordinates" class="form-control custom-input pe-4"
                                 value="{{ $gpsCoords }}" placeholder="50.6884, 3.1748">
                             <button class="btn btn-link position-absolute end-0 top-50 translate-middle-y text-primary p-0 pe-2 border-0" type="button" id="btn_get_gps" title="Obtenir la géolocalisation">
-                                <i class="bi bi-geo-alt-fill" style="color: #4f46e5;"></i>
+                                <i class="bi bi-geo-alt-fill" style="color: #91378e;"></i>
                             </button>
                         </div>
                     </div>
@@ -213,7 +213,7 @@
             <div class="col-xl-3 col-lg-6 col-md-12">
                 <div class="inner-sub-card">
                     <div class="card-title-custom">
-                        <i class="bi bi-wrench-adjustable" style="color: #4f46e5; font-size: 1.25rem;"></i>
+                        <i class="bi bi-wrench-adjustable" style="color: #91378e; font-size: 1.25rem;"></i>
                         <span>3. Intervention</span>
                     </div>
 
@@ -299,7 +299,7 @@
             <div class="col-xl-3 col-lg-6 col-md-12">
                 <div class="inner-sub-card d-flex flex-column">
                     <div class="card-title-custom">
-                        <i class="bi bi-list-check" style="color: #4f46e5; font-size: 1.25rem;"></i>
+                        <i class="bi bi-list-check" style="color: #91378e; font-size: 1.25rem;"></i>
                         <span>4. Checklist des tâches</span>
                     </div>
 
@@ -336,7 +336,7 @@
     <!-- BOTTOM SECTION: Grande Card englobant les 2 cartes (Matériels et Outils) -->
     <div class="outer-container-card mb-4">
         <div class="card-title-custom mb-3">
-            <i class="bi bi-box-seam" style="color: #4f46e5; font-size: 1.25rem;"></i>
+            <i class="bi bi-box-seam" style="color: #91378e; font-size: 1.25rem;"></i>
             <span>5. Matériel & outils nécessaires</span>
         </div>
 
@@ -647,7 +647,7 @@
             </div>
             <div class="modal-footer border-0 pt-0">
                 <button type="button" class="btn btn-sm btn-light rounded-pill px-3" data-bs-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3" id="btn_confirm_add_task" style="background-color: #4f46e5; border-color: #4f46e5;">Ajouter</button>
+                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3" id="btn_confirm_add_task" style="background-color: #91378e; border-color: #91378e;">Ajouter</button>
             </div>
         </div>
     </div>
@@ -701,7 +701,7 @@
             </div>
             <div class="modal-footer border-0 pt-0">
                 <button type="button" class="btn btn-sm btn-light rounded-pill px-3" data-bs-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3" id="btn_confirm_add_material" style="background-color: #4f46e5; border-color: #4f46e5;">Ajouter</button>
+                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3" id="btn_confirm_add_material" style="background-color: #91378e; border-color: #91378e;">Ajouter</button>
             </div>
         </div>
     </div>
@@ -736,7 +736,7 @@
             </div>
             <div class="modal-footer border-0 pt-0">
                 <button type="button" class="btn btn-sm btn-light rounded-pill px-3" data-bs-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3" id="btn_confirm_add_tool" style="background-color: #4f46e5; border-color: #4f46e5;">Ajouter</button>
+                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3" id="btn_confirm_add_tool" style="background-color: #91378e; border-color: #91378e;">Ajouter</button>
             </div>
         </div>
     </div>
@@ -856,7 +856,7 @@
 }
 
 .action-link-blue {
-    color: #4f46e5;
+    color: #91378e;
     font-size: 13px;
     font-weight: 600;
     text-decoration: none;
@@ -875,7 +875,7 @@
     border-radius: 4px;
     border: 1px solid #cbd5e1;
     cursor: pointer;
-    accent-color: #4f46e5;
+    accent-color: #91378e;
 }
 
 .task-label-text {
@@ -1037,11 +1037,11 @@ window.initTechIntervForm = function(rootDoc) {
                 navigator.geolocation.getCurrentPosition(
                     function(pos) {
                         gpsInput.value = `${pos.coords.latitude.toFixed(6)}, ${pos.coords.longitude.toFixed(6)}`;
-                        btnGetGps.innerHTML = '<i class="bi bi-geo-alt-fill" style="color: #4f46e5;"></i>';
+                        btnGetGps.innerHTML = '<i class="bi bi-geo-alt-fill" style="color: #91378e;"></i>';
                     },
                     function(err) {
                         alert('Impossible de récupérer la position GPS : ' + err.message);
-                        btnGetGps.innerHTML = '<i class="bi bi-geo-alt-fill" style="color: #4f46e5;"></i>';
+                        btnGetGps.innerHTML = '<i class="bi bi-geo-alt-fill" style="color: #91378e;"></i>';
                     }
                 );
             } else {

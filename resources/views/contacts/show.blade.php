@@ -303,7 +303,7 @@
 </div>
 
 <style>
-    .bg-label-primary { background-color: rgba(105, 108, 255, 0.16) !important; color: #696cff !important; }
+    .bg-label-primary { background-color: rgba(145, 55, 142, 0.10) !important; color: #91378e !important; }
     .bg-label-secondary { background-color: rgba(133, 146, 163, 0.16) !important; color: #8592a3 !important; }
     .bg-label-success { background-color: rgba(113, 221, 55, 0.16) !important; color: #71dd37 !important; }
     .bg-label-info { background-color: rgba(3, 195, 236, 0.16) !important; color: #03c3ec !important; }

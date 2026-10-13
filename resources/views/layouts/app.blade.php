@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" class="light-style layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-bordered"
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light-style layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-bordered"
     data-assets-path="{{ url('/') }}/" data-template="vertical-menu-template-bordered" data-style="light">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+        content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @hasSection('title')
         <title>@yield('title') | Novalyo</title>
@@ -46,18 +46,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
         integrity="sha384-He3RckdFB2wffiHOcESa3sf4Ida+ni/fw9SSzAcfY2EPnU1zkK/sLUzw2C5Tyuhj" crossorigin="anonymous">
     <!-- Remixicon CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.min.css" rel="stylesheet"
-        integrity="sha384-tfEwtPQRbzmgeuqdzD9yIr//J+ygmYLnPoxn19mX03AfLoXoN7feKElIT5xO3qs5" crossorigin="anonymous">
+    <link href="{{ asset('fonts/remixicon/remixicon.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('fonts/flag-icons.css') }}" />
     <!-- Menu waves for no-customizer fix -->
     <link rel="stylesheet" href="{{ asset('libs/node-waves/node-waves.css') }}" />
     <!-- Core CSS -->
     <link rel="stylesheet" href="{{ asset('css/core.css') }}" class="template-customizer-core-css" />
     <link rel="stylesheet" href="{{ asset('css/theme-bordered.css') }}" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="{{ asset('css/demo.css') }}" />
     <!-- jQuery (necessary for Select2) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
+    <script src="{{ asset('libs/jquery/jquery.js') }}"></script>
     <!-- Select2 for searchable dropdowns -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"
         integrity="sha384-OXVF05DQEe311p6ohU11NwlnX08FzMCsyoXzGOaL+83dKAb3qS17yZJxESl8YrJQ" crossorigin="anonymous" />
@@ -604,25 +601,28 @@
             }
         }
     </style>
+    <!-- Loaded last so copied views/assets also work with the existing Vite build. -->
+    <link rel="stylesheet" href="{{ asset('css/demo.css') }}?v=novalyo-v01" />
 </head>
 
-<body>
+<body class="novalyo-portal" data-novalyo-density="comfortable" data-portal-user="{{ auth()->id() ?? 'guest' }}">
     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token() }}">
     <!-- Layout wrapper -->
     <div class="layout-wrapper">
         <div class="layout-container">
             <!-- Menu -->
-            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme sidebar">
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme sidebar" aria-label="{{ __('locale.portal.navigation') }}">
                 <div class="app-brand demo brand">
                     <a href="{{ route('dashboard') }}" class="app-brand-link d-flex align-items-center text-decoration-none">
                         <img id="logo-full" src="{{ asset('images/logo.png') }}" alt="Novalyo 360" class="app-brand-logo-full" />
                         <img id="logo-small" src="{{ asset('images/logo_small.png') }}" alt="Novalyo 360" class="app-brand-logo-small" />
                     </a>
-                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto" id="mobile-menu-close" style="padding: 0; min-height: unset; height: auto;" aria-label="Toggle menu">
+                    <a href="javascript:void(0);" class="portal-menu-toggle menu-link text-large ms-auto" id="mobile-menu-close" style="padding: 0; min-height: unset; height: auto;" aria-label="{{ __('locale.portal.toggle_menu') }}" aria-controls="layout-menu">
                         <i class="bi bi-chevron-left d-none d-xl-block" style="font-size: 16px;"></i>
                         <i class="bi bi-x-lg d-xl-none" style="font-size: 18px;"></i>
                     </a>
                 </div>
+                <div class="portal-saved-pages" id="portal-saved-pages" hidden></div>
                 <div class="menu-inner-shadow"></div>
                 <ul class="menu-inner py-1"> @auth 
                             @if (Auth::user()->hasPermission('dashboard-access') || Auth::user()->is_admin == 1)
@@ -685,7 +685,8 @@
                                     </ul>
                                 @endif
                             </li>
-                                <li class="menu-item {{ Route::is('clients.*') || Route::is('prospects.*') || Route::is('contracts.*') || Route::is('contacts.*') ? 'active open' : '' }}">
+                                <li class="portal-section-label">{{ __('locale.portal.relations') }}</li>
+                            <li class="menu-item {{ Route::is('clients.*') || Route::is('prospects.*') || Route::is('contracts.*') || Route::is('contacts.*') ? 'active open' : '' }}">
                                 @if (Auth::user()->hasPermission('clients-access') || Auth::user()->is_admin == 1)
                                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                                         <i class="bi bi-building" style="margin-right: 10px;"></i>
@@ -819,7 +820,8 @@
                                 </li>
 
                                 @if (Auth::user()->hasPermission('purchasing-access') || Auth::user()->is_admin == 1)
-                                <li class="menu-item {{ Route::is('suppliers.*') || Route::is('purchases.*') || Route::is('supplier-orders.*') || Route::is('supplier-contacts.*') ? 'active open' : '' }}">
+                                <li class="portal-section-label">{{ __('locale.portal.operations') }}</li>
+                            <li class="menu-item {{ Route::is('suppliers.*') || Route::is('purchases.*') || Route::is('supplier-orders.*') || Route::is('supplier-contacts.*') ? 'active open' : '' }}">
                                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                                         <i class="bi bi-cart-check" style="margin-right: 10px;"></i>
                                         <div>{{ __('locale.menu_purchasing') }}</div>
@@ -1032,6 +1034,7 @@
                             </li>
                             @endif
                             
+                            <li class="portal-section-label">{{ __('locale.portal.configuration') }}</li>
                             <li class="menu-item {{ 
                                 Route::is('users.*') || 
                                 Route::is('roles.*') || 
@@ -1544,40 +1547,17 @@
             <!-- / Menu -->
             <!-- Layout container -->
                 <div class="layout-page main">
-                    <!-- Unified Modern Top Navbar -->
-                    <header class="layout-navbar topbar">
-                        <!-- Left Section: Mobile Menu Toggle, Title & Subtitle -->
-                        <div class="topbar-left-wrapper d-flex align-items-center gap-2">
-                            <button type="button" class="btn mobile-menu-toggle layout-menu-toggle d-xl-none" id="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-                                <i class="bi bi-list"></i>
-                            </button>
-                            <div class="title-block">
-                                <div class="title-line">
-                                    @hasSection('navbar-icon')
-                                        @yield('navbar-icon')
-                                    @endif
-                                    @hasSection('navbar-title')
-                                        @yield('navbar-title')
-                                    @elseif(View::hasSection('title'))
-                                        <h1>@yield('title')</h1>
-                                    @else
-                                        <h1>Novalyo 360</h1>
-                                    @endif
-                                </div>
-                                @hasSection('navbar-subtitle')
-                                    <div class="subtitle">@yield('navbar-subtitle')</div>
-                                @endif
-                            </div>
-                        </div>
-
-                        <!-- Right Section: Search, Actions, Company, Notifications, Profile -->
-                        <div class="top-actions">
-                            <div class="navbar-search-container">
-                                @yield('navbar-search')
-                            </div>
-
-                            @yield('page-actions')
-
+                    <div class="global-utility-bar">
+                        <button type="button" class="portal-icon-button portal-menu-toggle d-none d-xl-inline-flex" id="desktop-menu-toggle" aria-controls="layout-menu" aria-expanded="true" aria-label="{{ __('locale.portal.toggle_menu') }}"><i class="bi bi-layout-sidebar" aria-hidden="true"></i></button>
+                        <span class="portal-utility-spacer"></span>
+                        <button type="button" class="portal-icon-button" id="portal-search-toggle" aria-label="{{ __('locale.portal.search') }}" title="{{ __('locale.portal.search') }} (Ctrl/⌘ K)"><i class="bi bi-search" aria-hidden="true"></i></button>
+                        <button type="button" class="portal-icon-button" id="portal-favorite-toggle" aria-pressed="false" aria-label="{{ __('locale.portal.favorite') }}" title="{{ __('locale.portal.favorite') }}" hidden><i class="bi bi-star" aria-hidden="true"></i></button>
+                        <button type="button" class="portal-icon-button" id="portal-columns-toggle" aria-label="{{ __('locale.portal.columns') }}" title="{{ __('locale.portal.columns') }}" hidden><i class="bi bi-layout-three-columns" aria-hidden="true"></i></button>
+                        <select class="portal-density" id="portal-density" aria-label="{{ __('locale.portal.density') }}" hidden>
+                            <option value="compact">{{ __('locale.portal.compact') }}</option>
+                            <option value="comfortable" selected>{{ __('locale.portal.comfortable') }}</option>
+                            <option value="large">{{ __('locale.portal.large') }}</option>
+                        </select>
                             @auth
                             @php
                                 $availableCompanies = auth()->user()->getAvailableCompanies();
@@ -1658,11 +1638,13 @@
 
                             {{-- User Avatar Dropdown --}}
                             <div class="dropdown">
-                                <div class="avatar avatar-online" data-bs-toggle="dropdown" style="cursor: pointer;">
+                                <button type="button" class="portal-profile-trigger" data-bs-toggle="dropdown" aria-expanded="false" aria-label="{{ __('locale.dashboard_new.my_profile') }}">
                                     <div class="sidebar-avatar" style="width: 38px; height: 38px; font-size: 13px;">
                                         {{ $sidebarInits }}
                                     </div>
-                                </div>
+                                    <span class="portal-profile-name">{{ auth()->user()->name }}</span>
+                                    <i class="bi bi-chevron-down" aria-hidden="true"></i>
+                                </button>
                                 <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
                                     <li>
                                         <a class="dropdown-item d-flex align-items-center py-2" href="{{ route('user.settings.edit') }}">
@@ -1714,6 +1696,47 @@
                                 </ul>
                             </div>
                             @endauth
+                    </div>
+                    <nav class="portal-breadcrumb" aria-label="{{ __('locale.portal.home') }}">
+                        <a href="{{ route('dashboard') }}">{{ __('locale.portal.home') }}</a>
+                        <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                        <span>{{ ($extractedTitle ?? trim(strip_tags(View::yieldContent('navbar-title') ?: View::yieldContent('title')))) ?: 'Novalyo 360' }}</span>
+                    </nav>
+                    <!-- Unified Modern Top Navbar -->
+                    <header class="layout-navbar topbar">
+                        <!-- Left Section: Mobile Menu Toggle, Title & Subtitle -->
+                        <div class="topbar-left-wrapper d-flex align-items-center gap-2">
+                            <button type="button" class="btn mobile-menu-toggle portal-menu-toggle d-xl-none" id="mobile-menu-toggle" aria-label="{{ __('locale.portal.toggle_menu') }}" aria-controls="layout-menu" aria-expanded="false">
+                                <i class="bi bi-list"></i>
+                            </button>
+                            <div class="title-block">
+                                <div class="title-line">
+                                    @hasSection('navbar-icon')
+                                        @yield('navbar-icon')
+                                    @endif
+                                    @hasSection('navbar-title')
+                                        @yield('navbar-title')
+                                    @elseif(View::hasSection('title'))
+                                        <h1>@yield('title')</h1>
+                                    @else
+                                        <h1>Novalyo 360</h1>
+                                    @endif
+                                </div>
+                                @hasSection('navbar-subtitle')
+                                    <div class="subtitle">@yield('navbar-subtitle')</div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!-- Right Section: Search, Actions, Company, Notifications, Profile -->
+                        <div class="top-actions">
+                            <div class="navbar-search-container">
+                                @yield('navbar-search')
+                            </div>
+
+                            @yield('page-actions')
+
+
                         </div>
                     </header>
 
@@ -1725,11 +1748,21 @@
             <!-- / Layout page -->
         </div>
         <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle" id="mobile-menu-overlay"></div>
+        <div class="layout-overlay" id="mobile-menu-overlay"></div>
         <!-- Drag Target Area To SlideIn Menu On Small Screens -->
         <div class="drag-target"></div>
     </div>
     <!-- / Layout wrapper -->
+    <script type="application/json" id="novalyo-labels">@json(__('locale.portal'))</script>
+    <dialog class="portal-dialog" id="portal-search-dialog" aria-labelledby="portal-search-title">
+        <div class="portal-dialog-head"><h2 id="portal-search-title">{{ __('locale.portal.search') }}</h2><button type="button" class="portal-icon-button" data-portal-close aria-label="{{ __('locale.portal.close') }}"><i class="bi bi-x-lg" aria-hidden="true"></i></button></div>
+        <div class="portal-dialog-body"><input type="search" id="portal-search-input" class="form-control" placeholder="{{ __('locale.portal.search_placeholder') }}" aria-label="{{ __('locale.portal.search') }}" autocomplete="off"><div id="portal-search-results" class="portal-search-results"></div></div>
+    </dialog>
+    <dialog class="portal-dialog" id="portal-columns-dialog" aria-labelledby="portal-columns-title">
+        <div class="portal-dialog-head"><h2 id="portal-columns-title">{{ __('locale.portal.columns') }}</h2><button type="button" class="portal-icon-button" data-portal-close aria-label="{{ __('locale.portal.close') }}"><i class="bi bi-x-lg" aria-hidden="true"></i></button></div>
+        <div class="portal-dialog-body"><div id="portal-column-options" class="portal-column-options"></div><button type="button" class="btn btn-outline-primary" id="portal-columns-reset">{{ __('locale.portal.reset_columns') }}</button></div>
+    </dialog>
+    <div id="portal-live-status" class="portal-live-status" role="status" aria-live="polite"></div>
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="{{ asset('libs/popper/popper.js') }}"></script>
@@ -1745,7 +1778,7 @@
     <script src="{{ asset('libs/apex-charts/apexcharts.js') }}"></script>
     <script src="{{ asset('libs/swiper/swiper.js') }}"></script>
     <!-- Main JS -->
-    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}?v=novalyo-v01"></script>
     <!-- Page JS -->
     <script src="{{ asset('js/dashboards-crm.js') }}"></script>
     <script>
@@ -2181,140 +2214,7 @@
     </script>
 
     <!-- Mobile Menu Popup Controller -->
-    <script>
-        (function() {
-            var toggleBtn = document.getElementById('mobile-menu-toggle');
-            var closeBtn = document.getElementById('mobile-menu-close');
-            var overlay = document.getElementById('mobile-menu-overlay');
-            var menuEl = document.getElementById('layout-menu');
 
-            function syncActiveSubmenus() {
-                if (!menuEl) return;
-                var activeItems = menuEl.querySelectorAll('.menu-item.active');
-                activeItems.forEach(function(item) {
-                    var parent = item.parentElement;
-                    while (parent && parent !== menuEl) {
-                        if (parent.classList.contains('menu-item')) {
-                            parent.classList.add('open');
-                            var sub = parent.querySelector(':scope > .menu-sub');
-                            if (sub) {
-                                sub.style.display = 'flex';
-                            }
-                        }
-                        parent = parent.parentElement;
-                    }
-                });
-            }
-
-            function openMobileMenu(e) {
-                if (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                }
-                document.documentElement.classList.remove('layout-menu-collapsed');
-                document.body.classList.remove('layout-menu-collapsed');
-                document.documentElement.classList.add('layout-menu-expanded');
-                document.body.classList.add('layout-menu-expanded');
-                if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
-                if (window.Helpers && typeof window.Helpers._setCollapsed === 'function') {
-                    try { window.Helpers._setCollapsed(false); } catch(err) {}
-                }
-                syncActiveSubmenus();
-            }
-
-            function closeMobileMenu(e) {
-                if (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                }
-                document.documentElement.classList.remove('layout-menu-expanded');
-                document.body.classList.remove('layout-menu-expanded');
-                if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
-                if (window.Helpers && typeof window.Helpers._setCollapsed === 'function') {
-                    try { window.Helpers._setCollapsed(true); } catch(err) {}
-                }
-            }
-
-            if (toggleBtn) {
-                toggleBtn.addEventListener('click', function(e) {
-                    if (document.documentElement.classList.contains('layout-menu-expanded')) {
-                        closeMobileMenu(e);
-                    } else {
-                        openMobileMenu(e);
-                    }
-                });
-            }
-
-            if (closeBtn) {
-                closeBtn.addEventListener('click', function(e) {
-                    if (window.innerWidth < 1200) {
-                        closeMobileMenu(e);
-                    }
-                });
-            }
-
-            if (overlay) {
-                overlay.addEventListener('click', closeMobileMenu);
-                overlay.addEventListener('touchend', closeMobileMenu);
-            }
-
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && document.documentElement.classList.contains('layout-menu-expanded')) {
-                    closeMobileMenu(e);
-                }
-            });
-
-            // Submenu accordion toggle handler for mobile/drawer
-            if (menuEl) {
-                menuEl.addEventListener('click', function(e) {
-                    var toggleLink = e.target.closest('.menu-toggle');
-                    if (toggleLink && window.innerWidth < 1200) {
-                        e.preventDefault();
-                        e.stopPropagation();
-
-                        var menuItem = toggleLink.closest('.menu-item');
-                        if (!menuItem) return;
-
-                        var menuSub = menuItem.querySelector(':scope > .menu-sub');
-                        var willOpen = !menuItem.classList.contains('open');
-
-                        if (willOpen) {
-                            menuItem.classList.add('open');
-                            menuItem.style.height = '';
-                            menuItem.style.overflow = '';
-                            if (menuSub) {
-                                menuSub.style.display = 'flex';
-                            }
-                        } else {
-                            menuItem.classList.remove('open');
-                            menuItem.style.height = '';
-                            menuItem.style.overflow = '';
-                            if (menuSub) {
-                                menuSub.style.display = 'none';
-                            }
-                        }
-                        return;
-                    }
-
-                    // Navigation link clicked - close drawer
-                    var navLink = e.target.closest('a');
-                    if (navLink && window.innerWidth < 1200) {
-                        var href = navLink.getAttribute('href');
-                        if (href && href !== '#' && !href.startsWith('javascript:') && !navLink.classList.contains('menu-toggle')) {
-                            closeMobileMenu();
-                        }
-                    }
-                }, true); // Capture phase to guarantee interception before menu.js animation
-            }
-
-            // Sync open state on page load
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', syncActiveSubmenus);
-            } else {
-                syncActiveSubmenus();
-            }
-        })();
-    </script>
 
     @yield('scripts')
     @stack('scripts')

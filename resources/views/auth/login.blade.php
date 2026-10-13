@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" class="light-style layout-wide  customizer-hide" dir="ltr" data-theme="theme-semi-dark" data-assets-path="{{ asset('/') }}" data-template="vertical-menu-template-semi-dark"
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light-style layout-wide  customizer-hide" dir="ltr" data-theme="theme-semi-dark" data-assets-path="{{ asset('/') }}" data-template="vertical-menu-template-semi-dark"
 	data-style="light">
 
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Connexion | Novalyo</title>
 		<meta name="description" content="Materialize – is the most developer friendly &amp; highly customizable Admin Dashboard Template." />
 		<meta name="keywords" content="dashboard, material, material design, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
@@ -15,7 +15,7 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&ampdisplay=swap" rel="stylesheet">
 		<!-- Icons -->
-		<link href=" https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.min.css " rel="stylesheet">
+		<link href="{{ asset('fonts/remixicon/remixicon.css') }}" rel="stylesheet">
 		<link rel="stylesheet" href="{{ asset('fonts/flag-icons.css') }}" />
 		<!-- Menu waves for no-customizer fix -->
 		<link rel="stylesheet" href="{{ asset('libs/node-waves/node-waves.css') }}" />
@@ -37,9 +37,10 @@
 		<!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  --> {{-- <script src="{{ asset('js/template-customizer.js') }}"></script> --}}
 		<!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 		<script src="{{ asset('js/config.js') }}"></script>
+	    <link rel="stylesheet" href="{{ asset('css/demo.css') }}?v=novalyo-v01" />
 	</head>
 
-	<body>
+	<body class="novalyo-portal novalyo-auth">
 		<!-- ?PROD Only: Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
 		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5J3LMKC" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript>
 		<!-- End Google Tag Manager (noscript) -->
@@ -51,13 +52,14 @@
 					<div class="card p-md-7 p-1">
 						<!-- Logo -->
 						<div class="app-brand justify-content-center mt-5">
-							<img src="{{ asset('images/logo.png') }}" style="width: 193px;" />
+							<img src="{{ asset('images/logo.png') }}" style="width: 193px; max-width: 100%;" alt="Novalyo" />
 						</div>
 						<!-- /Logo -->
 						<div class="card-body mt-1">
+                            <h4 class="mb-5">{{ __('locale.portal.login_heading') }}</h4>
 							<form id="formAuthentication" class="mb-5" action="{{ route('login') }}" method="POST"> @csrf @if ($errors->any())
 									<div class="alert alert-danger">
-										<strong>Whoops!</strong> There were some problems with your input. <ul>
+										<strong>{{ __('locale.portal.validation_error') }}</strong> <ul>
 											@foreach ($errors->all() as $error)
 												<li>{{ $error }}</li>
 											@endforeach
@@ -65,8 +67,8 @@
 									</div>
 								@endif
 								<div class="form-floating form-floating-outline mb-5">
-									<input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" autofocus>
-									<label for="email">Email</label>
+									<input type="text" class="form-control" id="email" name="email" placeholder="{{ __('locale.portal.email') }}" autofocus>
+									<label for="email">{{ __('locale.portal.email') }}</label>
 								</div>
 								<div class="mb-5">
 									<div class="form-password-toggle">
@@ -74,7 +76,7 @@
 											<div class="form-floating form-floating-outline">
 												<input type="password" id="password" class="form-control" name="password"
 													placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" />
-												<label for="password">Password</label>
+												<label for="password">{{ __('locale.portal.password') }}</label>
 											</div>
 											<span class="input-group-text cursor-pointer"><i class="ri-eye-off-line" style="font-size: 1rem !important;"></i></span>
 										</div>
@@ -83,13 +85,13 @@
 								<div class="mb-5 d-flex justify-content-between mt-5">
 									<div class="form-check mt-2">
 										<input class="form-check-input" type="checkbox" id="remember-me">
-										<label class="form-check-label" for="remember-me"> Remember Me </label>
+										<label class="form-check-label" for="remember-me"> {{ __('locale.portal.remember') }} </label>
 									</div> {{-- <a href="auth-forgot-password-basic.html" class="float-end mb-1 mt-2">
                                     <span>Forgot Password?</span>
                                 </a> --}}
 								</div>
 								<div class="mb-5">
-									<button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+									<button class="btn btn-primary d-grid w-100" type="submit">{{ __('locale.portal.login') }}</button>
 								</div>
 							</form> {{-- <p class="text-center">
                             <span>New on our platform?</span>
@@ -122,7 +124,7 @@
 		<script src="{{ asset('libs/@form-validation/bootstrap5.js') }}"></script>
 		<script src="{{ asset('libs/@form-validation/auto-focus.js') }}"></script>
 		<!-- Main JS -->
-		<script src="{{ asset('js/main.js') }}"></script>
+		<script src="{{ asset('js/main.js') }}?v=novalyo-v01"></script>
 		<!-- Page JS -->
 		<script src="{{ asset('js/pages-auth.js') }}"></script>
 	</body>

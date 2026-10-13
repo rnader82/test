@@ -17,7 +17,7 @@
             padding: 0;
         }
         .header-banner {
-            background-color: #008ba3;
+            background-color: #91378e;
             color: #ffffff;
             padding: 18px 20px;
             border-radius: 4px;
@@ -40,13 +40,13 @@
             font-size: 8px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: #b2ebf2;
+            color: #f3eaf2;
             margin-top: 2px;
         }
         .header-contact {
             text-align: right;
             font-size: 10px;
-            color: #e0f7fa;
+            color: #f8f3f8;
             line-height: 1.5;
         }
         .header-info-table {
@@ -72,7 +72,7 @@
         }
         .quote-ref-box {
             width: 30%;
-            background-color: #005b6e;
+            background-color: #7e3e7b;
             color: #ffffff;
             padding: 10px 12px;
             border-radius: 4px;
@@ -92,7 +92,7 @@
         }
         .quote-meta {
             font-size: 9px;
-            color: #e0f7fa;
+            color: #f8f3f8;
             border-top: 1px solid rgba(255,255,255,0.2);
             padding-top: 5px;
             margin-top: 5px;
@@ -165,8 +165,8 @@
         .totals-table tr.total-ttc td {
             font-size: 13px;
             font-weight: bold;
-            color: #008ba3;
-            border-top: 2px solid #008ba3;
+            color: #91378e;
+            border-top: 2px solid #91378e;
             padding-top: 8px;
         }
 
@@ -197,6 +197,9 @@
             border-top: 1px solid #e2e8f0;
             padding-top: 10px;
         }
+    /* Novalyo document palette; keep PDF/email layout self-contained. */
+        h1, h2, h3 { color: #7e3e7b; }
+        a { color: #91378e; }
     </style>
 </head>
 <body>
@@ -219,7 +222,7 @@
         <table class="header-info-table">
             <tr>
                 <td class="client-box">
-                    <div style="font-size: 9px; text-transform: uppercase; color: #b2ebf2; margin-bottom: 3px;">Devis pour :</div>
+                    <div style="font-size: 9px; text-transform: uppercase; color: #f3eaf2; margin-bottom: 3px;">Devis pour :</div>
                     <strong>{{ optional($order->client)->raison_sociale ?? 'CLIENT' }}</strong><br>
                     @if($order->contact)
                         M/Mme {{ $order->contact->prenom }} {{ $order->contact->nom }}<br>
@@ -228,7 +231,7 @@
                     {{ optional($order->client)->code_postal }} {{ optional($order->client)->ville }}
                 </td>
                 <td class="commercial-box">
-                    <div style="font-size: 9px; text-transform: uppercase; color: #b2ebf2; margin-bottom: 3px;">Contacts :</div>
+                    <div style="font-size: 9px; text-transform: uppercase; color: #f3eaf2; margin-bottom: 3px;">Contacts :</div>
                     Contact commercial : <strong>{{ optional($order->commercial)->name ?? (auth()->user()->name ?? 'Mohamed KHELOUFI') }}</strong><br>
                     Rédacteur de l'offre : <strong>{{ auth()->user()->name ?? 'Ralph NADER' }}</strong><br>
                     @if($order->validity_date)
