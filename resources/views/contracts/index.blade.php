@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'contracts')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'relations')
+@section('portal-icon', 'users')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -28,7 +34,7 @@
 @section('content')
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1">
-        <div class="table-toolbar">
+        <div class="table-toolbar portal-original-toolbar">
             <div class="toolbar-left">
                 <span class="text-muted small">
                     Résultats {{ $contracts->firstItem() ?? 0 }}-{{ $contracts->lastItem() ?? 0 }} sur {{ $contracts->total() }}
@@ -37,7 +43,7 @@
             <div class="toolbar-right">
             </div>
         </div>
-		<table class="table table-bordered table-hover align-middle">
+		<table class="module-table table table-bordered table-hover align-middle">
 			<thead class="table-light">
 				<tr>
 					<th>{{ __('locale.lbl_reference') }}</th>

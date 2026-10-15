@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'quote-templates')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'quotes')
+@section('portal-icon', 'file-lines')
+
 
 @section('title', 'Détails du Modèle - ' . $template->name)
 
@@ -36,7 +42,7 @@
     </div>
 
     <!-- Header Banner Panel (Matching Screenshot) -->
-    <div class="card card-premium p-4 mb-4 shadow-sm border-0 bg-white">
+    <div class="module-record-card card card-premium p-4 mb-4 shadow-sm border-0 bg-white">
         <div class="row align-items-center">
             <!-- Left Info -->
             <div class="col-md-5">
@@ -114,7 +120,7 @@
         
         <!-- Tab 1: Informations -->
         <div class="tab-pane fade" id="tab-show-info" role="tabpanel">
-            <div class="card card-premium p-4 shadow-sm border-0 mb-4">
+            <div class="module-record-card card card-premium p-4 shadow-sm border-0 mb-4">
                 <h5 class="fw-bold text-dark mb-4"><i class="bi bi-info-circle text-primary me-2"></i>Informations Générales</h5>
                 
                 <div class="row g-4">
@@ -172,7 +178,7 @@
 
         <!-- Tab 2: Produits Table -->
         <div class="tab-pane fade show active" id="tab-show-produits" role="tabpanel">
-            <div class="card card-premium shadow-sm border-0">
+            <div class="module-record-card card card-premium shadow-sm border-0">
                 <div class="card-header bg-transparent border-0 pt-3 px-3 pb-2 d-flex align-items-center justify-content-between">
                     <h5 class="mb-0 fw-bold d-flex align-items-center text-dark">
                         <i class="bi bi-list-task text-primary me-2 fs-5"></i> Lignes d'articles et chapitres

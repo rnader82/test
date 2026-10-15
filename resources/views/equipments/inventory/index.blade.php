@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'equipments')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'catalog')
+@section('portal-icon', 'tags')
+
 
 @php
     $equipments = is_iterable($equipments) ? $equipments : collect();
@@ -250,7 +256,7 @@
         <div class="card card-premium eq-card-table mb-2">
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table class="table table-premium mb-0 align-middle">
+                    <table class="module-table table table-premium mb-0 align-middle">
                         <thead class="small text-uppercase text-muted">
                             <tr>
                                 <th class="ps-4 py-3">{{ __('locale.lbl_reference') }}</th>

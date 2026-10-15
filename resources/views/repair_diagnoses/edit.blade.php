@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'repair_diagnoses')
+@section('portal-page', 'edit')
+@section('portal-kind', 'form')
+@section('portal-family', 'admin')
+@section('portal-icon', 'gear')
+
 
 @section('title', 'Modifier diagnostic SAV')
 

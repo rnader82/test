@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'quote-templates')
+@section('portal-page', 'create')
+@section('portal-kind', 'form')
+@section('portal-family', 'quotes')
+@section('portal-icon', 'file-lines')
+
 
 @section('title', 'Nouveau Modèle de devis')
 

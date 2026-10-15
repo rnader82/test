@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'deliveries')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'adv')
+@section('portal-icon', 'boxes-stacked')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -28,6 +34,17 @@
 @endsection
 
 @section('content')
+
+@php
+    $modulePageRecords = method_exists($deliveries, 'items') ? collect($deliveries->items()) : collect($deliveries);
+@endphp
+<section class="supply-summary portal-module-summary" aria-label="{{ __('locale.portal.modules.page_scope') }}">
+    <article class="module-card"><small>{{ __('locale.portal.modules.records_total') }}</small><strong>{{ method_exists($deliveries, 'total') ? $deliveries->total() : $modulePageRecords->count() }}</strong></article>
+    <article class="module-card"><small>{{ __('locale.portal.modules.records_page') }}</small><strong>{{ $modulePageRecords->count() }}</strong></article>
+    <article class="module-card"><small>{{ __('locale.portal.modules.pending_page') }}</small><strong>{{ $modulePageRecords->filter(fn ($record) => in_array($record->state, ['confirmed', 'waiting', 'assigned'], true))->count() }}</strong></article>
+    <article class="module-card"><small>{{ __('locale.portal.modules.completed_page') }}</small><strong>{{ $modulePageRecords->filter(fn ($record) => in_array($record->state, ['done'], true))->count() }}</strong></article>
+</section>
+
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1">
 
@@ -115,7 +132,7 @@
 
         <div class="card card-premium">
             <div class="table-responsive text-nowrap">
-                <table class="table table-hover align-middle mb-0">
+                <table class="module-table table table-hover align-middle mb-0">
                     <thead class="table-light">
                         <tr>
                             <th>

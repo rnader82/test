@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'equipments')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'catalog')
+@section('portal-icon', 'tags')
+
 
 @php
     $calculatedComboPublicPrice = 0;
@@ -301,7 +307,7 @@
 
 @section('content')
 <div class="content-wrapper">
-    <div class="container-xxl flex-grow-1">
+    <div class="container-xxl flex-grow-1 article-detail-shell">
         @if (session('success'))
             <div class="alert alert-success border-0 shadow-sm py-1 px-3 mb-2 small">{{ session('success') }}</div>
         @endif
@@ -310,9 +316,9 @@
         @endif
 
         <!-- Odoo Sheet Container -->
-        <div class="odoo-sheet">
+        <div class="odoo-sheet article-detail-card">
             <!-- Header / Title & Image -->
-            <div class="row align-items-start mb-2">
+            <div class="row align-items-start mb-2 article-product-header">
                 <div class="col">
                     <div class="odoo-top-label mb-1">{{ __('locale.equipment_show.lbl_product') }}</div>
                     <div class="d-flex align-items-center gap-2 mb-2">
@@ -385,7 +391,7 @@
             </div>
 
             <!-- Odoo Nav Tabs -->
-            <ul class="nav nav-tabs odoo-nav-tabs" id="equipmentTab" role="tablist">
+            <ul class="nav nav-tabs odoo-nav-tabs article-tabs" id="equipmentTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general-tab-pane" type="button" role="tab">{{ __('locale.equipment_show.lbl_tab_general') }}</button>
                 </li>
@@ -437,7 +443,7 @@
             </ul>
 
             <!-- Tab Content -->
-            <div class="tab-content" id="equipmentTabContent">
+            <div class="tab-content article-detail-body" id="equipmentTabContent">
                 <!-- Tab 1: Informations Générales -->
                 <div class="tab-pane fade show active" id="general-tab-pane" role="tabpanel" tabindex="0">
                     <div class="row g-3">
@@ -911,7 +917,7 @@
                 <!-- Tab 5: Inventaire -->
                 <div class="tab-pane fade" id="inventory-tab-pane" role="tabpanel" tabindex="0">
                     <!-- Warehouse Stock Levels Table -->
-                    <div class="card border shadow-sm mb-4">
+                    <div class="module-record-card card border shadow-sm mb-4">
                         <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center border-bottom">
                             <div class="d-flex align-items-center gap-2">
                                 <i class="bi bi-boxes text-success fs-5"></i>
@@ -1025,7 +1031,7 @@
                     <div class="row g-3">
                         <div class="col-12">
                             @if($equipment->comboItems->isNotEmpty())
-                                <div class="card border shadow-sm mb-4">
+                                <div class="module-record-card card border shadow-sm mb-4">
                                     <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center border-bottom">
                                         <div class="d-flex align-items-center gap-2">
                                             <i class="bi bi-box-seam text-primary fs-5"></i>
@@ -1137,7 +1143,7 @@
                             </div>
 
                             @if($equipment->kitItems->isNotEmpty())
-                                <div class="card border rounded-3 overflow-hidden shadow-none mb-3">
+                                <div class="module-record-card card border rounded-3 overflow-hidden shadow-none mb-3">
                                     <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center border-bottom">
                                         <div class="d-flex align-items-center gap-2">
                                             <i class="bi bi-diagram-3 text-success fs-5"></i>
@@ -1265,9 +1271,9 @@
         </div>
 
         <!-- Related Data Sections Card -->
-        <div class="card card-premium border-0 shadow-sm overflow-hidden mb-4">
+        <div class="module-record-card card card-premium border-0 shadow-sm overflow-hidden mb-4">
             <div class="card-header bg-white border-bottom p-0">
-                <ul class="nav nav-tabs nav-tabs-bordered card-header-tabs m-0 px-3 pt-2" id="equipmentRelatedTabs" role="tablist">
+                <ul class="nav nav-tabs nav-tabs-bordered card-header-tabs m-0 px-3 pt-2 article-related-tabs" id="equipmentRelatedTabs" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active fw-semibold d-flex align-items-center py-2 px-3 small" id="reseller-tab" data-bs-toggle="tab" data-bs-target="#reseller-tab-pane" type="button" role="tab">
                             <i class="bi bi-shop text-warning me-2"></i> {{ __('locale.lbl_reseller_references') }}
@@ -1654,7 +1660,7 @@
                         <p class="text-muted mb-0 small italic text-center py-4">{{ __('locale.no_price_history_found') ?? 'Aucun historique de prix.' }}</p>
                     @else
                         <!-- Chart Card -->
-                        <div class="card border border-light-subtle shadow-none mb-3" style="background-color: #fbfcfe; border-radius: 8px;">
+                        <div class="module-record-card card border border-light-subtle shadow-none mb-3" style="background-color: #fbfcfe; border-radius: 8px;">
                             <div class="card-body p-3">
                                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
                                     <div class="d-flex align-items-center gap-2">

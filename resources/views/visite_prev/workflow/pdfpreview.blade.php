@@ -1,4 +1,10 @@
-@extends('layouts.app') @section('title', 'Visit Report #' . $vp_visit->id)
+@extends('layouts.app')
+@section('portal-module', 'visite_prev')
+@section('portal-page', 'workflow')
+@section('portal-kind', 'workflow')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+ @section('title', 'Visit Report #' . $vp_visit->id)
 @push('styles')
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css"
 		integrity="sha384-GPAzSuZc0kFvdIev6wm9zg8gnafE8tLso7rsAYQfc9hAdWCpOcpcNI5W9lWkYcsd" crossorigin="anonymous">
@@ -201,7 +207,7 @@
 			</div>
 		</div>
 
-		<div class="card workflow-card">
+		<div class="preventive-panel card workflow-card">
 			<div class="card-header">
 				<ul class="nav nav-pills workflow-tabs" id="vpVisitStepsTabs" role="tablist">
 					@for ($i = 1; $i <= 14; $i++)

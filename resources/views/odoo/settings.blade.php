@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'odoo')
+@section('portal-page', 'settings')
+@section('portal-kind', 'form')
+@section('portal-family', 'admin')
+@section('portal-icon', 'gear')
+
 
 @section('title', 'Odoo Settings Synchronization')
 
@@ -29,7 +35,7 @@
         @endif
 
         <!-- Odoo Connection Status Card -->
-        <div class="card card-premium mb-4">
+        <div class="module-form-card card card-premium mb-4">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
                     <div>
@@ -87,7 +93,7 @@
         <div class="row">
             <!-- Product Categories -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card card-premium h-100 border-top border-4 border-info">
+                <div class="module-form-card card card-premium h-100 border-top border-4 border-info">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -118,7 +124,7 @@
 
             <!-- Fiscal Positions -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card card-premium h-100 border-top border-4 border-warning">
+                <div class="module-form-card card card-premium h-100 border-top border-4 border-warning">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -149,7 +155,7 @@
 
             <!-- Pricelists & Rules -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card card-premium h-100 border-top border-4 border-success">
+                <div class="module-form-card card card-premium h-100 border-top border-4 border-success">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -178,7 +184,7 @@
 
             <!-- Recurring Plans -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card card-premium h-100 border-top border-4 border-info">
+                <div class="module-form-card card card-premium h-100 border-top border-4 border-info">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -207,7 +213,7 @@
 
             <!-- Companies -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card card-premium h-100 border-top border-4 border-primary">
+                <div class="module-form-card card card-premium h-100 border-top border-4 border-primary">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -236,7 +242,7 @@
 
             <!-- Taxes -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card card-premium h-100 border-top border-4 border-danger">
+                <div class="module-form-card card card-premium h-100 border-top border-4 border-danger">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -265,7 +271,7 @@
 
             <!-- Equipments -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card card-premium h-100 border-top border-4 border-secondary">
+                <div class="module-form-card card card-premium h-100 border-top border-4 border-secondary">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -294,7 +300,7 @@
 
             <!-- Client Odoo IDs -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card card-premium h-100 border-top border-4 border-purple" style="border-top-color: #6f42c1 !important;">
+                <div class="module-form-card card card-premium h-100 border-top border-4 border-purple" style="border-top-color: #6f42c1 !important;">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -323,7 +329,7 @@
 
             <!-- Payment Terms -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card card-premium h-100 border-top border-4 border-dark">
+                <div class="module-form-card card card-premium h-100 border-top border-4 border-dark">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -352,7 +358,7 @@
 
             <!-- Countries -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card card-premium h-100 border-top border-4" style="border-top-color: #20c997 !important;">
+                <div class="module-form-card card card-premium h-100 border-top border-4" style="border-top-color: #20c997 !important;">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -381,7 +387,7 @@
 
             <!-- Languages -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card card-premium h-100 border-top border-4" style="border-top-color: #6f42c1 !important;">
+                <div class="module-form-card card card-premium h-100 border-top border-4" style="border-top-color: #6f42c1 !important;">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -412,7 +418,7 @@
 
             <!-- Warehouses -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card card-premium h-100 border-top border-4" style="border-top-color: #fd7e14 !important;">
+                <div class="module-form-card card card-premium h-100 border-top border-4" style="border-top-color: #fd7e14 !important;">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -443,7 +449,7 @@
 
             <!-- Inventory & Stock Levels (stock.quant) -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card card-premium h-100 border-top border-4" style="border-top-color: #198754 !important;">
+                <div class="module-form-card card card-premium h-100 border-top border-4" style="border-top-color: #198754 !important;">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -497,7 +503,7 @@
 
             <!-- Order Statuses (Incremental via write_date) -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card card-premium h-100 border-top border-4" style="border-top-color: #0dcaf0 !important;">
+                <div class="module-form-card card card-premium h-100 border-top border-4" style="border-top-color: #0dcaf0 !important;">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -539,7 +545,7 @@
 
             <!-- Order Odoo IDs -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card card-premium h-100 border-top border-4" style="border-top-color: #6610f2 !important;">
+                <div class="module-form-card card card-premium h-100 border-top border-4" style="border-top-color: #6610f2 !important;">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -570,7 +576,7 @@
 
             <!-- Delivery Odoo IDs -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card card-premium h-100 border-top border-4" style="border-top-color: #e83e8c !important;">
+                <div class="module-form-card card card-premium h-100 border-top border-4" style="border-top-color: #e83e8c !important;">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -601,7 +607,7 @@
 
             <!-- Subscriptions & Contracts -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card card-premium h-100 border-top border-4" style="border-top-color: #0d6efd !important;">
+                <div class="module-form-card card card-premium h-100 border-top border-4" style="border-top-color: #0d6efd !important;">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -650,7 +656,7 @@
 
         <!-- Taxes Table Display (if retrieved) -->
         @if(count($taxes) > 0)
-            <div class="card card-premium mt-4 mb-5 border-start border-4 border-danger">
+            <div class="module-form-card card card-premium mt-4 mb-5 border-start border-4 border-danger">
                 <div class="card-header bg-transparent d-flex justify-content-between align-items-center border-bottom">
                     <h5 class="mb-0 fw-bold"><i class="bi bi-percent me-2 text-danger"></i>Active Odoo Taxes List</h5>
                     <form action="{{ route('odoo.settings.sync') }}" method="POST">

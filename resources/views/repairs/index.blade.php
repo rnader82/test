@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'repairs')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @section('title', __('locale.menu_repairs'))
 
@@ -65,7 +71,7 @@
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1">
 
-        <div class="table-toolbar">
+        <div class="table-toolbar portal-original-toolbar">
             <div class="toolbar-left">
                 @foreach ($statuses as $status)
                     <span class="status-item small" style="font-size: 0.75rem; margin-right: 10px;">
@@ -202,7 +208,7 @@
         </div>
 
 
-        <table class="table table-bordered table-hover align-middle">
+        <table class="module-table table table-bordered table-hover align-middle">
             <thead class="table-light">
                 <tr>
                     <th style="width: 30px;"></th>

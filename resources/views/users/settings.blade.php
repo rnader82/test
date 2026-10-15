@@ -1,8 +1,14 @@
-@extends('layouts.app') @section('content')
+@extends('layouts.app')
+@section('portal-module', 'users')
+@section('portal-page', 'settings')
+@section('portal-kind', 'form')
+@section('portal-family', 'admin')
+@section('portal-icon', 'gear')
+ @section('content')
 	<div class="container-xxl flex-grow-1 container-p-y">
 		<div class="row">
 			<div class="col-12 col-lg-8">
-				<div class="card">
+				<div class="module-form-card card">
 					<div class="card-header d-flex justify-content-between align-items-center">
 						<h5 class="mb-0">{{ __('locale.lbl_user_settings') }}</h5>
 					</div>
@@ -31,7 +37,7 @@
 						</form>
 					</div>
 				</div>
-				<div class="card mt-4">
+				<div class="module-form-card card mt-4">
 					<div class="card-header d-flex justify-content-between align-items-center">
 						<h5 class="mb-0">{{ __('locale.lbl_change_password') }}</h5>
 					</div>

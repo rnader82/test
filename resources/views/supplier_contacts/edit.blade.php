@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'supplier_contacts')
+@section('portal-page', 'edit')
+@section('portal-kind', 'form')
+@section('portal-family', 'purchasing')
+@section('portal-icon', 'cart-flatbed')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -18,7 +24,7 @@
             <div class="row g-4">
                 <!-- Main Form Card -->
                 <div class="col-xl-8 col-lg-7">
-                    <div class="card shadow-sm mb-4">
+                    <div class="module-form-card card shadow-sm mb-4">
                         <div class="card-header py-3">
                             <h5 class="card-title mb-0">Informations générales</h5>
                         </div>
@@ -77,7 +83,7 @@
                     </div>
 
                     <!-- Address Card -->
-                    <div class="card shadow-sm mb-4">
+                    <div class="module-form-card card shadow-sm mb-4">
                         <div class="card-header py-3">
                             <h5 class="card-title mb-0">Adresse</h5>
                         </div>
@@ -108,7 +114,7 @@
                     </div>
 
                     <!-- Contact details -->
-                    <div class="card shadow-sm">
+                    <div class="module-form-card card shadow-sm">
                         <div class="card-header py-3">
                             <h5 class="card-title mb-0">Coordonnées</h5>
                         </div>
@@ -137,7 +143,7 @@
 
                 <!-- Submit Card -->
                 <div class="col-xl-4 col-lg-5">
-                    <div class="card shadow-sm">
+                    <div class="module-form-card card shadow-sm">
                         <div class="card-body">
                             <button type="submit" class="btn btn-primary w-100 mb-3">Enregistrer les modifications</button>
                             <a href="{{ route('supplier-contacts.index') }}" class="btn btn-outline-secondary w-100">Annuler</a>

@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'deliveries')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'adv')
+@section('portal-icon', 'boxes-stacked')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -24,7 +30,7 @@
         <div class="row">
             <!-- Main Info Card -->
             <div class="col-lg-8 mb-4">
-                <div class="card card-premium mb-4">
+                <div class="module-record-card card card-premium mb-4">
                     <div class="card-header bg-transparent border-bottom d-flex justify-content-between align-items-center">
                         <h5 class="fw-bold mb-0"><i class="bi bi-truck me-2 text-primary"></i>Informations de Livraison</h5>
                         <div class="d-flex gap-2">
@@ -94,7 +100,7 @@
                 </div>
 
                 <!-- Delivery Lines Table -->
-                <div class="card card-premium">
+                <div class="module-record-card card card-premium">
                     <div class="card-header bg-transparent border-bottom">
                         <h5 class="fw-bold mb-0"><i class="bi bi-list-check me-2 text-primary"></i>Articles / Lignes de livraison ({{ $delivery->lines->count() }})</h5>
                     </div>
@@ -142,7 +148,7 @@
             <!-- Sidebar Info Cards -->
             <div class="col-lg-4">
                 <!-- Odoo Connection Card -->
-                <div class="card card-premium mb-4 border-top border-4 border-primary">
+                <div class="module-record-card card card-premium mb-4 border-top border-4 border-primary">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h6 class="fw-bold mb-0">Synchronisation Odoo</h6>
@@ -167,7 +173,7 @@
                 </div>
 
                 <!-- Client Card -->
-                <div class="card card-premium mb-4">
+                <div class="module-record-card card card-premium mb-4">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h6 class="fw-bold mb-0">Client / Destinataire</h6>
@@ -188,7 +194,7 @@
                 </div>
 
                 <!-- Order Card -->
-                <div class="card card-premium mb-4">
+                <div class="module-record-card card card-premium mb-4">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h6 class="fw-bold mb-0">Commande liée</h6>

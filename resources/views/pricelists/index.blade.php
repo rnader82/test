@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'pricelists')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'catalog')
+@section('portal-icon', 'tags')
+
 
 @section('title', __('locale.pricelists_list_title') ?? 'Listes de prix')
 
@@ -112,7 +118,7 @@
     <div class="odoo-card p-4">
         @if ($pricelists->count())
             <div class="table-responsive">
-                <table class="table table-hover odoo-table align-middle">
+                <table class="module-table table table-hover odoo-table align-middle">
                     <thead>
                         <tr>
                             <th>{{ __('locale.lbl_name') }}</th>

@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'supplier_contacts')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'purchasing')
+@section('portal-icon', 'cart-flatbed')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -30,7 +36,7 @@
             <!-- Left Column: Primary Details -->
             <div class="col-xl-4 col-lg-5 col-md-5">
                 <!-- Contact Summary Card -->
-                <div class="card mb-4 shadow-sm">
+                <div class="module-record-card card mb-4 shadow-sm">
                     <div class="card-body">
                         <div class="user-avatar-section mb-4">
                             <div class="d-flex align-items-center flex-column">
@@ -85,7 +91,7 @@
                 </div>
 
                 <!-- Supplier Info Card -->
-                <div class="card shadow-sm mb-4">
+                <div class="module-record-card card shadow-sm mb-4">
                     <div class="card-body">
                         <h5 class="pb-2 border-bottom mb-3">Fournisseur</h5>
                         @if($supplierContact->supplier)
@@ -126,7 +132,7 @@
                 </div>
 
                 <!-- Company Info Card -->
-                <div class="card shadow-sm mb-4">
+                <div class="module-record-card card shadow-sm mb-4">
                     <div class="card-body">
                         <h5 class="pb-2 border-bottom mb-3">Société</h5>
                         @if($supplierContact->company)
@@ -148,7 +154,7 @@
 
             <!-- Right Column: Address Details -->
             <div class="col-xl-8 col-lg-7 col-md-7">
-                <div class="card shadow-sm">
+                <div class="module-record-card card shadow-sm">
                     <div class="card-header py-3">
                         <h5 class="card-title mb-0">Adresse du contact</h5>
                     </div>

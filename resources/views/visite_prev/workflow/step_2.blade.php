@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'visite_prev')
+@section('portal-page', 'workflow')
+@section('portal-kind', 'workflow')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @section('content')
 
@@ -28,9 +34,9 @@
 
         @foreach ($vp_visit->checklistItems as $item)
             @if(isset($error_ids) && in_array($item->id, $error_ids))
-                <div class="card mb-3 shadow-sm border-danger">
+                <div class="preventive-panel card mb-3 shadow-sm border-danger">
             @else
-                <div class="card mb-3 shadow-sm">
+                <div class="preventive-panel card mb-3 shadow-sm">
             @endif
 
                 <div class="card-body">

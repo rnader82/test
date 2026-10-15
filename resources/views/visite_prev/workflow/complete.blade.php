@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'visite_prev')
+@section('portal-page', 'workflow')
+@section('portal-kind', 'workflow')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @section('content')
 	<div class="container text-center">

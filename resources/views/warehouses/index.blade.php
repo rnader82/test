@@ -1,4 +1,10 @@
-@extends('layouts.app') 
+@extends('layouts.app')
+@section('portal-module', 'warehouses')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'catalog')
+@section('portal-icon', 'tags')
+
 
 @section('title', __('locale.menu_warehouses')) 
 
@@ -41,7 +47,7 @@
         </div>
         
         <div class="table-responsive">
-            <table class="table table-premium">
+            <table class="module-table table table-premium">
                 <thead>
                     <tr>
                         <th>{{ __('locale.code') ?? 'Code' }}</th>

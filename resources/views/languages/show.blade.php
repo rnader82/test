@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'languages')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'admin')
+@section('portal-icon', 'gear')
+
 
 @section('title', $language->name)
 
@@ -33,7 +39,7 @@
     <div class="container-xxl flex-grow-1">
         <div class="row justify-content-center">
             <div class="col-lg-7">
-                <div class="card card-premium shadow-sm border-0 mb-4">
+                <div class="module-record-card card card-premium shadow-sm border-0 mb-4">
                     <div class="card-header bg-light border-bottom py-3 d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-center gap-3">
                             <div class="avatar avatar-sm bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 40px; height: 40px; font-size: 14px;">

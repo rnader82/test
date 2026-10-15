@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'employee_equipments')
+@section('portal-page', 'create')
+@section('portal-kind', 'form')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @section('title', __('locale.employee_equipments.btn_add') ?? 'Nouveau matériel')
 
@@ -32,7 +38,7 @@
             <div class="col-12 col-lg-8">
                 
                 <!-- Category Selector Card -->
-                <div class="card card-premium shadow-sm border-0 mb-4">
+                <div class="module-form-card card card-premium shadow-sm border-0 mb-4">
                     <div class="card-header bg-transparent border-bottom py-3">
                         <h5 class="card-title mb-0 fw-bold"><i class="bi bi-tag me-2 text-primary"></i> 1. Catégorie de matériel</h5>
                     </div>
@@ -83,7 +89,7 @@
                 </div>
 
                 <!-- Asset Specifications Card -->
-                <div class="card card-premium shadow-sm border-0 mb-4">
+                <div class="module-form-card card card-premium shadow-sm border-0 mb-4">
                     <div class="card-header bg-transparent border-bottom py-3">
                         <h5 class="card-title mb-0 fw-bold"><i class="bi bi-sliders me-2 text-primary"></i> 2. Caractéristiques du matériel</h5>
                     </div>
@@ -228,7 +234,7 @@
             <div class="col-12 col-lg-4">
                 
                 <!-- Status Card -->
-                <div class="card card-premium shadow-sm border-0 mb-4">
+                <div class="module-form-card card card-premium shadow-sm border-0 mb-4">
                     <div class="card-header bg-transparent border-bottom py-3">
                         <h5 class="card-title mb-0 fw-bold"><i class="bi bi-check2-circle me-2 text-success"></i> Suivi & Statut</h5>
                     </div>
@@ -248,7 +254,7 @@
                 </div>
 
                 <!-- Initial Assignment Card -->
-                <div class="card card-premium shadow-sm border-0 mb-4">
+                <div class="module-form-card card card-premium shadow-sm border-0 mb-4">
                     <div class="card-header bg-transparent border-bottom py-3 d-flex justify-content-between align-items-center">
                         <h5 class="card-title mb-0 fw-bold"><i class="bi bi-person-badge me-2 text-info"></i> Affectation initiale</h5>
                         <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#quickEmployeeModal">

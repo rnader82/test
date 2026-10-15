@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'equipment_categories')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'catalog')
+@section('portal-icon', 'tags')
+
 
 @section('title', 'Segmentation produits')
 
@@ -121,7 +127,7 @@
                         </span>
                     </div>
                     <div class="card-body p-0 table-scrollable drop-target-zone" id="zone-found-products">
-                        <table class="table table-hover align-middle mb-0 segmentation-table">
+                        <table class="module-table table table-hover align-middle mb-0 segmentation-table">
                             <thead>
                                 <tr>
                                     <th style="width: 25%;">Produit</th>
@@ -165,7 +171,7 @@
                         </div>
                     </div>
                     <div class="card-body p-0 table-scrollable drop-target-zone" id="zone-available-products">
-                        <table class="table table-hover align-middle mb-0 segmentation-table">
+                        <table class="module-table table table-hover align-middle mb-0 segmentation-table">
                             <thead>
                                 <tr>
                                     <th style="width: 25%;">Produit</th>

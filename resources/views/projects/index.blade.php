@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'projects')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'adv')
+@section('portal-icon', 'boxes-stacked')
+
 
 @section('title', __('locale.projects.title'))
 
@@ -30,7 +36,7 @@
 @section('content')
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1">
-        <div class="table-toolbar">
+        <div class="table-toolbar portal-original-toolbar">
             <div class="toolbar-left">
                 <span class="text-muted small">
                     Résultats {{ $projects->firstItem() ?? 0 }}-{{ $projects->lastItem() ?? 0 }} sur {{ $projects->total() }}
@@ -42,7 +48,7 @@
 
     @if ($projects->count())
         <div class="table-responsive">
-            <table class="table table-bordered table-hover">
+            <table class="module-table table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>{{ __('locale.projects.id') }}</th>

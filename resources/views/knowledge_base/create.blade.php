@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'knowledge_base')
+@section('portal-page', 'create')
+@section('portal-kind', 'form')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @section('title', __('locale.add'))
 
@@ -14,7 +20,7 @@
 @section('content')
 <div class="container mt-4">
 
-    <div class="card">
+    <div class="module-form-card card">
         <div class="card-body">
             <form action="{{ route('knowledge-base.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf

@@ -1,4 +1,10 @@
-@extends('layouts.app') 
+@extends('layouts.app')
+@section('portal-module', 'visite_prev')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -103,7 +109,7 @@
 			</form>
 		</div>
 		@if ($vpVisits->count())
-			<table class="table table-bordered table-hover">
+			<table class="module-table table table-bordered table-hover">
 				<thead>
 					<tr>
 						<th>

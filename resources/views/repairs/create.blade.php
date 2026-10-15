@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'repairs')
+@section('portal-page', 'create')
+@section('portal-kind', 'form')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -26,7 +32,7 @@
 
 @section('content')
 <div class="container mt-4">
-    <div class="card shadow-lg">
+    <div class="module-form-card card shadow-lg">
         <div class="card-body">
             <form action="{{ route('repairs.store') }}" method="POST" id="repairCreateForm" data-repair-form>
                 @csrf

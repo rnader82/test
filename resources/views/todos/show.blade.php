@@ -1,4 +1,10 @@
-@extends('layouts.app') 
+@extends('layouts.app')
+@section('portal-module', 'todos')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'dashboard')
+@section('portal-icon', 'house')
+
 
 @section('title', __('locale.todo.details_title')) 
 
@@ -32,7 +38,7 @@
 		<div class="row">
 			<!-- Main Todo Details Card -->
 			<div class="col-md-7 mb-4">
-				<div class="card card-premium">
+				<div class="module-record-card card card-premium">
 					<div class="card-body p-4">
 						<div class="d-flex align-items-center justify-content-between mb-4">
 							<h5 class="fw-bold mb-0 text-primary">{{ $todo->title }}</h5>
@@ -71,7 +77,7 @@
 			
 			<!-- Status Updates Timeline Card -->
 			<div class="col-md-5 mb-4">
-				<div class="card card-premium">
+				<div class="module-record-card card card-premium">
 					<div class="card-body p-4">
 						<h5 class="fw-bold mb-4">{{ __('locale.todo.lbl_status_updates') }}</h5>
 						

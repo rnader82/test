@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'seeds')
+@section('portal-page', 'advanced')
+@section('portal-kind', 'form')
+@section('portal-family', 'admin')
+@section('portal-icon', 'gear')
+
 
 @section('content')
 <div class="content-wrapper">
@@ -20,7 +26,7 @@
             </div>
         @endif
 
-        <div class="card">
+        <div class="module-form-card card">
             <div class="card-body">
                 <form action="{{ route('seeds.advanced.run') }}" method="POST">
                     @csrf

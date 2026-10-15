@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'odoo_fiscal_positions')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'catalog')
+@section('portal-icon', 'tags')
+
 
 @section('title', __('locale.lbl_odoo_fiscal_positions') ?? 'Positions Fiscales Odoo')
 
@@ -68,7 +74,7 @@
 
         <div class="card card-premium">
             <div class="table-responsive">
-                <table class="table table-striped table-hover align-middle mb-0">
+                <table class="module-table table table-striped table-hover align-middle mb-0">
                     <thead class="table-dark">
                         <tr>
                             <th>{{ __('locale.odoo_id') }}</th>

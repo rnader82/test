@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'tenants')
+@section('portal-page', 'create')
+@section('portal-kind', 'form')
+@section('portal-family', 'admin')
+@section('portal-icon', 'gear')
+
 
 @section('title', __('locale.Create Tenant'))
 
@@ -14,7 +20,7 @@
 @section('content')
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1">
-        <div class="card card-premium">
+        <div class="module-form-card card card-premium">
             <div class="card-body p-4">
                 <form action="{{ route('tenants.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf

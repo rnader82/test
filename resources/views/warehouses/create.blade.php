@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'warehouses')
+@section('portal-page', 'create')
+@section('portal-kind', 'form')
+@section('portal-family', 'catalog')
+@section('portal-icon', 'tags')
+
 
 @section('title', __('locale.add_warehouse') ?? 'Ajouter un entrepôt')
 
@@ -14,7 +20,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-8 mx-auto">
-        <div class="card card-premium">
+        <div class="module-form-card card card-premium">
             <div class="card-body">
                 <form action="{{ route('warehouses.store') }}" method="POST">
                     @csrf

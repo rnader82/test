@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'users')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'admin')
+@section('portal-icon', 'gear')
+
 
 @section('title', __('locale.lbl_users'))
 
@@ -49,7 +55,7 @@
 			@endif
 		</div>
 
-		<table class="table table-bordered">
+		<table class="module-table table table-bordered">
 			<thead>
 				<tr>
 					<th>{{ __('locale.name') }}</th>

@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'construction_reports')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'adv')
+@section('portal-icon', 'boxes-stacked')
+
 
 @section('title', 'Comptes Rendus de Chantier')
 
@@ -39,7 +45,7 @@
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
+                <table class="module-table table table-hover align-middle mb-0">
                     <thead class="bg-light">
                         <tr>
                             <th>N° Rapport</th>

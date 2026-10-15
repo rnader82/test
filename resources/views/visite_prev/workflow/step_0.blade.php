@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'visite_prev')
+@section('portal-page', 'workflow')
+@section('portal-kind', 'workflow')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @section('content')
 	<div class="container">
@@ -15,7 +21,7 @@
 
 		<div class="row g-3 mb-4">
 			<div class="col-md-4 col-lg-2">
-				<div class="card h-100">
+				<div class="preventive-panel card h-100">
 					<div class="card-body">
 						<p class="text-muted mb-1">{{ __('visite_prev.card_vp') }}</p>
 						<h4 class="fw-bold mb-0">{{ number_format($overviewStats['vp']) }}</h4>
@@ -23,7 +29,7 @@
 				</div>
 			</div>
 			<div class="col-md-4 col-lg-2">
-				<div class="card h-100">
+				<div class="preventive-panel card h-100">
 					<div class="card-body">
 						<p class="text-muted mb-1">{{ __('visite_prev.card_intervention') }}</p>
 						<h4 class="fw-bold mb-0">{{ number_format($overviewStats['interventions']) }}</h4>
@@ -31,7 +37,7 @@
 				</div>
 			</div>
 			<div class="col-md-4 col-lg-2">
-				<div class="card h-100">
+				<div class="preventive-panel card h-100">
 					<div class="card-body">
 						<p class="text-muted mb-1">{{ __('visite_prev.card_sav') }}</p>
 						<h4 class="fw-bold mb-1">{{ number_format($overviewStats['sav']) }}</h4>
@@ -40,7 +46,7 @@
 				</div>
 			</div>
 			<div class="col-md-4 col-lg-2">
-				<div class="card h-100">
+				<div class="preventive-panel card h-100">
 					<div class="card-body">
 						<p class="text-muted mb-1">{{ __('visite_prev.card_repairs_equipment') }}</p>
 						<h4 class="fw-bold mb-1">{{ number_format($overviewStats['repairs_equipment']) }}</h4>
@@ -52,7 +58,7 @@
 				</div>
 			</div>
 			<div class="col-md-4 col-lg-2">
-				<div class="card h-100">
+				<div class="preventive-panel card h-100">
 					<div class="card-body">
 						<p class="text-muted mb-1">{{ __('visite_prev.card_tickets') }}</p>
 						<h4 class="fw-bold mb-0">{{ number_format($overviewStats['tickets']) }}</h4>
@@ -60,7 +66,7 @@
 				</div>
 			</div>
 			<div class="col-md-4 col-lg-2">
-				<div class="card h-100">
+				<div class="preventive-panel card h-100">
 					<div class="card-body">
 						<p class="text-muted mb-1">{{ __('visite_prev.card_quotes') }}</p>
 						<h4 class="fw-bold mb-0">{{ number_format($overviewStats['quotes']) }}</h4>
@@ -459,7 +465,7 @@
 					<p class="text-muted mb-3">{{ __('visite_prev.tab_quotes_description') }}</p>
 					<div class="row g-3">
 						<div class="col-md-4">
-							<div class="card h-100">
+							<div class="preventive-panel card h-100">
 								<div class="card-body">
 									<p class="text-muted mb-1">{{ __('visite_prev.quotes_accepted') }}</p>
 									<h5 class="fw-bold mb-0">{{ number_format($quoteBreakdown['accepted']) }}</h5>
@@ -467,7 +473,7 @@
 							</div>
 						</div>
 						<div class="col-md-4">
-							<div class="card h-100">
+							<div class="preventive-panel card h-100">
 								<div class="card-body">
 									<p class="text-muted mb-1">{{ __('visite_prev.quotes_refused') }}</p>
 									<h5 class="fw-bold mb-0">{{ number_format($quoteBreakdown['refused']) }}</h5>
@@ -475,7 +481,7 @@
 							</div>
 						</div>
 						<div class="col-md-4">
-							<div class="card h-100">
+							<div class="preventive-panel card h-100">
 								<div class="card-body">
 									<p class="text-muted mb-1">{{ __('visite_prev.quotes_no_response') }}</p>
 									<h5 class="fw-bold mb-0">{{ number_format($quoteBreakdown['no_response']) }}</h5>
@@ -523,7 +529,7 @@
 					<h5 class="mb-1">{{ __('visite_prev.tab_plans_title') }}</h5>
 					<p class="text-muted mb-3">{{ __('visite_prev.tab_plans_description') }}</p>
 
-					<div class="card mb-4">
+					<div class="preventive-panel card mb-4">
 						<div class="card-body">
 							<label for="building_plans" class="form-label">{{ __('visite_prev.upload_plan') }} (PDF)</label>
 							<input type="file" name="building_plans[]" id="building_plans" class="form-control" accept="application/pdf" multiple>

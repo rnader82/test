@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'supplier_orders')
+@section('portal-page', 'edit')
+@section('portal-kind', 'form')
+@section('portal-family', 'purchasing')
+@section('portal-icon', 'cart-flatbed')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -13,7 +19,7 @@
 <div class="container-xxl flex-grow-1 mt-4">
     <div class="row">
         <div class="col-md-8 mx-auto animate__animated animate__fadeIn">
-            <div class="card card-premium">
+            <div class="module-form-card card card-premium">
                 <div class="card-header bg-warning text-dark d-flex align-items-center justify-content-between border-0">
                     <h5 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Modifier les Informations de la Commande</h5>
                 </div>

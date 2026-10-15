@@ -1,4 +1,10 @@
-@extends('layouts.app') @section('content') <style>
+@extends('layouts.app')
+@section('portal-module', 'repairs')
+@section('portal-page', 'print-preview')
+@section('portal-kind', 'document')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+ @section('content') <style>
 		.form_title {
 			background-color: var(--bs-purple) !important;
 			-webkit-print-color-adjust: exact;

@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'repairs')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @section('title', 'Dossier SAV #' . $repair->id)
 
@@ -40,57 +46,17 @@
 @endphp
 
 <div class="container-xxl py-3">
-    <!-- Header Card -->
-    <div class="card shadow-sm border-0 mb-4">
-        <div class="card-body p-4">
-            <div class="row align-items-center">
-                <div class="col-md-7">
-                    <div class="d-flex align-items-center gap-3 mb-2">
-                        <span class="badge fs-6 px-3 py-2" style="background-color: {{ hexToRgba($statusColor, 0.15) }}; color: {{ getDynamicStatusColor($statusColor) }}; font-weight: 600;">
-                            <span class="status-rectangle" style="background-color: {{ $statusColor }}; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 6px;"></span>
-                            {{ $statusLabel }}
-                        </span>
-                        <span class="text-muted small">Créé le {{ $repair->created_at->format('d/m/Y à H:i') }}</span>
-                    </div>
-
-                    <h4 class="fw-bold mb-1">
-                        @if($client)
-                            <a href="{{ route('clients.show', $client->id) }}" class="text-decoration-none text-dark">
-                                <i class="bi bi-building text-primary me-2"></i>{{ $client->raison_sociale }}
-                            </a>
-                        @else
-                            <span class="text-muted">Client non spécifié</span>
-                        @endif
-                    </h4>
-
-                    <div class="text-muted mt-2">
-                        @if($repair->issue)
-                            <span class="me-3"><i class="bi bi-ticket-perforated me-1 text-primary"></i>Ticket interne : <a href="{{ route('issues.show', $repair->issue_id) }}">#{{ $repair->issue_id }} - {{ $repair->issue->subject }}</a></span>
-                        @endif
-                        @if($repair->external_ticket_number)
-                            <span class="me-3"><i class="bi bi-tag me-1 text-secondary"></i>Ticket externe : <strong>{{ $repair->external_ticket_number }}</strong></span>
-                        @endif
-                        @if(!$repair->issue && !$repair->external_ticket_number)
-                            <span class="me-3"><i class="bi bi-dash-circle me-1"></i>Sans ticket</span>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="col-md-5 text-md-end mt-3 mt-md-0">
-                    <div class="p-3 bg-light rounded-3 d-inline-block text-start" style="min-width: 220px;">
-                        <div class="text-muted small">Total équipements suivis</div>
-                        <div class="fs-4 fw-bold text-primary">{{ $repair->equipmentRepairs->count() }} matériel(s)</div>
-                        @if($repair->notes)
-                            <div class="small text-secondary mt-1 text-truncate" style="max-width: 250px;" title="{{ $repair->notes }}">
-                                <i class="bi bi-sticky me-1"></i>{{ $repair->notes }}
-                            </div>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <section class="repair-summary-grid" aria-label="{{ __('locale.portal.modules.repair_summary') }}">
+        <article class="repair-summary-card"><small>{{ __('locale.lbl_client') }}</small><strong>@if($client)<a href="{{ route('clients.show', $client->id) }}">{{ $client->raison_sociale }}</a>@else — @endif</strong></article>
+        <article class="repair-summary-card"><small>{{ __('locale.lbl_status') }}</small><strong style="color: {{ getDynamicStatusColor($statusColor) }}">{{ $statusLabel }}</strong></article>
+        <article class="repair-summary-card"><small>{{ __('locale.lbl_equipment') }}</small><strong>{{ $repair->equipmentRepairs->count() }}</strong></article>
+        <article class="repair-summary-card"><small>{{ __('locale.portal.created_date') }}</small><strong>{{ $repair->created_at->format('d/m/Y à H:i') }}</strong></article>
+    </section>
+    <section class="repair-card repair-record-context">
+        @if($repair->issue)<a href="{{ route('issues.show', $repair->issue_id) }}"><i class="bi bi-ticket-perforated" aria-hidden="true"></i> #{{ $repair->issue_id }} · {{ $repair->issue->subject }}</a>@endif
+        @if($repair->external_ticket_number)<p>{{ $repair->external_ticket_number }}</p>@endif
+        @if($repair->notes)<p>{{ $repair->notes }}</p>@endif
+    </section>
     <!-- Section Équipements & Traçabilité SAV -->
     <div class="d-flex align-items-center justify-content-between mb-3">
         <h5 class="fw-bold mb-0"><i class="bi bi-tools text-primary me-2"></i>Matériels & Traçabilité du Suivi SAV</h5>
@@ -102,7 +68,7 @@
     </div>
 
     @forelse($repair->equipmentRepairs as $index => $eqRep)
-        <div class="card shadow-sm border mb-4">
+        <div class="module-record-card card shadow-sm border mb-4">
             <div class="card-header bg-light d-flex justify-content-between align-items-center py-3 flex-wrap gap-2">
                 <div class="d-flex align-items-center gap-2">
                     <span class="badge bg-primary rounded-pill">#{{ $index + 1 }}</span>
@@ -343,7 +309,7 @@
                             </div>
 
                             <!-- 2. Section Prise en charge & Garantie -->
-                            <div class="card mb-4 border shadow-none bg-white">
+                            <div class="module-record-card card mb-4 border shadow-none bg-white">
                                 <div class="card-header bg-light py-2">
                                     <h6 class="fw-bold text-primary mb-0 small text-uppercase">
                                         <i class="bi bi-shield-check me-1"></i> Étape 2 : Prise en charge / Garantie
@@ -435,7 +401,7 @@
                             </div>
 
                             <!-- 3. Section Expédition & Retour Fournisseur -->
-                            <div class="card mb-4 border shadow-none bg-white">
+                            <div class="module-record-card card mb-4 border shadow-none bg-white">
                                 <div class="card-header bg-light py-2">
                                     <h6 class="fw-bold text-primary mb-0 small text-uppercase">
                                         <i class="bi bi-truck me-1"></i> Étape 3 : Expédition Fournisseur
@@ -478,7 +444,7 @@
                             </div>
 
                             <!-- 4. Section Expédition Client & Clôture -->
-                            <div class="card border shadow-none bg-white">
+                            <div class="module-record-card card border shadow-none bg-white">
                                 <div class="card-header bg-light py-2">
                                     <h6 class="fw-bold text-primary mb-0 small text-uppercase">
                                         <i class="bi bi-send-check me-1"></i> Étape 4 : Livraison Client & Commentaires

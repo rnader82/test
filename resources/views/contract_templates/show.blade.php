@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'contract_templates')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'quotes')
+@section('portal-icon', 'file-lines')
+
 
 @section('title', $contractTemplate->contract_name)
 
@@ -31,7 +37,7 @@
     <div class="container-xxl flex-grow-1">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <div class="card card-premium shadow-sm border-0 mb-4">
+                <div class="module-record-card card card-premium shadow-sm border-0 mb-4">
                     <div class="card-header bg-light border-bottom py-3 d-flex align-items-center justify-content-between">
                         <h5 class="card-title mb-0 fs-6 fw-bold text-dark">
                             <i class="bi bi-journal-text me-2 text-primary"></i>{{ __('locale.lbl_contract_template_details') ?? 'Détails du modèle de contrat' }}

@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'commercials')
+@section('portal-page', 'edit')
+@section('portal-kind', 'form')
+@section('portal-family', 'crm')
+@section('portal-icon', 'arrow-trend-up')
+
 
 @section('title', __('locale.lbl_edit_commercial'))
 
@@ -25,7 +31,7 @@
     <div class="container-xxl flex-grow-1">
         <div class="row justify-content-center">
             <div class="col-lg-10">
-                <div class="card card-premium shadow-sm border-0">
+                <div class="module-form-card card card-premium shadow-sm border-0">
                     <div class="card-header bg-light border-bottom py-3">
                         <h5 class="card-title mb-0 fs-6 fw-bold text-dark">
                             <i class="bi bi-person-badge me-2 text-primary"></i>{{ $commercial->prenom }} {{ $commercial->libelle }}

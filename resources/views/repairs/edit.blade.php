@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'repairs')
+@section('portal-page', 'edit')
+@section('portal-kind', 'form')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -26,7 +32,7 @@
 
 @section('content')
 <div class="container">
-    <div class="card shadow-lg">
+    <div class="module-form-card card shadow-lg">
         <div class="card-header border-0 bg-transparent pt-4 px-4 pb-0">
             <h5 class="mb-0 fw-bold d-flex align-items-center">
                 <i class="bi bi-pencil-square text-primary me-2 fs-4"></i> {{ __('locale.lbl_general_info') }}

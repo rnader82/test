@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'contract_templates')
+@section('portal-page', 'edit')
+@section('portal-kind', 'form')
+@section('portal-family', 'quotes')
+@section('portal-icon', 'file-lines')
+
 
 @section('title', __('Edit contract template'))
 

@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'combos')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'catalog')
+@section('portal-icon', 'tags')
+
 
 @section('title', $combo->name . ' - ' . (__('locale.combo.title') ?? 'Combo'))
 
@@ -62,7 +68,7 @@
         <div class="row g-4">
             <!-- Left Column: Combo Details -->
             <div class="col-lg-4">
-                <div class="card card-premium shadow-sm border-0 mb-4">
+                <div class="module-record-card card card-premium shadow-sm border-0 mb-4">
                     <div class="card-header bg-white py-3 border-bottom">
                         <h5 class="card-title mb-0 fw-bold text-dark">
                             <i class="bi bi-info-circle text-primary me-2"></i>Détails du Combo
@@ -118,7 +124,7 @@
             <!-- Right Column: Articles & Related Equipments -->
             <div class="col-lg-8">
                 <!-- Card 1: Options incluses dans ce combo -->
-                <div class="card card-premium shadow-sm border-0 mb-4">
+                <div class="module-record-card card card-premium shadow-sm border-0 mb-4">
                     <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
                         <h5 class="card-title mb-0 fw-bold text-dark">
                             <i class="bi bi-list-check text-primary me-2"></i>{{ __('locale.combo.options') ?? 'Articles & Options' }}
@@ -205,7 +211,7 @@
                 </div>
 
                 <!-- Card 2: Produits / Équipements utilisant ce combo -->
-                <div class="card card-premium shadow-sm border-0 mb-4">
+                <div class="module-record-card card card-premium shadow-sm border-0 mb-4">
                     <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
                         <h5 class="card-title mb-0 fw-bold text-dark">
                             <i class="bi bi-box-seam text-secondary me-2"></i>Produits Combos utilisant ce choix

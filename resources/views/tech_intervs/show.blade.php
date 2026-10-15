@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'tech_intervs')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @php
     $client = $technicalIntervention->client;

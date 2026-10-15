@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'tech_intervs')
+@section('portal-page', 'create')
+@section('portal-kind', 'form')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @php
     $pageTitle = 'Nouvelle intervention';

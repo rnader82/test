@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'projects')
+@section('portal-page', 'create')
+@section('portal-kind', 'form')
+@section('portal-family', 'adv')
+@section('portal-icon', 'boxes-stacked')
+
 
 @section('title', 'Créer un Projet')
 
@@ -15,7 +21,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="module-form-card card">
                 <div class="card-header border-0 bg-transparent">
                 </div>
                 <div class="card-body">

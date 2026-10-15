@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'combos')
+@section('portal-page', 'create')
+@section('portal-kind', 'form')
+@section('portal-family', 'catalog')
+@section('portal-icon', 'tags')
+
 
 @section('title', __('locale.combo.create_combo') ?? 'Créer un choix de combo')
 
@@ -40,7 +46,7 @@
             <div class="row g-4">
                 <!-- Left: General information -->
                 <div class="col-lg-4">
-                    <div class="card card-premium shadow-sm border-0 mb-4">
+                    <div class="module-form-card card card-premium shadow-sm border-0 mb-4">
                         <div class="card-header bg-white py-3 border-bottom">
                             <h5 class="card-title mb-0 fw-bold text-dark">
                                 <i class="bi bi-info-circle text-primary me-2"></i>Informations générales
@@ -103,7 +109,7 @@
 
                 <!-- Right: Options builder -->
                 <div class="col-lg-8">
-                    <div class="card card-premium shadow-sm border-0 mb-4">
+                    <div class="module-form-card card card-premium shadow-sm border-0 mb-4">
                         <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center flex-wrap gap-2">
                             <div>
                                 <h5 class="card-title mb-0 fw-bold text-dark">

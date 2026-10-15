@@ -1,4 +1,10 @@
-@extends('layouts.app') 
+@extends('layouts.app')
+@section('portal-module', 'todos')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'dashboard')
+@section('portal-icon', 'house')
+
 
 @section('title', __('locale.todo.list_title')) 
 
@@ -57,7 +63,7 @@
 		<div class="card card-premium">
 			<div class="card-body p-0">
 				<div class="table-responsive">
-					<table class="table table-bordered table-hover align-middle mb-0" id="todoTable">
+					<table class="module-table table table-bordered table-hover align-middle mb-0" id="todoTable">
 						<thead>
 							<tr>
 								<th style="width: 80px;">#</th>

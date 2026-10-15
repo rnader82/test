@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'users')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'admin')
+@section('portal-icon', 'gear')
+
 
 @section('title', $user->name)
 
@@ -58,7 +64,7 @@
     <div class="container-xxl flex-grow-1">
 
         <!-- User Profile Hero Card -->
-        <div class="card card-premium shadow-sm border-0 mb-4 overflow-hidden position-relative">
+        <div class="module-record-card card card-premium shadow-sm border-0 mb-4 overflow-hidden position-relative">
             <!-- Colored accent strip -->
             <div class="position-absolute top-0 start-0 w-100" style="height: 5px; background: linear-gradient(90deg, {{ $userColor }}, #91378e);"></div>
 
@@ -160,7 +166,7 @@
         </div>
 
         <!-- Tabbed Content Sections -->
-        <div class="card card-premium shadow-sm border-0 mb-4 overflow-hidden">
+        <div class="module-record-card card card-premium shadow-sm border-0 mb-4 overflow-hidden">
             <div class="card-header bg-white border-bottom p-0">
                 <ul class="nav nav-tabs border-0 px-3 pt-2 gap-1" id="userTabs" role="tablist">
                     <li class="nav-item" role="presentation">
@@ -262,7 +268,7 @@
                         @endif
 
                         <!-- Interactive Controls Toolbar -->
-                        <div class="card bg-light border border-light-subtle mb-4 rounded-3 shadow-2xs">
+                        <div class="module-record-card card bg-light border border-light-subtle mb-4 rounded-3 shadow-2xs">
                             <div class="card-body p-3">
                                 <div class="row g-2 align-items-center">
                                     <div class="col-lg-4 col-md-5">
@@ -413,7 +419,7 @@
                                                             $children = $permissions->where('parent_id', $parentPermission->id);
                                                         @endphp
                                                         <div class="col-md-6 parent-perm-card">
-                                                            <div class="card h-100 shadow-2xs border rounded-3 overflow-hidden">
+                                                            <div class="module-record-card card h-100 shadow-2xs border rounded-3 overflow-hidden">
                                                                 <div class="card-header bg-white p-2 px-3 border-bottom">
                                                                     <div class="permission-item d-flex align-items-center justify-content-between"
                                                                          data-name="{{ strtolower($parentPermission->translated_name . ' ' . $parentPermission->name . ' ' . $parentPermission->slug) }}"
@@ -543,7 +549,7 @@
                         <div class="row g-3">
                             @forelse($user->roles as $role)
                                 <div class="col-md-6 col-lg-4">
-                                    <div class="card h-100 border rounded-3 shadow-2xs overflow-hidden transition-hover">
+                                    <div class="module-record-card card h-100 border rounded-3 shadow-2xs overflow-hidden transition-hover">
                                         <div class="card-header bg-light d-flex justify-content-between align-items-center py-3 border-bottom">
                                             <div class="d-flex align-items-center gap-2">
                                                 <span class="rounded p-2 bg-primary-subtle text-primary d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
@@ -578,7 +584,7 @@
                     <!-- Client Assignments Tab -->
                     <div class="tab-pane fade" id="assignments" role="tabpanel">
                         @forelse($user->assignments as $assignment)
-                            <div class="card mb-3 border rounded-3 shadow-2xs overflow-hidden">
+                            <div class="module-record-card card mb-3 border rounded-3 shadow-2xs overflow-hidden">
                                 <div class="card-header bg-white d-flex justify-content-between align-items-center py-3 border-bottom flex-wrap gap-2">
                                     <div class="d-flex align-items-center gap-3">
                                         <span class="rounded p-2 bg-secondary-subtle text-secondary d-inline-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
@@ -630,7 +636,7 @@
                     <div class="tab-pane fade" id="company" role="tabpanel">
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <div class="card border rounded-3 shadow-2xs h-100 overflow-hidden">
+                                <div class="module-record-card card border rounded-3 shadow-2xs h-100 overflow-hidden">
                                     <div class="card-header bg-white py-3 border-bottom d-flex align-items-center gap-2">
                                         <span class="rounded p-2 bg-primary-subtle text-primary d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
                                             <i class="bi bi-buildings"></i>
@@ -673,7 +679,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="card border rounded-3 shadow-2xs h-100 overflow-hidden">
+                                <div class="module-record-card card border rounded-3 shadow-2xs h-100 overflow-hidden">
                                     <div class="card-header bg-white py-3 border-bottom d-flex align-items-center gap-2">
                                         <span class="rounded p-2 bg-info-subtle text-info d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
                                             <i class="bi bi-tags"></i>
@@ -708,7 +714,7 @@
                         <div class="row g-3">
                             @forelse($user->clientDocumentTypes as $docType)
                                 <div class="col-md-4">
-                                    <div class="card border rounded-3 shadow-2xs p-3 d-flex flex-row align-items-center gap-3 transition-hover h-100">
+                                    <div class="module-record-card card border rounded-3 shadow-2xs p-3 d-flex flex-row align-items-center gap-3 transition-hover h-100">
                                         <div class="rounded-circle p-2 bg-primary-subtle text-primary flex-shrink-0 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
                                             <i class="bi bi-file-earmark-lock fs-5"></i>
                                         </div>

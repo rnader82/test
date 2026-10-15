@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'suppliers')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'purchasing')
+@section('portal-icon', 'cart-flatbed')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -39,7 +45,7 @@
     <div class="row">
         <!-- Supplier Information -->
         <div class="col-md-4">
-            <div class="card shadow-sm border-0 mb-4" style="position: relative; overflow: visible !important;">
+            <div class="module-record-card card shadow-sm border-0 mb-4" style="position: relative; overflow: visible !important;">
                 @if ($supplier->closed)
                     <div class="ribbon-wrapper">
                         <div class="ribbon">{{ __('locale.lbl_closed') }}</div>
@@ -212,7 +218,7 @@
             <div class="tab-content" id="supplierDetailsTabsContent">
                 <!-- Purchases Tab -->
                 <div class="tab-pane fade show active" id="purchases" role="tabpanel" aria-labelledby="purchases-tab">
-                    <div class="card shadow-sm border-0">
+                    <div class="module-record-card card shadow-sm border-0">
                         <div class="card-header border-bottom d-flex justify-content-between align-items-center bg-white py-3">
                             <h5 class="mb-0">{{ __('locale.purchase_history') ?? 'Historique des Achats' }}</h5>
                             <a href="{{ route('purchases.create', ['supplier_id' => $supplier->id]) }}" class="btn btn-sm btn-primary">
@@ -266,7 +272,7 @@
 
                 <!-- Contacts Tab -->
                 <div class="tab-pane fade" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
-                    <div class="card shadow-sm border-0">
+                    <div class="module-record-card card shadow-sm border-0">
                         <div class="card-header border-bottom d-flex justify-content-between align-items-center bg-white py-3">
                             <h5 class="mb-0">{{ __('locale.contacts') ?? 'Contacts' }}</h5>
                             <a href="{{ route('supplier-contacts.create', ['supplier_id' => $supplier->id]) }}" class="btn btn-sm btn-primary">

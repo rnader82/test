@@ -1,4 +1,10 @@
-@extends('layouts.app') 
+@extends('layouts.app')
+@section('portal-module', 'equipments')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'catalog')
+@section('portal-icon', 'tags')
+
 
 @section('navbar-search')
     <form method="GET" action="{{ route('equipments.index') }}" class="w-100">
@@ -366,7 +372,7 @@
         <div class="card card-premium eq-card-table">
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0">
+                    <table class="module-table table table-hover align-middle mb-0">
                         <thead>
                             <tr>
                                 <th class="ps-4">{{ __('locale.lbl_reference') }}</th>

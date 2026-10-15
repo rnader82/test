@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'accounting_families')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'catalog')
+@section('portal-icon', 'tags')
+
 
 @section('title', __('locale.lbl_accounting_family') ?? 'Familles Comptables')
 
@@ -53,7 +59,7 @@
 
         <div class="card card-premium">
             <div class="table-responsive">
-                <table class="table table-striped table-hover align-middle mb-0">
+                <table class="module-table table table-striped table-hover align-middle mb-0">
                     <thead class="table-dark">
                         <tr>
                             <th>{{ __('locale.code_cegid') }}</th>

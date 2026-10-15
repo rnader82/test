@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'pricelists')
+@section('portal-page', 'edit')
+@section('portal-kind', 'form')
+@section('portal-family', 'catalog')
+@section('portal-icon', 'tags')
+
 
 @section('title', __('locale.edit_pricelist_title'))
 
@@ -97,7 +103,7 @@
         @method('PUT')
 
         <!-- Control Header Banner -->
-        <div class="card card-premium p-4 mb-4">
+        <div class="module-form-card card card-premium p-4 mb-4">
             <div class="row align-items-center">
                 <div class="col-md-7">
                     <div class="d-flex align-items-center gap-3 flex-wrap">
@@ -128,7 +134,7 @@
         <div class="row g-4">
             <!-- Left Panel: Available Selection Mode -->
             <div class="col-xl-4 col-lg-5">
-                <div class="card card-premium" style="max-height: 750px; display: flex; flex-direction: column; padding: 20px !important;">
+                <div class="module-form-card card card-premium" style="max-height: 750px; display: flex; flex-direction: column; padding: 20px !important;">
                     <div class="card-header bg-transparent border-0 pt-0 px-0 pb-3 d-flex align-items-center justify-content-between mb-2">
                         <!-- Mode selector -->
                         <div class="btn-group w-100" role="group" aria-label="Selection Mode">
@@ -197,7 +203,7 @@
 
             <!-- Right Panel: Tabbed Form and Rules -->
             <div class="col-xl-8 col-lg-7">
-                <div class="card card-premium p-4" id="right-panel-card" style="min-height: 600px;">
+                <div class="module-form-card card card-premium p-4" id="right-panel-card" style="min-height: 600px;">
                     <!-- Tabs Navigation -->
                     <ul class="nav nav-tabs nav-tabs-premium mb-4" id="pricelistFormTabs" role="tablist">
                         <li class="nav-item" role="presentation">

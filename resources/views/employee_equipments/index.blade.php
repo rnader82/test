@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'employee_equipments')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @section('title', __('locale.employee_equipments.title') ?? 'Matériel Collaborateurs & Flotte')
 
@@ -243,7 +249,7 @@
 
             <!-- Table Responsive -->
             <div class="table-responsive">
-                <table class="table table-hover table-premium align-middle mb-0">
+                <table class="module-table table table-hover table-premium align-middle mb-0">
                     <thead class="table-light">
                         <tr>
                             @if($tab === 'tous')

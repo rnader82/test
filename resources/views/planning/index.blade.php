@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'planning')
+@section('portal-page', 'index')
+@section('portal-kind', 'planning')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">

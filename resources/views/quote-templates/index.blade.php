@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'quote-templates')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'quotes')
+@section('portal-icon', 'file-lines')
+
 
 @section('title', 'Modèles de devis')
 
@@ -71,7 +77,7 @@
     <!-- Templates Table Card -->
     <div class="card card-premium shadow-sm border-0">
         <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
+            <table class="module-table table table-hover align-middle mb-0">
                 <thead class="table-light text-uppercase small text-muted">
                     <tr>
                         <th class="ps-4" style="width: 30%;">Nom du modèle</th>

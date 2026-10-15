@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'orders')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'adv')
+@section('portal-icon', 'boxes-stacked')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -89,7 +95,7 @@
 
         <div class="row g-4">
             <div class="col-12">
-                <div class="card card-premium mb-4">
+                <div class="module-record-card card card-premium mb-4">
                     <div class="card-header bg-transparent border-0 pt-4 px-4 pb-0">
                         <h5 class="mb-0 fw-bold d-flex align-items-center">
                             <i class="bi bi-file-earmark-text text-primary me-2 fs-4"></i> {{ __('locale.orders.sections.summary') }}
@@ -242,7 +248,7 @@
             </div>
 
             <div class="col-12">
-                <div class="card card-premium mb-4">
+                <div class="module-record-card card card-premium mb-4">
                     <div class="card-header bg-transparent border-0 pt-4 px-4 pb-0">
                         <h5 class="mb-0 fw-bold d-flex align-items-center">
                             <i class="bi bi-geo-alt text-warning me-2 fs-4"></i> {{ __('locale.orders.sections.addresses') }}
@@ -279,7 +285,7 @@
             </div>
 
             <div class="col-12">
-                <div class="card card-premium mb-4">
+                <div class="module-record-card card card-premium mb-4">
                     <div class="card-header bg-transparent border-0 pt-4 px-4 pb-0">
                         <h5 class="mb-0 fw-bold d-flex align-items-center">
                             <i class="bi bi-list-stars text-info me-2 fs-4"></i> {{ __('locale.orders.sections.lines') }}
@@ -350,7 +356,7 @@
             </div>
 
             <div class="col-12">
-                <div class="card card-premium mb-4">
+                <div class="module-record-card card card-premium mb-4">
                     <div class="card-header bg-transparent border-0 pt-4 px-4 pb-0">
                         <h5 class="mb-0 fw-bold d-flex align-items-center">
                             <i class="bi bi-truck text-success me-2 fs-4"></i> {{ __('locale.orders.sections.ports') }}
@@ -401,7 +407,7 @@
                 </div>
             </div>
             <div class="col-12">
-                <div class="card card-premium mb-4">
+                <div class="module-record-card card card-premium mb-4">
                     <div class="card-header bg-transparent border-0 pt-4 px-4 pb-0 d-flex justify-content-between align-items-center">
                         <h5 class="mb-0 fw-bold d-flex align-items-center">
                             <i class="bi bi-box-seam text-primary me-2 fs-4"></i> {{ __('locale.orders.sections.supplier_orders') }}

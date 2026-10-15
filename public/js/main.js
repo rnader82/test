@@ -283,6 +283,7 @@
     let density = storage.get('density','comfortable');
     if (!['compact','comfortable','large'].includes(density)) density = 'comfortable';
     body.dataset.novalyoDensity = density;
+    body.classList.toggle('density-compact',density==='compact'); body.classList.toggle('density-large',density==='large');
     if (densitySelect) {
       densitySelect.value = density;
       densitySelect.addEventListener('change', () => { body.dataset.novalyoDensity = densitySelect.value; body.classList.toggle('density-compact',densitySelect.value==='compact'); body.classList.toggle('density-large',densitySelect.value==='large'); storage.set('density',densitySelect.value); });
@@ -325,7 +326,8 @@
     }
     function refreshTables() {
       if (!content) return;
-      const tables = Array.from(content.querySelectorAll('table')).filter(table => !table.closest('.modal') && table.getClientRects().length);
+      if(body.classList.contains('portal-module-page') && !['list','report'].includes(body.dataset.portalKind)){if(densitySelect)densitySelect.hidden=true;if(columnsButton)columnsButton.hidden=true;columnTable=null;return;}
+      const tables = Array.from(content.querySelectorAll('table')).filter(table => !table.closest('.modal') && (table.getClientRects().length || body.dataset.portalModuleView==='kanban' && table.dataset.modulePrimary==='true'));
       if (densitySelect) densitySelect.hidden = !tables.length;
       columnTable = tables.find(table => tableStates.has(table) || usable(table)) || null;
       if (columnsButton) columnsButton.hidden = !columnTable;
@@ -358,6 +360,121 @@
     if (window.jQuery) window.jQuery(document).on('draw.dt shown.bs.tab shown.bs.collapse', scheduleRefresh);
     window.addEventListener('load',scheduleRefresh);
     refreshTables();
+    // The HTML's shared module workspace, using the existing rendered records and forms.
+    const moduleLabels = labels.modules || {};
+    const moduleWorkspace = document.querySelector('[data-module-workspace]');
+    if (moduleWorkspace) {
+      // Full-screen repair records must not trap their dialogs below the backdrop.
+      if(body.dataset.portalModule==='repairs' && body.dataset.portalPage==='show') {
+        moduleWorkspace.querySelectorAll('.modal').forEach(modal=>{if(!modal.closest('form'))document.body.append(modal);});
+      }
+      function initTableDropdowns(){
+        if(!window.bootstrap?.Dropdown)return;
+        moduleWorkspace.querySelectorAll('table [data-bs-toggle="dropdown"]').forEach(toggle=>bootstrap.Dropdown.getOrCreateInstance(toggle,{popperConfig:config=>({...config,strategy:'fixed',modifiers:[...(config.modifiers||[]),{name:'preventOverflow',options:{boundary:document.body}}]})}));
+      }
+      initTableDropdowns();
+      moduleWorkspace.querySelectorAll('table').forEach(table => {
+        if (table.closest('.modal') || table.classList.contains('resource-grid')) return;
+        if (!table.closest('.table-responsive,.module-table-wrap,.dataTables_wrapper,.dt-container')) {
+          const wrap = document.createElement('div'); wrap.className = 'module-table-wrap'; table.before(wrap); wrap.append(table);
+        }
+      });
+      const moduleToolbar = moduleWorkspace.querySelector('[data-module-toolbar]');
+      const moduleTable = moduleWorkspace.querySelector('.portal-module-list-body table:not(.modal table)');
+      if (moduleToolbar) {
+        moduleWorkspace.querySelectorAll('.portal-original-toolbar').forEach(toolbar => { if(toolbar.closest('form'))return; toolbar.classList.add('portal-module-existing-tools'); moduleToolbar.append(toolbar); });
+        const searchHost = moduleToolbar.querySelector('.portal-module-search');
+        if (searchHost && moduleTable && usable(moduleTable) && !searchHost.querySelector('input,select')) {
+          const search = document.createElement('input'); search.type='search'; search.className='form-control'; search.placeholder=moduleLabels.search_page || labels.search_placeholder; search.setAttribute('aria-label',moduleLabels.search_page || labels.search_placeholder); search.dataset.moduleSearch=''; searchHost.append(search);
+        }
+        [densitySelect,columnsButton].forEach(control => { if (control) moduleToolbar.append(control); });
+      }
+      if (moduleToolbar && moduleTable && usable(moduleTable)) {
+        moduleTable.dataset.modulePrimary='true';
+        const columnNames=headers(moduleTable).map(cell=>cell.textContent.trim().replace(/\s+/g,' '));
+        const statusIndex=columnNames.findIndex(name=>/^(statut|status|état|etat|stage)(\b|$)/i.test(name) || body.dataset.portalModule==='clients' && /^contrat/i.test(name));
+        const cellsFor=row=>{const api=dataTableApi(moduleTable);return api ? columnNames.map((_,index)=>api.cell(row,index).node()) : Array.from(row.cells);};
+        const columnVisible=index=>{const api=dataTableApi(moduleTable);return api ? api.column(index).visible() : !moduleTable.tHead.rows[0].cells[index]?.classList.contains('novalyo-column-hidden');};
+        const rows=()=>{const api=dataTableApi(moduleTable);return api ? Array.from(api.rows({search:'applied',page:'current'}).nodes()) : Array.from(moduleTable.tBodies).flatMap(tbody=>Array.from(tbody.rows)).filter(row=>row.cells.length===columnNames.length && Array.from(row.cells).every(cell=>cell.colSpan===1));};
+        const text=cell=>cell?.textContent.trim().replace(/\s+/g,' ') || '';
+        rows().forEach(row=>{if(row.hidden)row.dataset.moduleInitiallyHidden='true';});
+        const statuses=statusIndex<0?[]:Array.from(new Set(rows().map(row=>text(cellsFor(row)[statusIndex])).filter(Boolean))).sort((a,b)=>a.localeCompare(b));
+        let statusFilter=null;
+        if (statuses.length) {
+          statusFilter=document.createElement('select'); statusFilter.className='module-filter'; statusFilter.setAttribute('aria-label',moduleLabels.status_page); statusFilter.title=moduleLabels.page_scope;
+          const all=document.createElement('option');all.value='';all.textContent=moduleLabels.all_statuses;statusFilter.append(all);
+          statuses.forEach(status=>{const option=document.createElement('option');option.value=status;option.textContent=status;statusFilter.append(option);});moduleToolbar.append(statusFilter);
+        }
+        const empty=document.createElement('p');empty.className='module-empty portal-module-empty';empty.textContent=labels.no_results;empty.hidden=true;moduleTable.closest('.module-table-wrap,.table-responsive')?.after(empty);
+        const kanban=moduleWorkspace.querySelector('[data-module-kanban]');
+        const canKanban=['clients','contacts','prospects','projects','orders','repairs','tech_intervs','todos'].includes(body.dataset.portalModule);
+        const viewKey='module-view.'+account+'.'+location.pathname;
+        let view=canKanban&&storage.get(viewKey,'list')==='kanban'?'kanban':'list';
+        let switcher=null;
+        if(canKanban && kanban) {
+          switcher=document.createElement('div');switcher.className='module-view-switch';switcher.setAttribute('role','group');switcher.setAttribute('aria-label',moduleLabels.view);
+          ['list','kanban'].forEach(mode=>{const button=document.createElement('button');button.type='button';button.className='module-view-button';button.dataset.moduleView=mode;button.textContent=moduleLabels[mode];switcher.append(button);button.addEventListener('click',()=>{view=mode;storage.set(viewKey,mode);renderModuleView();});});moduleToolbar.prepend(switcher);
+        }
+        function visibleRows(){return rows().filter(row=>!row.hidden&&row.style.display!=='none');}
+        function renderModuleView(){
+          body.dataset.portalModuleView=view;
+          switcher?.querySelectorAll('button').forEach(button=>{const active=button.dataset.moduleView===view;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});
+          const wrap=moduleTable.closest('.module-table-wrap,.table-responsive');
+          if(wrap)wrap.hidden=view==='kanban';
+          if(kanban) { kanban.hidden=view!=='kanban'; if(view==='kanban') {
+            kanban.replaceChildren();const buckets=new Map();
+            visibleRows().forEach(row=>{const state=statusIndex<0?moduleLabels.records:text(cellsFor(row)[statusIndex]);if(!buckets.has(state))buckets.set(state,[]);buckets.get(state).push(row);});
+            buckets.forEach((records,state)=>{
+              const column=document.createElement('section');column.className='module-kanban-column';
+              const heading=document.createElement('h3');heading.className='module-kanban-head';heading.textContent=state;const count=document.createElement('span');count.className='module-kanban-count';count.textContent=String(records.length);heading.append(count);column.append(heading);
+              const cards=document.createElement('div');cards.className='module-kanban-cards';column.append(cards);
+              records.forEach(row=>{
+                const card=document.createElement('article');card.className='module-kanban-card';
+                columnNames.forEach((name,index)=>{if(!name||/^(actions?|sélection)$/i.test(name)||!columnVisible(index))return;const field=document.createElement('div');field.className='module-kanban-field';const label=document.createElement('span');label.textContent=name;const value=document.createElement('b');value.textContent=text(cellsFor(row)[index]);field.append(label,value);card.append(field);});
+                const source=Array.from(row.querySelectorAll('a[href]')).find(link=>{try{const url=new URL(link.href,location.href);return url.origin===location.origin && /^https?:$/.test(url.protocol);}catch(_){return false;}});
+                if(source){const link=document.createElement('a');link.className='btn module-record-link';link.href=source.href;link.textContent=moduleLabels.open_record;card.append(link);}cards.append(card);
+              });kanban.append(column);
+            });
+          }}
+          scheduleRefresh();
+        }
+        function filterModuleRows(){
+          const query=moduleToolbar.querySelector('[data-module-search]')?.value.trim().toLocaleLowerCase() || '';
+          const status=statusFilter?.value || '';const api=dataTableApi(moduleTable);
+          if(api){api.search(query);if(statusIndex>=0)api.column(statusIndex).search(status ? '^'+status.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'$' : '',true,false);api.draw();}
+          else rows().forEach(row=>{row.hidden=row.dataset.moduleInitiallyHidden==='true'||(query&&!text(row).toLocaleLowerCase().includes(query))||(status&&text(cellsFor(row)[statusIndex])!==status);});
+          empty.hidden=visibleRows().length>0;renderModuleView();
+        }
+        moduleToolbar.querySelector('[data-module-search]')?.addEventListener('input',filterModuleRows);statusFilter?.addEventListener('change',filterModuleRows);
+        if(window.jQuery)jQuery(moduleTable).on('draw.dt',()=>{initTableDropdowns();empty.hidden=visibleRows().length>0;renderModuleView();});
+        options?.addEventListener('change',()=>{if(view==='kanban')renderModuleView();});
+        const exportButton=document.createElement('button');exportButton.type='button';exportButton.className='btn portal-module-export';exportButton.textContent=moduleLabels.export_page;exportButton.title=moduleLabels.page_scope;
+        document.querySelector('.top-actions')?.prepend(exportButton);
+        exportButton.addEventListener('click',()=>{
+          const indexes=columnNames.map((name,index)=>name&&!/^(actions?|sélection)$/i.test(name)&&columnVisible(index)?index:-1).filter(index=>index>=0);
+          const quote=value=>{let cell=String(value??'').trim();if(/^[=+@\-]/.test(cell))cell="'"+cell;return '"'+cell.replace(/"/g,'""')+'"';};
+          const csv=[indexes.map(index=>quote(columnNames[index])).join(','),...visibleRows().map(row=>indexes.map(index=>quote(text(cellsFor(row)[index]))).join(','))].join('\r\n');
+          const url=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'}));const link=document.createElement('a');link.href=url;link.download='novalyo-'+body.dataset.portalModule+'.csv';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+        });
+        renderModuleView();
+      }
+      // Company categories are built exclusively from permission-checked Laravel tabs.
+      const categoryNav=moduleWorkspace.querySelector('[data-company-categories]');
+      const companyTabs=moduleWorkspace.querySelector('#clientTab');
+      if(categoryNav && companyTabs && body.dataset.portalPage==='show'){
+        const definitions=[['overview',['general-tab'],'company_overview','chart-pie'],['relation',['contacts-tab','contracts-tab'],'company_relation','users'],['commercial',['orders-tab'],'company_commercial','file-lines'],['support',['issues-tab','interventions-tab','repairs-tab'],'company_support','headset'],['assets',['equipments-tab','sites-tab'],'company_assets','boxes-stacked'],['resources',['documents-tab','users-tab','portal-tab'],'company_resources','folder-open']];
+        const tabs=Array.from(companyTabs.querySelectorAll('[data-bs-toggle="tab"]'));const groups=definitions.map(([key,ids,label,icon])=>({key,ids,label,icon,tabs:tabs.filter(tab=>ids.includes(tab.id))})).filter(group=>group.tabs.length);
+        const buttons=new Map();
+        function selectCategory(group,activate){
+          groups.forEach(item=>{const active=item===group;buttons.get(item.key).classList.toggle('active',active);buttons.get(item.key).setAttribute('aria-pressed',String(active));});
+          tabs.forEach(tab=>{tab.closest('li').hidden=!group.tabs.includes(tab);});companyTabs.hidden=group.key==='overview';
+          if(activate)bootstrap.Tab.getOrCreateInstance(group.tabs[0]).show();
+        }
+        groups.forEach(group=>{const button=document.createElement('button');button.type='button';button.className='company-detail-category-button';const icon=document.createElement('i');icon.className='fa-solid fa-'+group.icon;icon.setAttribute('aria-hidden','true');button.append(icon,document.createTextNode(moduleLabels[group.label]));button.addEventListener('click',()=>selectCategory(group,true));categoryNav.append(button);buttons.set(group.key,button);group.tabs.forEach(tab=>{tab.classList.add('company-detail-nav-button');tab.addEventListener('shown.bs.tab',()=>selectCategory(group,false));});});
+        const active=groups.find(group=>group.tabs.some(tab=>tab.classList.contains('active')))||groups[0];if(active)selectCategory(active,false);
+      }
+    }
+
     const ticketsPanel=document.querySelector('[data-portal-tickets]');
     if(ticketsPanel) {
       const ticketTable=document.getElementById('portal-ticket-table');
@@ -411,6 +528,8 @@
     }
 
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',initPortal);
+  // The direct asset runs before an older deferred Vite bundle can claim initialization.
+  if (document.body && document.getElementById('novalyo-labels')) initPortal();
+  else if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',initPortal);
   else initPortal();
 })();

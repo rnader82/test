@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'client_document_types')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'relations')
+@section('portal-icon', 'users')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -57,7 +63,7 @@
 
         <div class="card shadow-sm border-0 rounded-3">
             <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
+                <table class="module-table table table-hover align-middle mb-0">
                     <thead class="table-light">
                         <tr>
                             <th style="width: 25%;">{{ __('locale.lbl_name') }}</th>

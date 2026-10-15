@@ -2,7 +2,7 @@
     <div class="card-body">
         <div class="row g-3">
             <input type="hidden" name="backups[{{ $index }}][id]" value="{{ $backup->id ?? '' }}">
-            
+
             <div class="col-md-5">
                 <label class="form-label">{{ __('visite_prev.name') }}</label>
                 <input type="text" name="backups[{{ $index }}][name]" class="form-control" value="{{ $backup->name ?? '' }}" placeholder="ex: Config PBX, Sauvegarde Appel-Malade...">

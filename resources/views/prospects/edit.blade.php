@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'prospects')
+@section('portal-page', 'edit')
+@section('portal-kind', 'form')
+@section('portal-family', 'crm')
+@section('portal-icon', 'arrow-trend-up')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -14,7 +20,7 @@
 		<form action="{{ route('prospects.update', $prospect->id) }}" method="POST">
 			@csrf
 			@method('PUT')
-			<div class="card shadow-sm border-0">
+			<div class="module-form-card card shadow-sm border-0">
 				<div class="card-header bg-white py-3">
 					<h5 class="mb-0 text-primary">Informations Générales</h5>
 				</div>
@@ -73,7 +79,7 @@
 				</div>
 			</div>
 
-			<div class="card shadow-sm border-0 mt-4">
+			<div class="module-form-card card shadow-sm border-0 mt-4">
 				<div class="card-header bg-white py-3">
 					<h5 class="mb-0 text-primary">Adresse & Localisation</h5>
 				</div>
@@ -112,7 +118,7 @@
 				</div>
 			</div>
 
-			<div class="card shadow-sm border-0 mt-4">
+			<div class="module-form-card card shadow-sm border-0 mt-4">
 				<div class="card-header bg-white py-3">
 					<h5 class="mb-0 text-primary">Notes & Commentaires</h5>
 				</div>

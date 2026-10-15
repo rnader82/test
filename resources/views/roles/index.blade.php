@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'roles')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'admin')
+@section('portal-icon', 'gear')
+
 
 @section('title', __('locale.lbl_role_title'))
 

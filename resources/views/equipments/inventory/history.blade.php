@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'equipments')
+@section('portal-page', 'history')
+@section('portal-kind', 'list')
+@section('portal-family', 'catalog')
+@section('portal-icon', 'tags')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-3">
@@ -69,7 +75,7 @@
         <div class="card card-premium eq-card-table mb-2">
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table class="table table-premium mb-0">
+                    <table class="module-table table table-premium mb-0">
                         <thead class="small text-uppercase text-muted">
                             <tr>
                                 <th class="ps-4 py-3">{{ __('locale.lbl_date_time') }}</th>

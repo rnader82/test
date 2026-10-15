@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'issues')
+@section('portal-page', 'show')
+@section('portal-kind', 'ticket')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @php
     $currentUser = auth()->user();

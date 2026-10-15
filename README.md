@@ -21,3 +21,87 @@ The workflow's next-action text is saved as the existing state-change `note`; as
 Ticket-detail validation: eighteen browser checks compare the rendered Blade view with the uploaded HTML and verify the six tabs, keyboard navigation, templates, composer validation, exact POST/PUT form payloads and CSRF fields, modal layering, state/assignment controls, visibility conversion, customer/employee restrictions, English labels, missing optional data, and responsive layouts from 1882 to 390 pixels. These use fixture data and a local form-capture server; they do not verify the absent backend controllers or database.
 
 Validation: all 368 Blade views compile and pass PHP syntax checks using an isolated Laravel 12 view engine. Eighteen browser checks pass against the actual ticket, shared layout, authentication, and welcome views with fixture data, including visual geometry, permission-restricted navigation, search, preferences, real record filters, selection/export, DataTables, existing modal loading, and mobile navigation. Ten additional browser checks reproduce the previous tab bug and verify the actual client and equipment detail views with fixture data: content visibility, every tab's pane, sidebar collapse, related equipment tabs, hidden tabs, and layouts at 1882, 1024, 768, and 390 pixels. The full Laravel backend is not included here, so complete backend integration must be checked in the existing application.
+
+## Module comparison and coverage
+
+Compared the uploaded HTML with all 284 views that extend the application layout, covering 71 modules. Every application view now declares its module, page type and reference family, so the shared layout selects the appropriate structure rather than relying on a global color override. The 84 other Blade files are partials, standalone authentication/landing pages, print/PDF/email views or pagination templates; their form/document contracts remain intact.
+
+The shared module list uses the reference header, description, toolbar, table card, density and column controls. Search forms keep their existing server actions. Page status filters and CSV exports use loaded rows only. List/Kanban views use the original records and links, with account/page-scoped preferences; they do not write workflow changes. Customer orders, purchases, supplier orders and deliveries include real page/total summary cards. Company records use permission-derived category/subsection navigation and overview cards; article records use the reference article and related-data tab shells. Repair records use a full-screen header and summary cards while preserving their existing per-equipment update forms. All existing field names, routes, CSRF fields, method overrides, includes and print exports were checked against the previous revision.
+
+Legacy type/status badges now have explicit theme colors, and all 260 static Bootstrap icon classes used by the views have local glyph mappings. The old static `dashboard2` template now links to the real dashboard instead of showing sample sales figures. The direct controller initializes before a previously built Vite bundle, so copying these files does not require rebuilding assets. Table action menus use fixed Popper positioning, and repair dialogs are mounted outside the full-screen record layer.
+
+| Repository module | Application views | Reference pattern |
+| --- | ---: | --- |
+| `accounting_families` | 4 | Article directory, article tabs and related data panels |
+| `brands` | 4 | Article directory, article tabs and related data panels |
+| `categories` | 4 | Administration module list, record and form patterns |
+| `client_document_types` | 4 | Company/contact directory and company category navigation |
+| `clients` | 4 | Company/contact directory and company category navigation |
+| `combos` | 4 | Article directory, article tabs and related data panels |
+| `commercials` | 3 | Prospecting / generic module list and record forms |
+| `companies` | 4 | Administration module list, record and form patterns |
+| `construction_reports` | 3 | Customer orders, deliveries and generic operations modules |
+| `contacts` | 4 | Company/contact directory and company category navigation |
+| `contract_clause_templates` | 4 | Commercial templates / generic module forms |
+| `contract_templates` | 4 | Commercial templates / generic module forms |
+| `contracts` | 4 | Company/contact directory and company category navigation |
+| `countries` | 4 | Administration module list, record and form patterns |
+| `dashboard` | 1 | General dashboard and task modules |
+| `dashboard2` | 1 | General dashboard and task modules |
+| `deliveries` | 4 | Customer orders, deliveries and generic operations modules |
+| `employee_equipments` | 4 | Technical modules, planning and preventive workflow panels |
+| `employees` | 4 | Technical modules, planning and preventive workflow panels |
+| `equipment_categories` | 4 | Article directory, article tabs and related data panels |
+| `equipment_types` | 4 | Article directory, article tabs and related data panels |
+| `equipments` | 7 | Article directory, article tabs and related data panels |
+| `errors` | 1 | Administration module list, record and form patterns |
+| `installers` | 4 | Technical modules, planning and preventive workflow panels |
+| `issue_criticities` | 4 | Administration module list, record and form patterns |
+| `issue_severities` | 4 | Administration module list, record and form patterns |
+| `issue_types` | 4 | Administration module list, record and form patterns |
+| `issues` | 4 | Technical modules, planning and preventive workflow panels |
+| `issues_groups` | 4 | Administration module list, record and form patterns |
+| `knowledge_base` | 4 | Technical modules, planning and preventive workflow panels |
+| `languages` | 4 | Administration module list, record and form patterns |
+| `loginwelcome` | 1 | Administration module list, record and form patterns |
+| `logs` | 1 | Administration module list, record and form patterns |
+| `message_templates` | 4 | Administration module list, record and form patterns |
+| `odoo` | 1 | Administration module list, record and form patterns |
+| `odoo_categories` | 4 | Article directory, article tabs and related data panels |
+| `odoo_fiscal_positions` | 4 | Article directory, article tabs and related data panels |
+| `orders` | 4 | Customer orders, deliveries and generic operations modules |
+| `origines` | 4 | Administration module list, record and form patterns |
+| `permissions` | 4 | Administration module list, record and form patterns |
+| `planning` | 2 | Technical modules, planning and preventive workflow panels |
+| `pricelists` | 4 | Article directory, article tabs and related data panels |
+| `process_stages` | 4 | Administration module list, record and form patterns |
+| `projects` | 4 | Customer orders, deliveries and generic operations modules |
+| `prospects` | 4 | Prospecting / generic module list and record forms |
+| `purchases` | 4 | Purchasing workspaces, suppliers and supplier orders |
+| `quote-reserves` | 3 | Commercial templates / generic module forms |
+| `quote-templates` | 4 | Commercial templates / generic module forms |
+| `remises_ascom` | 4 | Article directory, article tabs and related data panels |
+| `repair_diagnoses` | 4 | Administration module list, record and form patterns |
+| `repairs` | 6 | Technical modules, planning and preventive workflow panels |
+| `reports` | 4 | Performance cards and reports |
+| `roles` | 4 | Administration module list, record and form patterns |
+| `seeds` | 2 | Administration module list, record and form patterns |
+| `states` | 4 | Administration module list, record and form patterns |
+| `statuses` | 4 | Administration module list, record and form patterns |
+| `supplier_contacts` | 4 | Purchasing workspaces, suppliers and supplier orders |
+| `supplier_orders` | 4 | Purchasing workspaces, suppliers and supplier orders |
+| `suppliers` | 4 | Purchasing workspaces, suppliers and supplier orders |
+| `tech_intervention_severities` | 4 | Administration module list, record and form patterns |
+| `tech_intervention_states` | 4 | Administration module list, record and form patterns |
+| `tech_intervention_statuses` | 4 | Administration module list, record and form patterns |
+| `tech_intervention_types` | 4 | Administration module list, record and form patterns |
+| `tech_intervs` | 4 | Technical modules, planning and preventive workflow panels |
+| `tenants` | 4 | Administration module list, record and form patterns |
+| `todos` | 4 | General dashboard and task modules |
+| `user_assignments` | 4 | Technical modules, planning and preventive workflow panels |
+| `users` | 5 | Administration module list, record and form patterns |
+| `visite_prev` | 24 | Technical modules, planning and preventive workflow panels |
+| `warehouses` | 3 | Article directory, article tabs and related data panels |
+| `warranty_types` | 4 | Administration module list, record and form patterns |
+
+Validation for this revision: all 368 Blade templates compile and pass PHP syntax checks. Twenty-eight actual application pages are rendered with fixture data across directory, form, record, purchasing, administration, client and article layouts and checked at desktop/mobile widths. Eighteen module interaction checks cover native form submissions and validation, server search, status filters, CSV exports, Kanban, DataTables, column/density persistence, company permissions, article tabs, repair dialogs, and an older deferred Vite bundle. Eighteen ticket-detail regression checks also pass. This checkout contains no controllers, database, routes file or application manifests; the full Laravel runtime still needs integration validation in the host application.

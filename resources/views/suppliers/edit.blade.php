@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'suppliers')
+@section('portal-page', 'edit')
+@section('portal-kind', 'form')
+@section('portal-family', 'purchasing')
+@section('portal-icon', 'cart-flatbed')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -20,7 +26,7 @@
 
     <div class="row">
         <div class="col-md-8 mx-auto">
-            <div class="card shadow-sm border-0">
+            <div class="module-form-card card shadow-sm border-0">
                 <div class="card-header bg-warning text-dark d-flex align-items-center justify-content-between border-0">
                     <h5 class="mb-0 text-dark fw-bold"><i class="bi bi-pencil-square me-2 text-dark"></i>{{ __('locale.lbl_information') ?? 'Modifier les informations' }}</h5>
                 </div>

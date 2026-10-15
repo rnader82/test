@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'user_assignments')
+@section('portal-page', 'create')
+@section('portal-kind', 'form')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @section('title', __('locale.lbl_create_user_assignment'))
 
@@ -25,7 +31,7 @@
     <div class="container-xxl flex-grow-1">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <div class="card card-premium shadow-sm border-0">
+                <div class="module-form-card card card-premium shadow-sm border-0">
                     <div class="card-header bg-light border-bottom py-3">
                         <h5 class="card-title mb-0 fs-6 fw-bold text-dark">
                             <i class="bi bi-person-check me-2 text-primary"></i>{{ __('locale.lbl_create_user_assignment') }}

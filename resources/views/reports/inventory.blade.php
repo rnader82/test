@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'reports')
+@section('portal-page', 'inventory')
+@section('portal-kind', 'report')
+@section('portal-family', 'performance')
+@section('portal-icon', 'chart-line')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -13,7 +19,7 @@
 <div class="container-xxl mt-4">
 
         <!-- Date Picker Card -->
-        <div class="card mb-4 card-premium shadow-sm">
+        <div class="performance-card card mb-4 card-premium shadow-sm">
             <div class="card-header d-flex justify-content-between align-items-center border-bottom">
                 <h5 class="mb-0"><i class="bi bi-calendar-check me-2 text-primary"></i>{{ __('locale.inventory_date') }}</h5>
             </div>
@@ -47,7 +53,7 @@
 
         @if($inventoryDate)
             <!-- Results Table Card -->
-            <div class="card card-premium shadow-sm animate__animated animate__fadeIn">
+            <div class="performance-card card card-premium shadow-sm animate__animated animate__fadeIn">
                 <div class="card-header border-bottom d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">{{ __('locale.results') }} ({{ (is_object($equipments) || is_array($equipments)) ? count($equipments) : 0 }})</h5>
                     <div class="badge bg-label-info">
@@ -121,7 +127,7 @@
             </div>
         @else
             <!-- Empty State -->
-            <div class="card card-premium shadow-sm py-5 text-center">
+            <div class="performance-card card card-premium shadow-sm py-5 text-center">
                 <div class="card-body">
                     <div class="mb-4">
                         <div class="avatar avatar-xl bg-label-primary rounded mx-auto mb-3" style="width: 80px; height: 80px;">

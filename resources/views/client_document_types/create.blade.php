@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'client_document_types')
+@section('portal-page', 'create')
+@section('portal-kind', 'form')
+@section('portal-family', 'relations')
+@section('portal-icon', 'users')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -30,7 +36,7 @@
                     </div>
                 @endif
 
-                <div class="card shadow-sm border-0 rounded-3">
+                <div class="module-form-card card shadow-sm border-0 rounded-3">
                     <div class="card-header bg-light border-0 py-3">
                         <h6 class="mb-0 fw-bold text-secondary">
                             <i class="bi bi-file-earmark-plus me-2 text-primary"></i>{{ __('locale.lbl_type_details') }}

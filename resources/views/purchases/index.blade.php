@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'purchases')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'purchasing')
+@section('portal-icon', 'cart-flatbed')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -14,9 +20,20 @@
 @endsection
 
 @section('content')
+
+@php
+    $modulePageRecords = method_exists($purchases, 'items') ? collect($purchases->items()) : collect($purchases);
+@endphp
+<section class="supply-summary portal-module-summary" aria-label="{{ __('locale.portal.modules.page_scope') }}">
+    <article class="module-card"><small>{{ __('locale.portal.modules.records_total') }}</small><strong>{{ method_exists($purchases, 'total') ? $purchases->total() : $modulePageRecords->count() }}</strong></article>
+    <article class="module-card"><small>{{ __('locale.portal.modules.records_page') }}</small><strong>{{ $modulePageRecords->count() }}</strong></article>
+    <article class="module-card"><small>{{ __('locale.portal.modules.pending_page') }}</small><strong>{{ $modulePageRecords->filter(fn ($record) => in_array($record->status, ['pending'], true))->count() }}</strong></article>
+    <article class="module-card"><small>{{ __('locale.portal.modules.completed_page') }}</small><strong>{{ $modulePageRecords->filter(fn ($record) => in_array($record->status, ['received'], true))->count() }}</strong></article>
+</section>
+
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1">
-        <div class="table-toolbar">
+        <div class="table-toolbar portal-original-toolbar">
             <div class="toolbar-left">
                 <span class="text-muted small">
                     Résultats {{ $purchases->firstItem() ?? 0 }}-{{ $purchases->lastItem() ?? 0 }} sur {{ $purchases->total() ?? 0 }}
@@ -34,7 +51,7 @@
         </div>
     @endif
 
-    <table class="table table-bordered table-hover">
+    <table class="module-table table table-bordered table-hover">
             <thead>
                 <tr>
                         <th>{{ __('locale.lbl_reference') ?? 'Référence' }}</th>

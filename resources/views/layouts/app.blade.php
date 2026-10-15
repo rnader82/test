@@ -3,6 +3,15 @@
     data-assets-path="{{ url('/') }}/" data-template="vertical-menu-template-bordered" data-style="light">
 
 <head>
+    @php
+        $portalModule = trim(View::yieldContent('portal-module'));
+        $portalPage = trim(View::yieldContent('portal-page'));
+        $portalKind = trim(View::yieldContent('portal-kind'));
+        $portalFamily = trim(View::yieldContent('portal-family')) ?: 'admin';
+        $portalIcon = trim(View::yieldContent('portal-icon')) ?: 'gear';
+        $portalList = $portalKind === 'list' && $portalModule !== 'issues';
+        $portalStandard = $portalModule && !in_array($portalKind, ['ticket', 'document']) && !($portalModule === 'issues' && $portalPage === 'index');
+    @endphp
     <meta charset="utf-8" />
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0" />
@@ -85,15 +94,15 @@
     <link rel="stylesheet" href="{{ asset('libs/flatpickr/flatpickr.css') }}" />
     <!-- Helpers -->
     <script src="{{ asset('js/helpers.js') }}"></script>
-    <script src="{{ asset('js/config.js') }}?v=novalyo-html-v02"></script>
+    <script src="{{ asset('js/config.js') }}?v=novalyo-html-v05"></script>
     @vite(['resources/js/app.js'])
     @stack('styles')
 
     <!-- Loaded last so copied views/assets also work with the existing Vite build. -->
-    <link rel="stylesheet" href="{{ asset('css/demo.css') }}?v=novalyo-html-v04" />
+    <link rel="stylesheet" href="{{ asset('css/demo.css') }}?v=novalyo-html-v05" />
 </head>
 
-<body class="novalyo-portal" data-novalyo-density="comfortable" data-portal-user="{{ auth()->id() ?? 'guest' }}">
+<body class="novalyo-portal {{ $portalStandard ? 'portal-module-page' : '' }}" data-portal-module="{{ $portalModule }}" data-portal-page="{{ $portalPage }}" data-portal-kind="{{ $portalKind }}" data-novalyo-density="comfortable" data-portal-user="{{ auth()->id() ?? 'guest' }}">
     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token() }}">
     <div class="layout-wrapper">
         <div class="layout-container app">
@@ -1163,23 +1172,37 @@
                 <nav class="global-breadcrumb" aria-label="{{ __('locale.portal.home') }}">
                     <a href="{{ route('dashboard') }}">{{ __('locale.portal.home') }}</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><strong id="portal-breadcrumb-group" hidden></strong><i id="portal-breadcrumb-separator" class="fa-solid fa-chevron-right" aria-hidden="true" hidden></i><span>{{ ($extractedTitle ?? trim(strip_tags(View::yieldContent('navbar-title') ?: View::yieldContent('title')))) ?: 'Novalyo 360' }}</span>
                 </nav>
-                <header class="topbar">
+                <header class="topbar {{ $portalStandard ? 'module-topbar' : '' }}">
                     <div class="topbar-left-wrapper d-flex align-items-center gap-2">
                         <button type="button" class="btn mobile-menu-toggle portal-menu-toggle" id="mobile-menu-toggle" aria-label="{{ __('locale.portal.toggle_menu') }}" aria-controls="layout-menu" aria-expanded="false"><i class="bi bi-list" aria-hidden="true"></i></button>
+                        @if($portalStandard)<span class="module-title-icon portal-module-icon"><i class="fa-solid fa-{{ $portalIcon }}" aria-hidden="true"></i></span>@endif
                         <div class="title-block">
                             <div class="title-line">@hasSection('navbar-icon') @yield('navbar-icon') @endif @hasSection('navbar-title') @yield('navbar-title') @elseif(View::hasSection('title')) <h1>@yield('title')</h1> @else <h1>Novalyo 360</h1> @endif</div>
                             @hasSection('navbar-subtitle') <div class="subtitle">@yield('navbar-subtitle')</div> @endif
+                            @if($portalStandard && !View::hasSection('navbar-subtitle'))<p class="portal-module-description">{{ __('locale.portal.modules.' . $portalFamily) }}</p>@endif
                         </div>
                     </div>
                     <div class="top-actions">
-                        <div class="navbar-search-container">@yield('navbar-search')</div>
+                        @unless($portalList)<div class="navbar-search-container">@yield('navbar-search')</div>@endunless
                         @yield('page-actions')
                         <button type="button" class="btn" id="portal-columns-toggle" hidden><i class="fa-solid fa-table-columns" aria-hidden="true"></i>{{ __('locale.portal.columns') }}</button>
                         <select id="portal-density" class="density-control" aria-label="{{ __('locale.portal.density') }}" hidden><option value="compact">{{ __('locale.portal.compact') }}</option><option value="comfortable" selected>{{ __('locale.portal.comfortable') }}</option><option value="large">{{ __('locale.portal.large') }}</option></select>
                         @yield('page-filters')
                     </div>
                 </header>
-                <section class="content content-area-main">@yield('content')</section>
+                <section class="content content-area-main {{ $portalStandard ? 'module-content portal-module-content' : '' }}" @if($portalStandard) data-module-workspace @endif>
+                    @if($portalList)
+                        <section class="module-card module-list-card portal-module-list">
+                            <div class="module-list-toolbar portal-module-tools" data-module-toolbar>
+                                <div class="portal-module-search">@yield('navbar-search')</div>
+                            </div>
+                            <div class="portal-module-list-body">@yield('content')</div>
+                            <div class="module-kanban" data-module-kanban hidden></div>
+                        </section>
+                    @else
+                        @yield('content')
+                    @endif
+                </section>
             </main>
         </div>
         <div id="mobile-menu-overlay"></div>
@@ -1208,7 +1231,7 @@
     <script src="{{ asset('libs/apex-charts/apexcharts.js') }}"></script>
     <script src="{{ asset('libs/swiper/swiper.js') }}"></script>
     <!-- Main JS -->
-    <script src="{{ asset('js/main.js') }}?v=novalyo-html-v02"></script>
+    <script src="{{ asset('js/main.js') }}?v=novalyo-html-v05"></script>
     <!-- Page JS -->
     <script>
         (function() {

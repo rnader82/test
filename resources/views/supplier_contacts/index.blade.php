@@ -1,4 +1,10 @@
-@extends('layouts.app') 
+@extends('layouts.app')
+@section('portal-module', 'supplier_contacts')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'purchasing')
+@section('portal-icon', 'cart-flatbed')
+
 
 @section('navbar-search')
     <form method="GET" action="{{ route('supplier-contacts.index') }}" class="w-100">
@@ -28,7 +34,7 @@
 @section('content')
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1">
-        <div class="table-toolbar">
+        <div class="table-toolbar portal-original-toolbar">
             <div class="toolbar-left">
                 <span class="text-muted small">
                     Résultats {{ $contacts->firstItem() ?? 0 }}-{{ $contacts->lastItem() ?? 0 }} sur {{ $contacts->total() ?? 0 }}

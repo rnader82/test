@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'issues')
+@section('portal-page', 'edit')
+@section('portal-kind', 'form')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @section('title', __('locale.lbl_edit_issue_title'))
 

@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'purchases')
+@section('portal-page', 'create')
+@section('portal-kind', 'form')
+@section('portal-family', 'purchasing')
+@section('portal-icon', 'cart-flatbed')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -14,7 +20,7 @@
 
     <div class="row">
         <div class="col-md-8 mx-auto">
-            <div class="card shadow-sm border-0">
+            <div class="module-form-card card shadow-sm border-0">
                 <div class="card-header bg-primary text-white d-flex align-items-center justify-content-between border-0">
                     <h5 class="mb-0 text-white"><i class="bi bi-cart-plus me-2"></i>{{ __('locale.lbl_information') ?? 'Informations de l\'Achat' }}</h5>
                 </div>

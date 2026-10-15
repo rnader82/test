@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'warehouses')
+@section('portal-page', 'edit')
+@section('portal-kind', 'form')
+@section('portal-family', 'catalog')
+@section('portal-icon', 'tags')
+
 
 @section('title', __('locale.edit_warehouse') ?? 'Modifier l\'entrepôt')
 
@@ -14,7 +20,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-8 mx-auto">
-        <div class="card card-premium">
+        <div class="module-form-card card card-premium">
             <div class="card-body">
                 <form action="{{ route('warehouses.update', $warehouse->id) }}" method="POST">
                     @csrf
@@ -63,7 +69,7 @@
         </div>
         
         <div class="mt-4">
-            <div class="card card-premium">
+            <div class="module-form-card card card-premium">
                 <div class="card-header border-bottom">
                     <h5 class="card-title mb-0">{{ __('locale.stock_in_this_warehouse') ?? 'Articles stockés dans cet entrepôt' }}</h5>
                 </div>

@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'users')
+@section('portal-page', 'create')
+@section('portal-kind', 'form')
+@section('portal-family', 'admin')
+@section('portal-icon', 'gear')
+
 
 @section('title', __('locale.btn_create_new_user'))
 
@@ -37,7 +43,7 @@
 			<div class="row">
 				<!-- User Information Card -->
 				<div class="col-md-12 mb-4">
-					<div class="card">
+					<div class="module-form-card card">
 						<div class="card-header d-flex justify-content-between align-items-center">
 							<h5 class="mb-0">{{ __('locale.lbl_user_info') }}</h5>
 						</div>
@@ -217,7 +223,7 @@
 													<div class="row">
 														@foreach ($parentsWithChildren as $parentPermission)
 															<div class="col-md-6 mb-3">
-																<div class="card h-100 shadow-sm border">
+																<div class="module-form-card card h-100 shadow-sm border">
 																	<div class="card-header p-2 px-3 bg-white d-flex align-items-center justify-content-between">
 																		<div class="form-check mb-0">
 																			<input type="checkbox" name="permissions[]" value="{{ $parentPermission->id }}" class="form-check-input" id="permission{{ $parentPermission->id }}">
@@ -328,7 +334,7 @@
 											$isAssigned = in_array($type->id, old('client_document_types', $assignedDocumentTypeIds ?? []));
 										@endphp
 										<div class="col">
-											<div class="card h-100 border document-type-card {{ $isAssigned ? 'border-primary shadow-sm bg-light' : '' }}" style="cursor: pointer;">
+											<div class="module-form-card card h-100 border document-type-card {{ $isAssigned ? 'border-primary shadow-sm bg-light' : '' }}" style="cursor: pointer;">
 												<div class="card-body p-3 d-flex align-items-start gap-2">
 													<div class="form-check mt-1">
 														<input class="form-check-input doc-type-checkbox" type="checkbox" 
@@ -503,7 +509,7 @@
 					if (!client) return;
 
 					const cardHtml = `
-						<div class="card mb-3 portal-assignment-card" id="assignment-card-${clientId}" data-client-id="${clientId}">
+						<div class="module-form-card card mb-3 portal-assignment-card" id="assignment-card-${clientId}" data-client-id="${clientId}">
 							<div class="card-header d-flex justify-content-between align-items-center">
 								<strong>${client.name} (${client.type})</strong>
 								<div>

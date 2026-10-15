@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'employees')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @section('title', 'Gestion des salariés')
 
@@ -39,7 +45,7 @@
             
             <!-- Table -->
             <div class="table-responsive">
-                <table class="table table-hover table-premium align-middle mb-0">
+                <table class="module-table table table-hover table-premium align-middle mb-0">
                     <thead class="table-light">
                         <tr>
                             <th>Nom & Prénom</th>

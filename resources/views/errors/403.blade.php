@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'errors')
+@section('portal-page', '403')
+@section('portal-kind', 'record')
+@section('portal-family', 'admin')
+@section('portal-icon', 'gear')
+
 
 @section('content')
     <div class="container">

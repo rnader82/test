@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'construction_reports')
+@section('portal-page', 'create')
+@section('portal-kind', 'form')
+@section('portal-family', 'adv')
+@section('portal-icon', 'boxes-stacked')
+
 
 @section('title', 'Nouveau Compte Rendu')
 
@@ -12,7 +18,7 @@
 @endsection
 
 @section('content')
-    <div class="card shadow-sm border-0 mb-4">
+    <div class="module-form-card card shadow-sm border-0 mb-4">
         <div class="card-body py-4">
             <div class="wizard-steps d-flex justify-content-between position-relative">
                 <div class="wizard-progress position-absolute top-50 start-0 translate-middle-y w-100 bg-light" style="height: 2px; z-index: 0;">
@@ -42,7 +48,7 @@
         <div class="wizard-step" id="step-1">
             <div class="row">
                 <div class="col-md-8">
-                    <div class="card shadow-sm border-0 mb-4">
+                    <div class="module-form-card card shadow-sm border-0 mb-4">
                         <div class="card-header bg-white py-3">
                             <h5 class="mb-0 text-primary">Informations Générales</h5>
                         </div>
@@ -91,7 +97,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card shadow-sm border-0 mb-4">
+                    <div class="module-form-card card shadow-sm border-0 mb-4">
                         <div class="card-header bg-white py-3">
                             <h5 class="mb-0 text-primary">Design & Media</h5>
                         </div>
@@ -113,7 +119,7 @@
 
         {{-- Step 2: Stakeholders --}}
         <div class="wizard-step d-none" id="step-2">
-            <div class="card shadow-sm border-0 mb-4">
+            <div class="module-form-card card shadow-sm border-0 mb-4">
                 <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
                     <h5 class="mb-0 text-primary">Participants</h5>
                     <button type="button" class="btn btn-sm btn-outline-primary add-stakeholder">
@@ -148,7 +154,7 @@
 
         {{-- Step 3: Remarks --}}
         <div class="wizard-step d-none" id="step-3">
-            <div class="card shadow-sm border-0 mb-4">
+            <div class="module-form-card card shadow-sm border-0 mb-4">
                 <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
                     <h5 class="mb-0 text-primary">Observations</h5>
                     <button type="button" class="btn btn-sm btn-outline-primary add-remark">

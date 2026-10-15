@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'tech_intervs')
+@section('portal-page', 'edit')
+@section('portal-kind', 'form')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @php
     $fullTitle = "Modifier l'intervention #{$technicalIntervention->id}" . ($technicalIntervention->subject ? " - {$technicalIntervention->subject}" : '');

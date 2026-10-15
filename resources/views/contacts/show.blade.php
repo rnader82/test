@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'contacts')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'relations')
+@section('portal-icon', 'users')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -44,7 +50,7 @@
             <!-- Left Column: Primary Details -->
             <div class="col-xl-4 col-lg-5 col-md-5">
                 <!-- Contact Summary Card -->
-                <div class="card mb-4 shadow-sm border-0">
+                <div class="module-record-card card mb-4 shadow-sm border-0">
                     <div class="card-body">
                         <div class="user-avatar-section mb-4">
                             <div class="d-flex align-items-center flex-column">
@@ -134,7 +140,7 @@
                 </div>
 
                 <!-- Client Info Card -->
-                <div class="card shadow-sm border-0">
+                <div class="module-record-card card shadow-sm border-0">
                     <div class="card-body">
                         <h5 class="pb-2 border-bottom mb-3">{{ __('locale.lbl_client') }}</h5>
                         @if($contact->client)
@@ -163,7 +169,7 @@
             <div class="col-xl-8 col-lg-7 col-md-7">
                 <!-- Address Card -->
                 @if($contact->adresse_1 || $contact->ville || $contact->code_postal)
-                <div class="card shadow-sm mb-4 border-0">
+                <div class="module-record-card card shadow-sm mb-4 border-0">
                     <div class="card-header py-3 bg-light border-0">
                         <h5 class="card-title mb-0 fs-6 fw-bold text-secondary">
                             <i class="bi bi-geo-alt me-2 text-primary"></i>{{ __('locale.contact_address') }}
@@ -186,7 +192,7 @@
 
                 <!-- Notes Internes Card -->
                 @if($contact->notes)
-                <div class="card shadow-sm mb-4 border-0">
+                <div class="module-record-card card shadow-sm mb-4 border-0">
                     <div class="card-header py-3 bg-light border-0">
                         <h5 class="card-title mb-0 fs-6 fw-bold text-secondary">
                             <i class="bi bi-card-text me-2 text-primary"></i>{{ __('locale.notes') }}
@@ -200,7 +206,7 @@
                 </div>
                 @endif
 
-                <div class="card shadow-sm mb-4 border-0">
+                <div class="module-record-card card shadow-sm mb-4 border-0">
                     <div class="card-header d-flex align-items-center justify-content-between py-3 bg-light border-0">
                         <h5 class="card-title mb-0 fs-6 fw-bold text-secondary">{{ __('locale.informations') }}</h5>
                     </div>
@@ -263,7 +269,7 @@
                 </div>
                 
                 @if($contact->client && $contact->client->issues->isNotEmpty())
-                <div class="card shadow-sm">
+                <div class="module-record-card card shadow-sm">
                     <div class="card-header py-3">
                         <h5 class="card-title mb-0">{{ __('locale.lbl_issues') }} ({{ $contact->client->issues->count() }})</h5>
                     </div>

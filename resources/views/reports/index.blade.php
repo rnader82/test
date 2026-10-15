@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'reports')
+@section('portal-page', 'index')
+@section('portal-kind', 'performance')
+@section('portal-family', 'performance')
+@section('portal-icon', 'chart-line')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -17,7 +23,7 @@
                 @if(Auth::user()->hasPermission($report->permission_slug))
                     <div class="col-md-6 col-lg-4">
                         <a href="{{ $report->route_name ? route($report->route_name) : '#' }}" class="text-decoration-none">
-                            <div class="card h-100 card-premium hover-elevate">
+                            <div class="performance-card card h-100 card-premium hover-elevate">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center mb-3">
                                         <div class="avatar avatar-md me-3">
@@ -50,7 +56,6 @@
             @endif
         </div>
     </div>
-</div>
 
 <style>
     .hover-elevate {

@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'orders')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'adv')
+@section('portal-icon', 'boxes-stacked')
+
 
 @section('title', __('locale.orders.title'))
 
@@ -174,6 +180,17 @@
 @endsection
 
 @section('content')
+
+@php
+    $modulePageRecords = method_exists($orders, 'items') ? collect($orders->items()) : collect($orders);
+@endphp
+<section class="supply-summary portal-module-summary" aria-label="{{ __('locale.portal.modules.page_scope') }}">
+    <article class="module-card"><small>{{ __('locale.portal.modules.records_total') }}</small><strong>{{ method_exists($orders, 'total') ? $orders->total() : $modulePageRecords->count() }}</strong></article>
+    <article class="module-card"><small>{{ __('locale.portal.modules.records_page') }}</small><strong>{{ $modulePageRecords->count() }}</strong></article>
+    <article class="module-card"><small>{{ __('locale.portal.modules.pending_page') }}</small><strong>{{ $modulePageRecords->filter(fn ($record) => in_array($record->state, ['draft', 'sent'], true))->count() }}</strong></article>
+    <article class="module-card"><small>{{ __('locale.portal.modules.completed_page') }}</small><strong>{{ $modulePageRecords->filter(fn ($record) => in_array($record->state, ['sale', 'done'], true))->count() }}</strong></article>
+</section>
+
 <div class="panel">
     <!-- Toolbar with Modern Tabs and Pager -->
     <div class="toolbar">

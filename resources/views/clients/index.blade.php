@@ -1,4 +1,10 @@
-@extends('layouts.app') 
+@extends('layouts.app')
+@section('portal-module', 'clients')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'relations')
+@section('portal-icon', 'users')
+
 
 @section('navbar-search')
     <form method="GET" action="{{ route('clients.index') }}" class="w-100">
@@ -35,7 +41,7 @@
 @section('content')
 	<div class="content-wrapper">
 		<div class="container-xxl flex-grow-1">
-			<div class="table-toolbar">
+			<div class="table-toolbar portal-original-toolbar">
 				<div class="toolbar-left">
                     <span class="text-muted small">
                         {{ __('locale.results_range', ['first' => $clients->firstItem() ?? 0, 'last' => $clients->lastItem() ?? 0, 'total' => $clients->total()]) }}

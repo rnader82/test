@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'equipments')
+@section('portal-page', 'count')
+@section('portal-kind', 'record')
+@section('portal-family', 'catalog')
+@section('portal-icon', 'tags')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-3">
@@ -47,7 +53,7 @@
         <div class="row g-3 eq-count-row">
             <!-- Left Card: Article & Current Multi-Warehouse Breakdown -->
             <div class="col-lg-5">
-                <div class="card card-premium mb-0 h-100">
+                <div class="module-record-card card card-premium mb-0 h-100">
                     <div class="card-header bg-transparent border-0 pt-3 px-3 pb-0">
                         <h5 class="mb-0 fw-bold d-flex align-items-center text-dark">
                             <i class="bi bi-info-circle text-primary me-2"></i> {{ __('locale.lbl_equipment_details') }}
@@ -132,7 +138,7 @@
 
             <!-- Right Card: Odoo Physical Inventory Adjustment Form -->
             <div class="col-lg-7">
-                <div class="card card-premium h-100">
+                <div class="module-record-card card card-premium h-100">
                     <div class="card-header bg-transparent border-0 pt-3 px-3 pb-0">
                         <h5 class="mb-0 fw-bold d-flex align-items-center text-dark">
                             <i class="bi bi-pencil-square text-warning me-2"></i> {{ __('locale.record_entry') }}

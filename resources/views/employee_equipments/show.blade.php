@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'employee_equipments')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @section('title', ($employeeEquipment->brand . ' ' . $employeeEquipment->model) ?: 'Détails du matériel')
 
@@ -90,7 +96,7 @@
         <div class="col-12 col-lg-7">
             
             <!-- Asset Details Card -->
-            <div class="card card-premium shadow-sm border-0 mb-4">
+            <div class="module-record-card card card-premium shadow-sm border-0 mb-4">
                 <div class="card-header bg-transparent border-bottom py-3 d-flex justify-content-between align-items-center">
                     <h5 class="card-title mb-0 fw-bold">
                         @if($employeeEquipment->type === 'telephone')
@@ -187,7 +193,7 @@
             </div>
 
             <!-- Current Assignment Box -->
-            <div class="card card-premium shadow-sm border-0">
+            <div class="module-record-card card card-premium shadow-sm border-0">
                 <div class="card-header bg-transparent border-bottom py-3">
                     <h5 class="card-title mb-0 fw-bold"><i class="bi bi-person-check me-2 text-primary"></i> Affectation en cours</h5>
                 </div>
@@ -259,7 +265,7 @@
 
         <!-- Right Column: Full Assignment History Timeline -->
         <div class="col-12 col-lg-5">
-            <div class="card card-premium shadow-sm border-0">
+            <div class="module-record-card card card-premium shadow-sm border-0">
                 <div class="card-header bg-transparent border-bottom py-3">
                     <h5 class="card-title mb-0 fw-bold"><i class="bi bi-clock-history me-2 text-primary"></i> Historique des affectations</h5>
                 </div>

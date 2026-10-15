@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'reports')
+@section('portal-page', 'intervention')
+@section('portal-kind', 'report')
+@section('portal-family', 'performance')
+@section('portal-icon', 'chart-line')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -13,7 +19,7 @@
 <div class="container-xxl mt-4">
 
         <!-- Filters Card -->
-        <div class="card mb-4 card-premium shadow-sm">
+        <div class="performance-card card mb-4 card-premium shadow-sm">
             <div class="card-header d-flex justify-content-between align-items-center border-bottom">
                 <h5 class="mb-0"><i class="bi bi-funnel me-2"></i>{{ __('locale.advanced_filters') }}</h5>
                 <a href="{{ route('reports.intervention') }}" class="btn btn-sm btn-outline-secondary">
@@ -63,7 +69,7 @@
         <div class="row g-4 mb-4">
             <!-- Left: Pie Chart -->
             <div class="col-lg-8">
-                <div class="card h-100 card-premium shadow-sm">
+                <div class="performance-card card h-100 card-premium shadow-sm">
                     <div class="card-header border-bottom d-flex align-items-center justify-content-between py-3">
                         <h5 class="mb-0 fs-6 fw-bold text-uppercase ls-1"><i class="bi bi-pie-chart me-2 text-primary"></i>{{ __('locale.status_distribution') }}</h5>
                     </div>
@@ -78,7 +84,7 @@
                 <div class="row g-3 h-100">
                     <!-- Total Interventions -->
                     <div class="col-12">
-                        <div class="card card-premium shadow-sm border-0 border-start border-primary border-5">
+                        <div class="performance-card card card-premium shadow-sm border-0 border-start border-primary border-5">
                             <div class="card-body d-flex flex-column justify-content-center py-4">
                                 <div class="d-flex align-items-center mb-2">
                                     <div class="avatar bg-label-primary p-1 me-2 rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
@@ -94,7 +100,7 @@
                     <!-- Most Frequent Status -->
                     <div class="col-12">
                         @if($stats['most_frequent_status'])
-                            <div class="card card-premium shadow-sm border-0 border-start border-5" style="border-color: {{ $stats['most_frequent_status']['color'] }} !important;">
+                            <div class="performance-card card card-premium shadow-sm border-0 border-start border-5" style="border-color: {{ $stats['most_frequent_status']['color'] }} !important;">
                                 <div class="card-body d-flex flex-column justify-content-center py-4">
                                     <div class="d-flex align-items-center mb-2">
                                         <div class="avatar p-1 me-2 rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: {{ hexToRgba($stats['most_frequent_status']['color'], 0.1) }}; color: {{ $stats['most_frequent_status']['color'] }};">
@@ -107,7 +113,7 @@
                                 </div>
                             </div>
                         @else
-                           <div class="card card-premium shadow-sm border-0 border-start border-secondary border-5">
+                           <div class="performance-card card card-premium shadow-sm border-0 border-start border-secondary border-5">
                                 <div class="card-body d-flex flex-column justify-content-center text-center py-4">
                                     <p class="text-muted mb-0">{{ __('locale.no_data') }}</p>
                                 </div>
@@ -117,7 +123,7 @@
 
                     <!-- Most Common Type -->
                     <div class="col-12">
-                        <div class="card card-premium shadow-sm border-0 border-start border-info border-5">
+                        <div class="performance-card card card-premium shadow-sm border-0 border-start border-info border-5">
                             <div class="card-body d-flex flex-column justify-content-center py-4">
                                 <div class="d-flex align-items-center mb-2">
                                     <div class="avatar bg-label-info p-1 me-2 rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
@@ -134,7 +140,7 @@
         </div>
 
         <!-- Results Table Card -->
-        <div class="card card-premium shadow-sm">
+        <div class="performance-card card card-premium shadow-sm">
             <div class="card-header border-bottom d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">{{ __('locale.results') }} ({{ $interventions->total() }})</h5>
                 @if($interventions->total() > 0)

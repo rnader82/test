@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'deliveries')
+@section('portal-page', 'edit')
+@section('portal-kind', 'form')
+@section('portal-family', 'adv')
+@section('portal-icon', 'boxes-stacked')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -21,7 +27,7 @@
             </div>
         @endif
 
-        <div class="card card-premium">
+        <div class="module-form-card card card-premium">
             <div class="card-body p-4">
                 <form action="{{ route('deliveries.update', $delivery) }}" method="POST">
                     @csrf

@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'pricelists')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'catalog')
+@section('portal-icon', 'tags')
+
 
 @section('title', $pricelist->name)
 

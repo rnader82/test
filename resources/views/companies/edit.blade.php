@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'companies')
+@section('portal-page', 'edit')
+@section('portal-kind', 'form')
+@section('portal-family', 'admin')
+@section('portal-icon', 'gear')
+
 
 @section('title', __('locale.edit_company'))
 
@@ -14,7 +20,7 @@
 @section('content')
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1">
-        <div class="card card-premium">
+        <div class="module-form-card card card-premium">
             <div class="card-body p-4">
                 <form action="{{ route('companies.update', $company->id) }}" method="POST">
                     @csrf

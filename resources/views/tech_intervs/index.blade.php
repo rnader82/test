@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'tech_intervs')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @section('title', __('locale.lbl_technical_intervention'))
 
@@ -286,7 +292,7 @@
 
     <!-- Table Section -->
     <div class="table-responsive">
-        <table class="table-custom">
+        <table class="module-table table-custom">
             <thead>
                 <tr>
                     <th style="width: 36px;" class="text-center">

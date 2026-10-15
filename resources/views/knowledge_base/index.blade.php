@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'knowledge_base')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -42,7 +48,7 @@
 
     @if ($knowledgeBases->count())
         <div class="table-responsive">
-            <table class="table table-bordered table-hover">
+            <table class="module-table table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>{{ __('locale.id') }}</th>

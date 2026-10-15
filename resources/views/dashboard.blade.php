@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'dashboard')
+@section('portal-page', 'dashboard')
+@section('portal-kind', 'performance')
+@section('portal-family', 'dashboard')
+@section('portal-icon', 'house')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -15,7 +21,7 @@
 			@endphp
 
 			<!-- Premium Filter Card -->
-			<div class="card mb-4 border-0">
+			<div class="performance-card card mb-4 border-0">
 				<div class="card-body p-4">
 					<h5 class="fw-bold mb-3 d-flex align-items-center gap-2" style="font-size: 1.1rem; color: var(--md-sys-color-on-surface);">
 						<i class="bi bi-filter-left fs-4 text-primary"></i> {{ __('locale.select_action') ?? 'Filtrer le tableau' }}
@@ -142,7 +148,7 @@
 			<div class="row g-4 mb-4">
 				@if ($canViewKpis)
 					<div class="col-xxl-4 col-md-6">
-						<div class="card h-100 border-0">
+						<div class="performance-card card h-100 border-0">
 							<div class="card-body p-4">
 								<div class="d-flex justify-content-between align-items-start">
 									<div class="d-flex align-items-center gap-3">
@@ -172,7 +178,7 @@
 				@endif
 
 				<div class="col-xxl-4 col-md-6">
-					<div class="card h-100 border-0">
+					<div class="performance-card card h-100 border-0">
 						<div class="card-body p-4">
 							<div class="d-flex justify-content-between align-items-start">
 								<div class="d-flex align-items-center gap-3">
@@ -261,7 +267,7 @@
 						}
 					@endphp
 					<div class="col-xxl-4 col-md-6">
-						<div class="card h-100 border-0">
+						<div class="performance-card card h-100 border-0">
 							<div class="card-body p-4">
 								<div class="d-flex justify-content-between align-items-start mb-4">
 									<div class="d-flex align-items-center gap-3">

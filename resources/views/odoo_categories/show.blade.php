@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'odoo_categories')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'catalog')
+@section('portal-icon', 'tags')
+
 
 @section('title', $odooCategory->name . ' - ' . (__('locale.odoo_category_details') ?? 'Détails Catégorie Odoo'))
 
@@ -38,7 +44,7 @@
         <div class="row g-4">
             {{-- Category Overview --}}
             <div class="col-md-6">
-                <div class="card card-premium h-100 p-4">
+                <div class="module-record-card card card-premium h-100 p-4">
                     <h5 class="card-title text-primary mb-3">
                         <i class="bi bi-info-circle me-2"></i>{{ __('locale.general_information') }}
                     </h5>
@@ -129,7 +135,7 @@
 
             {{-- Subcategories & Accounting Families --}}
             <div class="col-md-6">
-                <div class="card card-premium h-100 p-4">
+                <div class="module-record-card card card-premium h-100 p-4">
                     <h5 class="card-title text-primary mb-3">
                         <i class="bi bi-diagram-3 me-2"></i>{{ __('locale.subcategories') }} ({{ $odooCategory->children->count() }})
                     </h5>
@@ -167,7 +173,7 @@
 
             {{-- Linked Equipments --}}
             <div class="col-12">
-                <div class="card card-premium p-4">
+                <div class="module-record-card card card-premium p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h5 class="card-title text-primary mb-0">
                             <i class="bi bi-box-seam me-2"></i>{{ __('locale.linked_equipments') }} ({{ $equipments->total() }})

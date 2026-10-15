@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'contracts')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'relations')
+@section('portal-icon', 'users')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -19,7 +25,7 @@
 	<div class="container-xxl">
 
 		<!-- Contract Main Summary Card -->
-		<div class="card mb-4 border-start border-4 border-primary">
+		<div class="module-record-card card mb-4 border-start border-4 border-primary">
 			<div class="card-body">
 				<div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
 					<div>
@@ -146,7 +152,7 @@
 		<div class="tab-content" id="contractTabsContent">
 			<!-- 1. Odoo Subscription Lines / Articles Tab -->
 			<div class="tab-pane fade show active" id="lines" role="tabpanel" aria-labelledby="lines-tab">
-				<div class="card shadow-sm">
+				<div class="module-record-card card shadow-sm">
 					<div class="card-header bg-light d-flex justify-content-between align-items-center">
 						<h6 class="mb-0 fw-bold"><i class="bi bi-list-check me-2 text-primary"></i>{{ __('locale.contracts.odoo_lines_title') }}</h6>
 						<span class="badge bg-secondary">{{ $contract->lines->count() }}</span>
@@ -212,7 +218,7 @@
 
 			<!-- 2. Terms Tab -->
 			<div class="tab-pane fade" id="terms" role="tabpanel" aria-labelledby="terms-tab">
-				<div class="card shadow-sm mb-3">
+				<div class="module-record-card card shadow-sm mb-3">
 					<div class="card-body">
 						<div class="row mb-3">
 							<div class="col-md-6"><strong>{{ __('locale.contracts.terms.contract_name') }}:</strong> {{ $contract->resolvedValue('contract_name') }}</div>
@@ -243,7 +249,7 @@
 
 			<!-- 3. GTI/GTR Tab -->
 			<div class="tab-pane fade" id="gti" role="tabpanel" aria-labelledby="gti-tab">
-				<div class="card shadow-sm mb-3">
+				<div class="module-record-card card shadow-sm mb-3">
 					<div class="card-body">
 						<div class="row mb-3">
 							<div class="col-md-6"><strong>{{ __('locale.contracts.gti.panne_mineure_gti') }}:</strong> {{ $contract->resolvedValue('panne_mineure_gti') }}</div>
@@ -271,7 +277,7 @@
 
 			<!-- 4. Documents & Clauses Tab -->
 			<div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab">
-				<div class="card shadow-sm mb-3">
+				<div class="module-record-card card shadow-sm mb-3">
 					<div class="card-body">
 						<h5>{{ __('locale.contracts.documents') }}</h5>
 						@if ($contract->documents->isEmpty())

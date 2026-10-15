@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'clients')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'relations')
+@section('portal-icon', 'users')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -205,7 +211,7 @@
         @endif
 
         <!-- Odoo Sheet Container -->
-        <div class="odoo-sheet">
+        <div class="odoo-sheet company-detail-layout portal-company-sheet">
             <!-- Header / Title & Metadata Chips -->
             <div class="row align-items-start mb-2">
                 <div class="col">
@@ -287,8 +293,10 @@
                 $canViewOrders = $isAdmin || $user->hasPermission('view-orders') || $user->hasPermission('order-access');
             @endphp
 
+            <div class="company-detail-navigation">
+                <nav class="company-detail-category-nav" data-company-categories aria-label="{{ __('locale.portal.modules.company_sections') }}"></nav>
             <!-- Odoo Nav Tabs -->
-            <ul class="nav nav-tabs odoo-nav-tabs" id="clientTab" role="tablist">
+            <ul class="nav nav-tabs odoo-nav-tabs company-detail-nav" id="clientTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general-tab-pane" type="button" role="tab">{{ __('locale.equipment_show.lbl_tab_general') }}</button>
                 </li>
@@ -379,11 +387,18 @@
                 </li>
             </ul>
 
+            </div>
             <!-- Tab Content -->
-            <div class="tab-content" id="clientTabContent">
+            <div class="tab-content company-detail-content" id="clientTabContent">
                 
                 <!-- 1. GENERAL TAB -->
                 <div class="tab-pane fade show active" id="general-tab-pane" role="tabpanel" tabindex="0">
+                    <div class="company-detail-grid portal-company-overview">
+                        <article class="company-detail-stat"><small>{{ __('locale.lbl_city') }}</small><strong>{{ $client->ville ?: '—' }}</strong></article>
+                        <article class="company-detail-stat"><small>{{ __('locale.lbl_group') }}</small><strong>{{ $client->parent?->raison_sociale ?? '—' }}</strong></article>
+                        <article class="company-detail-stat"><small>{{ __('locale.menu_contracts') }}</small><strong>{{ $client->contracts->count() }}</strong></article>
+                        <article class="company-detail-stat"><small>{{ __('locale.lbl_status') }}</small><strong>{{ $contractStatusValue ? __('locale.contract_status.' . $contractStatusValue) : '—' }}</strong></article>
+                    </div>
                     <div class="row g-3">
                         <!-- Left Column: Coordonnées & Identification -->
                         <div class="col-md-6 border-end pe-md-3">

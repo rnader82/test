@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'employees')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @section('title', $employee->full_name . ' - Fiche Collaborateur')
 
@@ -30,7 +36,7 @@
         
         <!-- Left Column: Employee Profile Details -->
         <div class="col-12 col-lg-4">
-            <div class="card card-premium shadow-sm border-0 mb-4">
+            <div class="module-record-card card card-premium shadow-sm border-0 mb-4">
                 <div class="card-body p-4 text-center border-bottom">
                     <div class="avatar bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center fw-bold fs-2 mb-3 shadow-sm" style="width: 72px; height: 72px;">
                         {{ mb_substr($employee->first_name, 0, 1) }}
@@ -99,7 +105,7 @@
         <div class="col-12 col-lg-8">
             
             <!-- Active Assigned Equipments Card -->
-            <div class="card card-premium shadow-sm border-0 mb-4">
+            <div class="module-record-card card card-premium shadow-sm border-0 mb-4">
                 <div class="card-header bg-transparent border-bottom py-3 d-flex justify-content-between align-items-center">
                     <h5 class="card-title mb-0 fw-bold">
                         <i class="bi bi-laptop me-2 text-primary"></i> Matériel actuellement en possession
@@ -113,7 +119,7 @@
                                 @php $eq = $assignment->employeeEquipment; @endphp
                                 @if($eq)
                                     <div class="col-12 col-md-6">
-                                        <div class="card h-100 border shadow-none p-3 hover-shadow-sm transition">
+                                        <div class="module-record-card card h-100 border shadow-none p-3 hover-shadow-sm transition">
                                             <div class="d-flex justify-content-between align-items-start mb-2">
                                                 <div class="d-flex align-items-center gap-2">
                                                     @if($eq->type === 'telephone')
@@ -170,7 +176,7 @@
             </div>
 
             <!-- Complete Assignment History Timeline -->
-            <div class="card card-premium shadow-sm border-0">
+            <div class="module-record-card card card-premium shadow-sm border-0">
                 <div class="card-header bg-transparent border-bottom py-3">
                     <h5 class="card-title mb-0 fw-bold">
                         <i class="bi bi-clock-history me-2 text-primary"></i> Historique complet des affectations

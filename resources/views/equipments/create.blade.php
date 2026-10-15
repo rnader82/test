@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'equipments')
+@section('portal-page', 'create')
+@section('portal-kind', 'form')
+@section('portal-family', 'catalog')
+@section('portal-icon', 'tags')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -524,7 +530,7 @@
     $canChangePrice = Auth::user()?->canChangeEquipmentPrice() ?? false;
 @endphp
 <div class="content-wrapper">
-    <div class="container-xxl flex-grow-1">
+    <div class="container-xxl flex-grow-1 article-detail-shell">
         @if ($errors->any())
             <div class="alert alert-danger border-0 shadow-sm py-2 px-3 mb-2 small">
                 <ul class="mb-0 ps-3">
@@ -539,7 +545,7 @@
             @csrf
 
             <!-- Odoo Sheet Container -->
-            <div class="odoo-sheet">
+            <div class="odoo-sheet article-detail-card">
                 <!-- Top Bar inside sheet: Checkboxes & Image -->
                 <div class="d-flex align-items-center justify-content-between mb-2 flex-shrink-0">
                     <div class="d-flex flex-wrap align-items-center gap-3">
@@ -576,7 +582,7 @@
                 </div>
 
                 <!-- Odoo Nav Tabs -->
-                <ul class="nav nav-tabs odoo-nav-tabs" id="equipmentTab" role="tablist">
+                <ul class="nav nav-tabs odoo-nav-tabs article-tabs" id="equipmentTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general-tab-pane" type="button" role="tab">{{ __('locale.equipment_show.lbl_tab_general') }}</button>
                     </li>
@@ -613,7 +619,7 @@
                 </ul>
 
                 <!-- Tab Content -->
-                <div class="tab-content" id="equipmentTabContent">
+                <div class="tab-content article-detail-body" id="equipmentTabContent">
                     <!-- Tab 1: Informations Générales -->
                     <div class="tab-pane fade show active" id="general-tab-pane" role="tabpanel" tabindex="0">
                         <div class="row g-3">
@@ -1277,7 +1283,7 @@
 
                     <!-- Tab 7: Combos / Produits associés -->
                     <div class="tab-pane fade" id="combos-tab-pane" role="tabpanel" tabindex="0">
-                        <div class="card border shadow-sm mb-3">
+                        <div class="module-form-card card border shadow-sm mb-3">
                             <div class="card-header bg-white py-2 d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center gap-2">
                                     <i class="bi bi-layers text-primary fs-5"></i>
@@ -1450,7 +1456,7 @@
 
                     <!-- Tab 8: Composants du Kit -->
                     <div class="tab-pane fade" id="kit-tab-pane" role="tabpanel" tabindex="0">
-                        <div class="card border shadow-sm mb-3">
+                        <div class="module-form-card card border shadow-sm mb-3">
                             <div class="card-header bg-white py-2 d-flex justify-content-between align-items-center flex-wrap gap-2">
                                 <div class="d-flex align-items-center gap-2 flex-wrap">
                                     <i class="bi bi-box-seam text-primary fs-5"></i>

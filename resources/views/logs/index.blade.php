@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'logs')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'admin')
+@section('portal-icon', 'gear')
+
 
 @section('content')
 <div class="container-fluid">
@@ -66,7 +72,7 @@
 
     <div class="card shadow-sm">
         <div class="table-responsive">
-            <table class="table table-hover table-striped align-middle mb-0" style="table-layout: fixed; width: 100%;">
+            <table class="module-table table table-hover table-striped align-middle mb-0" style="table-layout: fixed; width: 100%;">
                 <thead class="table-light">
                     <tr>
                         <th style="width: 6%;">{{ __('locale.lbl_id') }}</th>

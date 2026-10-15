@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'seeds')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'admin')
+@section('portal-icon', 'gear')
+
 
 @section('content')
 	<div class="content-wrapper">

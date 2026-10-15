@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'warranty_types')
+@section('portal-page', 'edit')
+@section('portal-kind', 'form')
+@section('portal-family', 'admin')
+@section('portal-icon', 'gear')
+
 
 @section('title', 'Modifier type de garantie SAV')
 

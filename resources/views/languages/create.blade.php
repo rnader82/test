@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'languages')
+@section('portal-page', 'create')
+@section('portal-kind', 'form')
+@section('portal-family', 'admin')
+@section('portal-icon', 'gear')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -25,7 +31,7 @@
 
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <div class="card shadow-sm border-0">
+                <div class="module-form-card card shadow-sm border-0">
                     <div class="card-header bg-light border-0 py-3">
                         <h5 class="card-title mb-0 fs-6 fw-bold text-secondary">
                             <i class="bi bi-translate me-2 text-primary"></i>Informations de la langue

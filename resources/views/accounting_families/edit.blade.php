@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'accounting_families')
+@section('portal-page', 'edit')
+@section('portal-kind', 'form')
+@section('portal-family', 'catalog')
+@section('portal-icon', 'tags')
+
 
 @section('title', __('locale.edit_accounting_family') ?? 'Modifier la famille comptable')
 
@@ -14,7 +20,7 @@
 @section('content')
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1">
-        <div class="card card-premium p-4">
+        <div class="module-form-card card card-premium p-4">
             <form action="{{ route('accounting_families.update', $accountingFamily->id) }}" method="POST">
                 @csrf
                 @method('PUT')

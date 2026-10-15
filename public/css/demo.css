@@ -2158,3 +2158,290 @@ html:has(.issue-detail), body:has(.issue-detail) { overflow:hidden; }
 .issue-detail .bi-pencil-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
 .issue-detail .detail-header-actions .btn, .issue-detail .technical-case-save { font-size:16px; }
 @media(max-width:600px) { .issue-detail .detail-header-actions .btn, .issue-detail .technical-case-save { font-size:12px; } }
+
+/* Shared module layouts from the HTML reference. Each Blade page selects its profile. */
+.novalyo-portal.portal-module-page .module-topbar { min-height:88px; padding:16px 26px; gap:14px; }
+.novalyo-portal.portal-module-page .topbar-left-wrapper { flex:1 1 360px; }
+.novalyo-portal.portal-module-page .top-actions { flex:0 1 auto; flex-wrap:wrap; }
+.novalyo-portal.portal-module-page .title-line h1 { font-size:21px; line-height:1.3; color:#162033!important; }
+.novalyo-portal.portal-module-page .portal-module-icon { flex:0 0 42px; }
+.novalyo-portal.portal-module-page .portal-module-description { margin:4px 0 0; color:#7b8492; font-size:13px; line-height:1.45; }
+.novalyo-portal.portal-module-page .portal-module-content { display:block; padding:20px 26px 32px; }
+.novalyo-portal .portal-module-content > .content-wrapper,
+.novalyo-portal .portal-module-content .portal-module-list-body > .content-wrapper,
+.novalyo-portal .portal-module-content .content-wrapper > .container-xxl { height:auto!important; min-height:0!important; overflow:visible!important; display:block!important; }
+.novalyo-portal .portal-module-content > .container-fluid { padding:0!important; }
+.novalyo-portal .portal-module-content .container-xxl { max-width:none; }
+.novalyo-portal .portal-module-list { padding:0; overflow:visible; }
+.novalyo-portal .portal-module-tools { flex-wrap:wrap; min-height:66px; }
+.novalyo-portal .portal-module-search { flex:1 1 260px; max-width:390px; min-width:160px; }
+.novalyo-portal .portal-module-search:empty { display:none; }
+.novalyo-portal .portal-module-search .search-bar-mockup { width:100%; min-width:0; margin:0; }
+.novalyo-portal .portal-module-search .search-bar-mockup input { height:38px; width:100%; min-width:0; }
+.novalyo-portal .portal-module-tools .portal-module-existing-tools { display:contents; }
+.novalyo-portal .portal-module-tools .toolbar-right { display:contents; }
+.novalyo-portal .portal-module-tools .toolbar-left { order:20; margin-left:auto; font-size:11px; color:#7b8492; }
+.novalyo-portal .portal-module-tools #portal-density { order:2; height:38px; }
+.novalyo-portal .portal-module-tools #portal-columns-toggle { order:3; height:38px; }
+.novalyo-portal .portal-module-tools .module-filter { order:4; height:38px; font-size:12px; }
+.novalyo-portal .portal-module-tools [data-bs-toggle="collapse"] { order:5; border:1px solid var(--border)!important; }
+.novalyo-portal .portal-module-list-body { min-width:0; }
+.novalyo-portal .portal-module-list-body .container-xxl { padding:0!important; }
+.novalyo-portal .portal-module-list-body .card { border:0!important; border-radius:0; box-shadow:none!important; margin-bottom:0!important; }
+.novalyo-portal .portal-module-list-body .card-body:has(>table),
+.novalyo-portal .portal-module-list-body .card-body:has(>.table-responsive) { padding:0; }
+.novalyo-portal .portal-module-list-body > .collapse,
+.novalyo-portal .portal-module-list-body #advancedFilters { padding:16px; border-bottom:1px solid var(--border); background:#fafbfc; }
+.novalyo-portal .portal-module-list-body .table-responsive,
+.novalyo-portal .portal-module-list-body .module-table-wrap { width:100%; max-width:100%; overflow-x:auto; border:0; }
+.novalyo-portal .portal-module-list .module-table { margin:0; border:0; table-layout:auto; }
+.novalyo-portal .portal-module-list .module-table th { padding:13px 15px!important; border-width:0 0 1px!important; border-color:var(--border)!important; background:#fafbfc!important; color:#738096!important; font-size:12px!important; font-weight:700; text-transform:uppercase; letter-spacing:.03em; }
+.novalyo-portal .portal-module-list .module-table td { padding:15px!important; border-width:0 0 1px!important; border-color:#edf0f4!important; font-size:14px!important; line-height:1.5; color:#334155; vertical-align:middle; }
+.novalyo-portal .portal-module-list .module-table tbody tr:hover { background:#faf9ff; }
+.novalyo-portal .portal-module-list .module-table td:first-child { font-weight:700; color:#263244; }
+.novalyo-portal .portal-module-list .pagination { padding:12px 16px; margin:0; }
+.novalyo-portal .portal-module-list .module-kanban { border-radius:0 0 10px 10px; }
+.novalyo-portal .portal-module-list .module-record-link { margin-top:10px; font-size:12px; color:var(--primary); }
+.novalyo-portal .portal-module-empty { margin:0; text-align:center; color:#7b8492; }
+.novalyo-portal .module-form-card, .novalyo-portal .module-record-card { border-radius:10px; border:1px solid var(--border)!important; box-shadow:none!important; }
+.novalyo-portal .module-form-card > .card-header, .novalyo-portal .module-record-card > .card-header { padding:16px 20px!important; background:#fff!important; }
+.novalyo-portal .module-form-card > .card-body, .novalyo-portal .module-record-card > .card-body { padding:20px!important; }
+.novalyo-portal[data-portal-kind="form"] .portal-module-content > .content-wrapper .row.justify-content-center > [class*="col-"] { width:100%; max-width:1100px; }
+.novalyo-portal.portal-module-page .odoo-sheet { min-height:0!important; height:auto!important; flex:none; overflow:visible; }
+.novalyo-portal.portal-module-page .odoo-sheet > .tab-content { flex:none; min-height:0; overflow:visible; }
+.novalyo-portal.portal-module-page .odoo-nav-tabs { scrollbar-width:thin!important; }
+.novalyo-portal.portal-module-page .odoo-nav-tabs::-webkit-scrollbar { display:block!important; height:4px!important; }
+.novalyo-portal.portal-module-page .odoo-nav-tabs::-webkit-scrollbar-thumb { background:#d7c6d5; border-radius:4px; }
+.novalyo-portal .portal-company-sheet { padding:0!important; border:0!important; background:transparent!important; }
+.novalyo-portal .portal-company-sheet > .row { margin:0 0 14px!important; padding:18px 20px; background:#fff; border:1px solid var(--border); border-radius:10px; }
+.novalyo-portal .portal-company-sheet .company-detail-navigation { border:1px solid var(--border); border-radius:10px 10px 0 0; }
+.novalyo-portal .portal-company-sheet .company-detail-nav { margin:0!important; padding:7px 20px; border-bottom:0; gap:6px; }
+.novalyo-portal .portal-company-sheet .company-detail-nav .nav-link { height:35px; padding:0 12px!important; border:1px solid transparent!important; border-radius:8px; display:inline-flex; align-items:center; font-size:12px; }
+.novalyo-portal .portal-company-sheet .company-detail-nav .nav-link.active { border-color:#e2cce1!important; background:var(--novalyo-soft)!important; color:var(--primary)!important; }
+.novalyo-portal .portal-company-sheet .company-detail-content { margin:0!important; padding:24px 28px!important; max-width:none; background:#fff; border:1px solid var(--border); border-top:0; border-radius:0 0 10px 10px; }
+.novalyo-portal .portal-company-sheet .odoo-field-row { padding:8px 0; margin:0; border-bottom:1px solid #edf0f4; align-items:flex-start; font-size:13px; }
+.novalyo-portal .portal-company-sheet .odoo-field-label { color:#7b8492!important; font-weight:500; }
+.novalyo-portal .portal-company-sheet .notes-title { border:0; margin:0 0 12px; color:#263244; font-size:13px; text-transform:none; }
+.novalyo-portal .article-detail-shell { padding:0!important; gap:16px; }
+.novalyo-portal .article-detail-card.odoo-sheet { padding:0!important; border:1px solid var(--border); border-radius:10px; box-shadow:none; }
+.novalyo-portal .article-product-header.row { margin:0; padding:18px 20px 14px; }
+.novalyo-portal .article-product-header .odoo-title-display { font-size:20px; font-weight:700; }
+.novalyo-portal .article-tabs.nav-tabs { padding:0 18px; gap:4px; margin:0!important; border-top:1px solid #eef1f4; }
+.novalyo-portal .article-tabs .nav-link { display:flex; align-items:center; min-height:46px; padding:0 12px!important; color:#526078!important; border-bottom:3px solid transparent!important; font-size:12px; }
+.novalyo-portal .article-tabs .nav-link.active { color:var(--primary)!important; background:var(--novalyo-soft)!important; border-bottom-color:var(--primary)!important; }
+.novalyo-portal .article-detail-body { padding:20px 22px!important; }
+.novalyo-portal .article-detail-body .odoo-field-row { padding:9px 0; border-bottom:1px solid #edf0f4; margin:0; align-items:flex-start; font-size:13px; }
+.novalyo-portal .article-detail-body .odoo-field-label { color:#7b8492!important; font-weight:500; }
+.novalyo-portal .article-related-tabs { gap:4px; border-top:0; }
+.novalyo-portal .article-related-tabs .nav-link { min-height:46px; font-size:12px; }
+.novalyo-portal[data-portal-module="repairs"][data-portal-page="show"] .sidebar,
+.novalyo-portal[data-portal-module="repairs"][data-portal-page="show"] .global-utility-bar,
+.novalyo-portal[data-portal-module="repairs"][data-portal-page="show"] .global-breadcrumb { display:none!important; }
+.novalyo-portal[data-portal-module="repairs"][data-portal-page="show"] .layout-page { position:fixed; inset:0; z-index:180; background:#f5f7fa; overflow:auto!important; }
+.novalyo-portal[data-portal-module="repairs"][data-portal-page="show"] .topbar { position:sticky; top:0; z-index:20; padding:13px 22px; min-height:76px; }
+.novalyo-portal[data-portal-module="repairs"][data-portal-page="show"] .portal-module-content { padding:18px 22px; }
+.novalyo-portal .repair-summary-grid { margin-bottom:16px; }
+.novalyo-portal .repair-summary-grid a { color:inherit; }
+.novalyo-portal .repair-record-context { margin-bottom:16px; padding:14px 18px; border:1px solid var(--border); border-radius:10px; background:#fff; }
+.novalyo-portal[data-portal-module="tech_intervs"] .outer-container-card { border:0; padding:0; background:transparent; box-shadow:none; }
+.novalyo-portal[data-portal-module="tech_intervs"] .inner-sub-card { padding:16px; background:#fff; border:1px solid var(--border); border-radius:10px; box-shadow:none; }
+.novalyo-portal[data-portal-kind="performance"] .performance-card,
+.novalyo-portal[data-portal-kind="report"] .performance-card { border:1px solid var(--border); border-radius:10px; background:#fff; box-shadow:none!important; }
+.novalyo-portal[data-portal-kind="workflow"] .preventive-panel { padding:0; border:1px solid var(--border); border-radius:10px; box-shadow:none; }
+.novalyo-portal[data-portal-kind="planning"] .planning-container { height:calc(100dvh - 225px)!important; min-height:420px; border:1px solid var(--border); border-radius:10px; background:#fff!important; overflow:hidden; }
+.novalyo-portal[data-portal-kind="planning"] .resource-grid th { font-size:12px; color:#738096; background:#fafbfc!important; }
+.novalyo-portal[data-portal-kind="planning"] .resource-grid td { border-color:#edf0f4; font-size:13px; }
+.novalyo-portal[data-novalyo-density="compact"] .portal-module-list .module-table td { padding-top:8px!important; padding-bottom:8px!important; font-size:12px!important; }
+.novalyo-portal[data-novalyo-density="large"] .portal-module-list .module-table td { padding-top:20px!important; padding-bottom:20px!important; font-size:15px!important; }
+@media(max-width:1000px) {
+    .novalyo-portal.portal-module-page .module-topbar { flex-wrap:wrap; }
+    .novalyo-portal.portal-module-page .topbar-left-wrapper { flex-basis:100%; }
+    .novalyo-portal.portal-module-page .top-actions { margin-left:0; width:100%; justify-content:flex-start; }
+}
+@media(max-width:700px) {
+    .novalyo-portal.portal-module-page .module-topbar { padding:14px 16px; }
+    .novalyo-portal.portal-module-page .portal-module-content { padding:14px 12px 24px; }
+    .novalyo-portal .portal-module-tools { gap:8px; }
+    .novalyo-portal .portal-module-search { max-width:none; flex-basis:100%; }
+    .novalyo-portal .portal-module-tools .toolbar-left { flex-basis:100%; margin:0; }
+    .novalyo-portal .portal-company-sheet .company-detail-content { padding:16px!important; }
+    .novalyo-portal .portal-company-sheet .odoo-field-row { flex-wrap:wrap; gap:4px; }
+    .novalyo-portal .portal-company-sheet .odoo-field-label,
+    .novalyo-portal .portal-company-sheet .odoo-field-value { width:100%; overflow-wrap:anywhere; }
+    .novalyo-portal .article-detail-body { padding:16px!important; }
+    .novalyo-portal .article-product-header .col { min-width:0; }
+    .novalyo-portal .article-product-header .odoo-title-display { font-size:17px; overflow-wrap:anywhere; }
+    .novalyo-portal .repair-summary-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+.novalyo-portal.portal-module-page .topbar-left-wrapper:has(.title-line a[href]) > .portal-module-icon { display:none; }
+.novalyo-portal .portal-company-overview { margin-bottom:22px; }
+.novalyo-portal .portal-company-sheet > .row { padding:12px 18px; }
+.novalyo-portal .portal-company-sheet > .row .odoo-top-label,
+.novalyo-portal .portal-company-sheet > .row .odoo-img-box,
+.novalyo-portal .portal-company-sheet > .row .d-flex.mb-2 { display:none!important; }
+.novalyo-portal .repair-summary-card small { display:block; font-size:11px; }
+.novalyo-portal .repair-summary-card strong { font-size:16px; overflow-wrap:anywhere; }
+.novalyo-portal .article-detail-card > .notes-title,
+.novalyo-portal .article-detail-card > .notes-title + div { margin-left:22px; margin-right:22px; }
+.novalyo-portal .portal-module-summary { padding:16px; margin:0; background:#f8fafc; border-bottom:1px solid var(--border); }
+.novalyo-portal .portal-module-summary small { display:block; color:#7b8492; font-size:11px; }
+.novalyo-portal .portal-module-summary strong { display:block; margin-top:6px; color:#263244; font-size:22px; }
+
+.novalyo-portal .portal-module-list .module-table tr { border:0!important; }
+.novalyo-portal .portal-module-tools .toolbar-left { display:flex; flex-wrap:wrap; gap:6px; min-width:0; max-width:100%; }
+.novalyo-portal .portal-module-tools .module-filter { max-width:100%; }
+/* Existing Blade status/type badges use these names throughout the modules. */
+.novalyo-portal .badge-matte-primary { background:var(--novalyo-soft); color:var(--primary); border-color:#e2cce1; }
+.novalyo-portal .badge-matte-success { background:#eefbf2; color:#14813b; border-color:#d9f3e2; }
+.novalyo-portal .badge-matte-info { background:#eef7ff; color:#075fb8; border-color:#bfdbfe; }
+.novalyo-portal .badge-matte-warning { background:#fff7e6; color:#b45309; border-color:#fed7aa; }
+.novalyo-portal .badge-matte-danger { background:#fff0f1; color:#c81e1e; border-color:#fecaca; }
+.novalyo-portal .badge-matte-secondary { background:#f4f5f7; color:#667085; border-color:#e7eaf0; }
+.novalyo-portal .badge-matte-dark { background:#eef1f4; color:#263244; border-color:#dfe3e8; }
+
+/* Local glyph coverage for the remaining legacy module controls. */
+.novalyo-portal .bi-arrow-counterclockwise::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-arrow-down-left-square::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-arrow-down-right::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-arrow-down-short::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-arrow-down-up::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-arrow-left-right::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-arrow-repeat::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-arrow-return-left::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-arrow-return-right::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-arrow-up-right::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-arrow-up-short::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-arrows-collapse::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-arrows-expand::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-arrows-move::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-award-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-bank::before,
+.novalyo-portal .bi-bank2::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-bezier2::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-bookmark-plus::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-box-arrow-in-down::before,
+.novalyo-portal .bi-inbox::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-box-arrow-up-right::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-boxes::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-briefcase-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-building-check::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-buildings::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-calendar-check::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-calendar-date::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-calendar-event::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-calendar-x::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-camera::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-camera-video-off::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-card-heading::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-card-text::before,
+.novalyo-portal .bi-file-text::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-cart::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-cart-plus::before,
+.novalyo-portal .bi-cart-x::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-cash-coin::before,
+.novalyo-portal .bi-currency-euro::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-chat-left-text::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-chat-quote::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-check-circle::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-check-circle-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-check-square-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-check2::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-check2-all::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-chevron-up::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-circle::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-clipboard::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-cloud-arrow-up::before,
+.novalyo-portal .bi-cloud-upload::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-cloud-arrow-up-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-cloud-check::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-cloud-check-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-cloud-slash-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-cone-striped::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-cpu::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-credit-card::before,
+.novalyo-portal .bi-credit-card-2-front::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-currency-dollar::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-currency-exchange::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-dash-circle::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-dash-lg::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-diagram-3-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-display::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-exclamation-circle::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-exclamation-circle-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-file-earmark::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-file-earmark-arrow-down::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-file-earmark-check::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-file-earmark-excel::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-file-earmark-lock::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-file-earmark-pdf::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-file-earmark-plus::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-file-earmark-x::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-files::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-flag::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-flag-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-floppy::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-folder-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-folder-plus::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-folder-x::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-funnel::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-funnel-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-gear-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-gear-wide-connected::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-geo-alt-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-graph-up-arrow::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-grid-3x3-gap::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-grid-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-grip-vertical::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-hash::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-info-circle-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-journal-x::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-key::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-lightning-charge-fill::before,
+.novalyo-portal .bi-lightning-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-list-stars::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-list-ul::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-lock::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-magic::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-palette-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-patch-check::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-patch-check-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-people-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-person-badge::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-person-check-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-person-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-person-plus::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-person-workspace::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-person-x::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-phone::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-phone-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-pie-chart::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-pin-map::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-play-circle::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-plus-circle::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-plus-circle-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-plus-square::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-question-circle::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-reception-3::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-send-check::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-shield-exclamation::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-shield-lock-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-shield-plus::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-shield-x::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-slash-circle::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-slash-lg::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-sliders::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-speedometer::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-square::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-sticky::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-tag-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-text-indent-left::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-toggles::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-trash-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-unlock-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-upc-scan::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-wallet2::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-window::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-window-sidebar::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-wrench-adjustable::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-x-circle::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.novalyo-portal .bi-x-circle-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }

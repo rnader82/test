@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'knowledge_base')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -22,7 +28,7 @@
 @section('content')
 <div class="container">
 
-    <div class="card">
+    <div class="module-record-card card">
         <div class="card-header d-flex justify-content-between align-items-center">
             @php
                 $typeBadge = match($knowledgeBase->type) {

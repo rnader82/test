@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'todos')
+@section('portal-page', 'edit')
+@section('portal-kind', 'form')
+@section('portal-family', 'dashboard')
+@section('portal-icon', 'house')
+
 
 @section('title', __('locale.todo.edit_title', ['title' => $todo->title]))
 
@@ -14,7 +20,7 @@
 @section('content')
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1">
-        <div class="card card-premium">
+        <div class="module-form-card card card-premium">
             <div class="card-body p-4">
                 <form action="{{ route('todos.update', $todo) }}" method="POST">
                     @csrf

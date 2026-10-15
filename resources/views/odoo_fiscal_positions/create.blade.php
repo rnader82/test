@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'odoo_fiscal_positions')
+@section('portal-page', 'create')
+@section('portal-kind', 'form')
+@section('portal-family', 'catalog')
+@section('portal-icon', 'tags')
+
 
 @section('title', __('locale.add_fiscal_position') ?? 'Ajouter une position fiscale')
 
@@ -14,7 +20,7 @@
 @section('content')
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1">
-        <div class="card card-premium p-4">
+        <div class="module-form-card card card-premium p-4">
             <form action="{{ route('odoo_fiscal_positions.store') }}" method="POST">
                 @csrf
                 <div class="row g-3">

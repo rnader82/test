@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'purchases')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'purchasing')
+@section('portal-icon', 'cart-flatbed')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -30,7 +36,7 @@
     <div class="row">
         <!-- Purchase Info -->
         <div class="col-md-4">
-            <div class="card shadow-sm border-0 mb-4">
+            <div class="module-record-card card shadow-sm border-0 mb-4">
                 <div class="card-header bg-primary text-white border-0">
                     <h5 class="mb-0 text-white"><i class="bi bi-info-circle me-2 text-white"></i>{{ __('locale.lbl_information') ?? 'Détails de l\'Achat' }}</h5>
                 </div>
@@ -74,7 +80,7 @@
 
         <!-- Purchase Items -->
         <div class="col-md-8">
-            <div class="card shadow-sm border-0 animate__animated animate__fadeIn">
+            <div class="module-record-card card shadow-sm border-0 animate__animated animate__fadeIn">
                 <div class="card-header border-bottom d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">{{ __('locale.purchase_items') ?? 'Équipements Commandés' }}</h5>
                     <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addEquipmentModal">

@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'quote-reserves')
+@section('portal-page', 'edit')
+@section('portal-kind', 'form')
+@section('portal-family', 'quotes')
+@section('portal-icon', 'file-lines')
+
 
 @section('title', 'Modifier la réserve de devis')
 
@@ -12,7 +18,7 @@
         <p class="text-muted">Modifiez les informations de la réserve réutilisable.</p>
     </div>
 
-    <div class="card card-premium shadow-sm border-0 p-4">
+    <div class="module-form-card card card-premium shadow-sm border-0 p-4">
         <form method="POST" action="{{ route('quote-reserves.update', $reserve) }}">
             @csrf
             @method('PUT')

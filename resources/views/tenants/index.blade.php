@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'tenants')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'admin')
+@section('portal-icon', 'gear')
+
 
 @section('title', __('locale.Tenants'))
 
@@ -28,7 +34,7 @@
         <div class="card card-premium">
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0">
+                    <table class="module-table table table-hover align-middle mb-0">
                         <thead>
                             <tr>
                                 <th>{{ __('locale.id') }}</th>

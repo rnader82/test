@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'projects')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'adv')
+@section('portal-icon', 'boxes-stacked')
+
 
 @section('title', 'Détails du Projet - ' . $project->name)
 
@@ -33,7 +39,7 @@
         </div>
     @endif
 
-    <div class="card mb-4">
+    <div class="module-record-card card mb-4">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs" id="projectTabs" role="tablist">
                 <li class="nav-item" role="presentation">

@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'prospects')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'crm')
+@section('portal-icon', 'arrow-trend-up')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -24,7 +30,7 @@
     <div class="row">
         <!-- Main Details Column -->
         <div class="col-lg-8">
-            <div class="card shadow-sm border-0 mb-4">
+            <div class="module-record-card card shadow-sm border-0 mb-4">
                 <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center border-bottom">
                     <h5 class="mb-0 text-primary"><i class="bi bi-info-circle-fill me-2"></i>Détails du Prospect</h5>
                     <div>
@@ -118,7 +124,7 @@
             </div>
 
             <!-- Construction Reports Card -->
-            <div class="card shadow-sm border-0 mb-4">
+            <div class="module-record-card card shadow-sm border-0 mb-4">
                 <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
                     <h5 class="mb-0 text-primary"><i class="bi bi-file-earmark-text-fill me-2"></i>Comptes Rendus de Chantier</h5>
                     <a href="{{ route('construction-reports.create', ['type' => 'prospect', 'prospect_id' => $prospect->id]) }}" class="btn btn-sm btn-primary">
@@ -172,7 +178,7 @@
         <!-- Sidebar Actions/Notes Column -->
         <div class="col-lg-4">
             <!-- Convert Card -->
-            <div class="card border-0 shadow-sm mb-4 bg-light-success border-start border-success border-4" style="background-color: #f0fdf4;">
+            <div class="module-record-card card border-0 shadow-sm mb-4 bg-light-success border-start border-success border-4" style="background-color: #f0fdf4;">
                 <div class="card-body py-4">
                     <h5 class="text-success fw-bold mb-2"><i class="bi bi-person-check-fill me-2"></i>Convertir en Client</h5>
                     <p class="small text-muted mb-4">
@@ -190,7 +196,7 @@
             </div>
 
             <!-- Notes Card -->
-            <div class="card shadow-sm border-0 mb-4">
+            <div class="module-record-card card shadow-sm border-0 mb-4">
                 <div class="card-header bg-white py-3 border-bottom">
                     <h5 class="mb-0 text-primary"><i class="bi bi-journal-text me-2"></i>Commentaires & Bloc-notes</h5>
                 </div>

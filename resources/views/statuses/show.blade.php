@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'statuses')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'admin')
+@section('portal-icon', 'gear')
+
 
 @section('title', __('locale.status') . ': ' . $status->translated_name)
 
@@ -31,7 +37,7 @@
     <div class="container-xxl flex-grow-1">
         <div class="row justify-content-center">
             <div class="col-lg-6">
-                <div class="card card-premium shadow-sm border-0">
+                <div class="module-record-card card card-premium shadow-sm border-0">
                     <div class="card-header bg-light border-bottom py-3">
                         <h5 class="card-title mb-0 fs-6 fw-bold text-dark">
                             <i class="bi bi-info-circle me-2 text-primary"></i>{{ __('locale.status') }}

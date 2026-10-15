@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'contacts')
+@section('portal-page', 'create')
+@section('portal-kind', 'form')
+@section('portal-family', 'relations')
+@section('portal-icon', 'users')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -31,7 +37,7 @@
             <div class="row g-4">
                 <!-- Main Form Card -->
                 <div class="col-xl-8 col-lg-7">
-                    <div class="card shadow-sm mb-4 border-0">
+                    <div class="module-form-card card shadow-sm mb-4 border-0">
                         <div class="card-body p-4">
                             <!-- Odoo Type Radio Selector -->
                             <div class="odoo-type-selector d-flex align-items-center flex-wrap gap-4 pb-3 mb-4 border-bottom">
@@ -245,7 +251,7 @@
                 <!-- Right Settings Card -->
                 <div class="col-xl-4 col-lg-5">
                     <!-- Client Assignment Card -->
-                    <div class="card shadow-sm mb-4 border-0">
+                    <div class="module-form-card card shadow-sm mb-4 border-0">
                         <div class="card-header py-3 bg-light border-0">
                             <h5 class="card-title mb-0 fs-6 fw-bold text-secondary">{{ __('locale.lbl_client') }}</h5>
                         </div>
@@ -275,7 +281,7 @@
                     </div>
 
                     <!-- Options Card -->
-                    <div class="card shadow-sm mb-4 border-0">
+                    <div class="module-form-card card shadow-sm mb-4 border-0">
                         <div class="card-header py-3 bg-light border-0">
                             <h5 class="card-title mb-0 fs-6 fw-bold text-secondary">{{ __('locale.system') }}</h5>
                         </div>
@@ -306,7 +312,7 @@
                     </div>
 
                     <!-- Action Buttons -->
-                    <div class="card shadow-sm border-0">
+                    <div class="module-form-card card shadow-sm border-0">
                         <div class="card-body d-grid gap-2">
                             <button type="submit" class="btn btn-primary btn-lg w-100">
                                 <i class="bi bi-check-lg me-1"></i> {{ __('locale.save') }}

@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'quote-templates')
+@section('portal-page', 'edit')
+@section('portal-kind', 'form')
+@section('portal-family', 'quotes')
+@section('portal-icon', 'file-lines')
+
 
 @section('title', 'Modifier le modèle de devis - ' . $template->name)
 

@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'user_assignments')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @section('title', $user->name)
 
@@ -26,7 +32,7 @@
     <div class="container-xxl flex-grow-1">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <div class="card card-premium shadow-sm border-0">
+                <div class="module-record-card card card-premium shadow-sm border-0">
                     <div class="card-header bg-light border-bottom py-3 d-flex align-items-center gap-3">
                         <div class="d-flex align-items-center justify-content-center bg-primary-subtle text-primary fw-bold rounded-circle" 
                              style="width: 44px; height: 44px; font-size: 1rem; text-transform: uppercase;">

@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'repairs')
+@section('portal-page', 'print-form')
+@section('portal-kind', 'document')
+@section('portal-family', 'technical')
+@section('portal-icon', 'screwdriver-wrench')
+
 
 @section('content')
 <style>

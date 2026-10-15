@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'suppliers')
+@section('portal-page', 'index')
+@section('portal-kind', 'list')
+@section('portal-family', 'purchasing')
+@section('portal-icon', 'cart-flatbed')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -35,7 +41,7 @@
             <div class="alert alert-danger border-0 shadow-sm mb-4">{{ session('error') }}</div>
         @endif
 
-        <div class="table-toolbar">
+        <div class="table-toolbar portal-original-toolbar">
             <div class="toolbar-left">
                 <span class="text-muted small">
                     Résultats {{ $suppliers->firstItem() ?? 0 }}-{{ $suppliers->lastItem() ?? 0 }} sur {{ $suppliers->total() ?? 0 }}

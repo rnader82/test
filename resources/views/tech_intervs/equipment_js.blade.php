@@ -3,7 +3,7 @@
 @endphp
 
 <script>
-    
+
 (() => {
     window.techIntervId = window.techIntervId || @json($techIntervId);
     $('.select2').select2({ width: '100%' });

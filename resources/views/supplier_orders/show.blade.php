@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('portal-module', 'supplier_orders')
+@section('portal-page', 'show')
+@section('portal-kind', 'record')
+@section('portal-family', 'purchasing')
+@section('portal-icon', 'cart-flatbed')
+
 
 @section('navbar-title')
     <div class="d-flex align-items-center gap-2">
@@ -30,7 +36,7 @@
     <div class="row">
         <!-- Supplier Order Info -->
         <div class="col-md-4 mb-4">
-            <div class="card card-premium shadow-sm border-0 h-100">
+            <div class="module-record-card card card-premium shadow-sm border-0 h-100">
                 <div class="card-header bg-primary text-white border-0 py-3">
                     <h5 class="mb-0 text-white"><i class="bi bi-info-circle me-2 text-white"></i>Détails de la Commande</h5>
                 </div>
@@ -143,7 +149,7 @@
 
         <!-- Supplier Order Lines -->
         <div class="col-md-8 mb-4">
-            <div class="card card-premium shadow-sm border-0 h-100">
+            <div class="module-record-card card card-premium shadow-sm border-0 h-100">
                 <div class="card-header border-bottom d-flex justify-content-between align-items-center py-3 bg-light">
                     <h5 class="mb-0 text-dark fw-bold"><i class="bi bi-list-stars me-2"></i>Lignes de la Commande</h5>
                     @if($supplierOrder->modifiable)
