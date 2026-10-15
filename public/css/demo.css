@@ -2053,3 +2053,108 @@ h1, h2, h3, h4, h5, h6 {
 .novalyo-portal .top-actions .btn-primary { order:5; }
 .novalyo-portal .btn-danger { border-color:#dc3545!important; }
 .novalyo-portal .btn-success { border-color:#15803d!important; }
+
+/* Ticket record: the supplied HTML opens this workspace across the viewport. */
+html:has(.issue-detail), body:has(.issue-detail) { overflow:hidden; }
+.novalyo-portal:has(.issue-detail) .sidebar,
+.novalyo-portal:has(.issue-detail) .global-utility-bar,
+.novalyo-portal:has(.issue-detail) .global-breadcrumb,
+.novalyo-portal:has(.issue-detail) .topbar { display:none!important; }
+.issue-detail .detail-back { display:grid; place-items:center; flex:0 0 40px; text-decoration:none; }
+.issue-detail .detail-heading h1 { margin:0; font-size:20px; font-weight:700; line-height:1.35; overflow-wrap:anywhere; }
+.issue-detail .detail-header-actions .btn { min-height:40px; padding:10px 14px; white-space:nowrap; }
+.issue-detail .detail-header-actions .dropdown { flex:0 0 auto; }
+.issue-detail .detail-body { min-height:0; overscroll-behavior:contain; }
+.issue-detail .detail-main { min-width:0; overflow:hidden; }
+.issue-detail .issue-status { flex-basis:100%; justify-content:flex-start; background:var(--issue-status-bg); color:var(--issue-status-color); }
+.issue-detail .detail-summary .assignee-list { display:inline-flex; flex-wrap:wrap; gap:4px; }
+.issue-detail .technical-case-banner { margin-top:0; }
+.issue-detail .technical-case-field label { margin:0; }
+.issue-detail .issue-workflow-value { display:flex; align-items:center; justify-content:space-between; gap:8px; height:35px; padding:0 10px; border:1px solid #dbe0e8; border-radius:7px; background:#fff; color:#263244; font-size:10px; text-align:left; }
+.issue-detail .issue-workflow-value span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.issue-detail .technical-case-field input[readonly] { color:#64748b; background:#fafbfc; }
+.issue-detail .ticket-progress-track { grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); }
+.issue-detail .single-ticket-tabs { flex-wrap:nowrap; min-width:0; max-width:100%; }
+.issue-detail .detail-tab { flex-shrink:0; }
+.issue-detail .tab-content { margin:0; padding:0; }
+.issue-detail .technical-chat-column { min-width:0; }
+.issue-detail .issue-message-list { display:contents; }
+.issue-detail .chat-bubble { white-space:normal; }
+.issue-detail .chat-message-text { white-space:pre-wrap; }
+.issue-detail .chat-message-meta { flex-wrap:wrap; }
+.issue-detail .issue-rich-text { overflow-wrap:anywhere; }
+.issue-detail .issue-rich-text img { max-width:100%; height:auto; }
+.issue-detail .issue-rich-text p:last-child { margin-bottom:0; }
+.issue-detail .issue-state-event { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:7px; padding:8px; color:#7b8492; font-size:10px; }
+.issue-detail .issue-state-event strong { color:#526078; }
+.issue-detail .issue-visibility-button { padding:0; border:0; background:transparent; color:inherit; font:inherit; }
+.issue-detail .issue-compose-fields { display:grid; grid-template-columns:auto minmax(0,1fr); align-items:center; gap:8px; padding:12px; border-bottom:1px solid var(--border); }
+.issue-detail .issue-compose-fields label { margin:0; color:#64748b; font-size:11px; }
+.issue-detail .reply-footer { justify-content:space-between; }
+.issue-detail .detail-side-card h2, .issue-detail .technical-panel-head h2 { margin:0 0 12px; color:#263244; font-size:13px; font-weight:700; }
+.issue-detail .diagnostic-card h3 { margin:0 0 12px; font-size:12px; font-weight:700; }
+.issue-detail .detail-info-list { margin:12px 0 0; }
+.issue-detail .detail-info dd { margin:0; overflow-wrap:anywhere; }
+.issue-detail .detail-info dt { font-weight:500; }
+.issue-detail .detail-info a { color:inherit; }
+.issue-detail .detail-sla.inactive { background:#f5f6f8; color:#64748b; }
+.issue-detail .issue-count-link { padding:0; border:0; background:none; color:var(--primary); font:inherit; text-decoration:underline; }
+.issue-detail .technical-object-card { overflow-wrap:anywhere; }
+.issue-detail .technical-object-card > div { min-width:0; }
+.issue-detail .issue-record-details { margin-top:8px; color:#64748b; font-size:11px; }
+.issue-detail .issue-record-details summary { cursor:pointer; color:var(--primary); }
+.issue-detail .issue-empty { padding:16px; color:#8691a2; font-size:12px; }
+.issue-detail .issue-document-name { overflow-wrap:anywhere; }
+.issue-detail .technical-events { min-width:0; }
+@media(max-width:1180px) {
+    .issue-detail .detail-layout { grid-template-columns:minmax(0,1fr) 285px; }
+    .issue-detail .technical-activity-layout { grid-template-columns:minmax(0,1fr); }
+    .issue-detail .technical-events { padding:14px 0 0; border-left:0; border-top:1px solid var(--border); }
+}
+@media(max-width:900px) {
+    .issue-detail .detail-layout { grid-template-columns:minmax(0,1fr); }
+    .issue-detail .detail-side { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .issue-detail .detail-heading { flex-basis:calc(100% - 60px); }
+    .issue-detail .detail-header-actions { padding-left:0; }
+}
+@media(max-width:600px) {
+    .issue-detail .detail-topbar { padding:12px; gap:10px; }
+    .issue-detail .detail-body { padding:12px; }
+    .issue-detail .detail-heading h1 { font-size:17px; }
+    .issue-detail .detail-heading-top { flex-wrap:wrap; }
+    .issue-detail .detail-header-actions { gap:6px; }
+    .issue-detail .detail-header-actions .btn { padding:8px 10px; font-size:11px; }
+    .issue-detail .technical-case-banner, .issue-detail .detail-side, .issue-detail .diagnostic-grid { grid-template-columns:minmax(0,1fr); }
+    .issue-detail .technical-activity-layout { padding:14px; }
+    .issue-detail .conversation-panel .chat-message, .issue-detail .conversation-panel .chat-message.internal { width:95%; }
+    .issue-detail .issue-compose-fields { grid-template-columns:minmax(0,1fr); }
+    .issue-detail .technical-object-card { grid-template-columns:32px minmax(0,1fr); }
+    .issue-detail .technical-object-actions { grid-column:2; flex-wrap:wrap; }
+}
+@media print {
+    html:has(.issue-detail), body:has(.issue-detail) { overflow:visible; }
+    .issue-detail { position:static; display:block; overflow:visible; }
+    .issue-detail .detail-body { overflow:visible; }
+    .issue-detail .detail-header-actions, .issue-detail .technical-case-banner, .issue-detail .reply-box { display:none; }
+}
+
+/* Local glyphs for the ticket detail controls, including offline deployments. */
+.issue-detail .bi-reply-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.issue-detail .bi-person-plus-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.issue-detail .bi-floppy-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.issue-detail .bi-person-gear::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.issue-detail .bi-clipboard-pulse::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.issue-detail .bi-file-earmark-text-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.issue-detail .bi-lock-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.issue-detail .bi-send-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.issue-detail .bi-shield-fill-check::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.issue-detail .bi-telephone-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.issue-detail .bi-clock::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.issue-detail .bi-exclamation-triangle-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.issue-detail .bi-hourglass-split::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.issue-detail .bi-chat-dots::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.issue-detail .bi-folder2-open::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.issue-detail .bi-paperclip::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.issue-detail .bi-pencil-fill::before { font-family:"NovalyoIcons"!important; content:""!important; font-style:normal; font-weight:normal!important; }
+.issue-detail .detail-header-actions .btn, .issue-detail .technical-case-save { font-size:16px; }
+@media(max-width:600px) { .issue-detail .detail-header-actions .btn, .issue-detail .technical-case-save { font-size:12px; } }
